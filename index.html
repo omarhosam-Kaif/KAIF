@@ -201,8 +201,6 @@ header{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:1p
 .s-dots i{flex:1;height:8px;border-radius:4px;background:var(--line)}
 .s-dots i.on{background:var(--teal-dark)}
 .s-val{font-weight:700;text-align:right}
-.pnote{background:var(--beige-light);border-radius:10px;padding:14px 16px;font-size:14px;color:var(--ink-soft);line-height:1.6}
-.pnote strong{color:var(--ink)}
 .related{padding:26px 36px 32px;border-top:1px solid var(--line);background:var(--paper)}
 .related h4{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal-dark);margin-bottom:14px}
 .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -329,7 +327,7 @@ footer p{font-size:15px;color:#b9c4c8;max-width:340px}
     <div class="policy-grid">
       <div class="policy">
         <h3>Delivery in Cairo &amp; Giza</h3>
-        <p>We deliver to Cairo and Giza. The delivery fee is <span id="shipFeeText">EGP 84</span>, added to your order total.</p>
+        <p>We deliver to Cairo and Giza. The delivery fee is <span id="shipFeeText">shown at checkout</span>, added to your order total.</p>
       </div>
       <div class="policy">
         <h3>Confirmed orders</h3>
@@ -651,11 +649,8 @@ function renderCartStep(){
         <div class="ci-right">${priced ? money(p.price * item.qty) : "NA"}</div>
       </div>`;
   }).join("");
-  const zone = shippingZones.length === 1 ? shippingZones[0] : null;
   $("drawerFoot").innerHTML = `
-    <div class="sum-row"><span>Coffee</span><span>${money(t.coffee)}</span></div>
-    <div class="sum-row"><span>Delivery <small>${zone ? "(" + esc(zone.name) + ")" : "(chosen at next step)"}</small></span><span>${zone ? money(zone.fee) : "&ndash;"}</span></div>
-    <div class="sum-row total"><span>Total</span><span>${zone && !t.unpriced ? money(t.coffee + Number(zone.fee)) : "NA"}</span></div>
+    <div class="sum-row total"><span>Subtotal</span><span>${t.unpriced ? "NA" : money(t.coffee)}</span></div>
     <button class="primary-btn" type="button" data-go="details" ${t.unpriced || loadFailed ? "disabled" : ""}>Continue to delivery</button>
     <p class="fine">Payment on delivery. No card details needed.</p>`;
 }
@@ -910,7 +905,6 @@ function renderProduct(p){
   const bars = PROFILE.filter(([k]) => r[k] !== null && r[k] !== undefined).map(([k, label]) =>
     `<div class="scale"><span>${label}</span><span class="s-dots">${Array.from({ length: 7 }, (_, i) => `<i class="${i < r[k] ? "on" : ""}"></i>`).join("")}</span><span class="s-val">${r[k]}</span></div>`).join("");
   const brew = (r.brew_methods || []).map(m => `<span class="pill">${esc(BREW_LABELS[m] || m)}</span>`).join("");
-  const zone = shippingZones[0];
   const others = products.filter(x => x.id !== p.id)
     .sort((a, b) => (b.category === p.category) - (a.category === p.category)).slice(0, 3);
   return `
@@ -945,9 +939,6 @@ function renderProduct(p){
         </dl>
       </div>
       ${brew ? `<div class="psec"><h4>Best brewed as</h4><div class="pills">${brew}</div></div>` : ""}
-      <div class="psec"><h4>Delivery and payment</h4>
-        <div class="pnote">${zone ? `We deliver to <strong>${esc(zone.name)}</strong> for <strong>${money(zone.fee)}</strong>. ` : ""}Pay on delivery. We confirm every order by phone or WhatsApp before we ship.</div>
-      </div>
     </div>
   </div>
   ${others.length ? `<div class="related"><h4>You might also like</h4><div class="related-grid">${others.map(x => `
