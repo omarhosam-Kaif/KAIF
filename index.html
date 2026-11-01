@@ -63,10 +63,18 @@ header{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:1p
 
 /* Product grid */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px}
-.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .2s,transform .2s}
-.card:hover{box-shadow:0 10px 28px rgba(31,42,46,.1);transform:translateY(-3px)}
-.card-img{aspect-ratio:4/5;background:var(--beige-light);overflow:hidden}
-.card-img img{width:100%;height:100%;object-fit:cover}
+.card{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .25s,transform .25s,opacity .25s,border-color .25s}
+.card-img{display:block;position:relative;cursor:pointer;aspect-ratio:4/5;background:var(--beige-light);overflow:hidden}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.card-img::after{content:"View details";position:absolute;left:50%;bottom:14px;transform:translate(-50%,8px);background:rgba(31,42,46,.88);color:#fff;font-size:13px;font-weight:600;padding:7px 16px;border-radius:999px;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;white-space:nowrap}
+.card:hover .card-img::after,.card-img:focus-visible::after{opacity:1;transform:translate(-50%,0)}
+.card h3 a{text-decoration:none}
+.card h3 a:hover{text-decoration:underline}
+@media (hover:hover){
+  .grid:hover .card{opacity:.7}
+  .grid .card:hover{opacity:1;transform:translateY(-8px) scale(1.02);box-shadow:0 22px 44px rgba(31,42,46,.22);border-color:var(--teal);z-index:2}
+  .card:hover .card-img img{transform:scale(1.08)}
+}
 .card-body{padding:20px;display:flex;flex-direction:column;gap:8px;flex:1}
 .tag{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal-dark);font-weight:600}
 .card h3{font-size:20px;line-height:1.3}
@@ -162,6 +170,48 @@ header{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:1p
 .order-no{display:inline-block;margin:14px 0;padding:10px 18px;border:1px dashed var(--teal-dark);border-radius:8px;font-weight:700;letter-spacing:1px;font-size:18px}
 .done-view p{color:var(--ink-soft);font-size:15px}
 
+/* Product detail view */
+[hidden]{display:none !important}
+.pmodal{position:fixed;inset:0;background:rgba(31,42,46,.55);overflow-y:auto;z-index:85;padding:32px 16px}
+.pbox{position:relative;max-width:1000px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 30px 70px rgba(0,0,0,.3);overflow:clip}
+.pclose{position:absolute;top:12px;right:14px;z-index:3;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.92);font-size:28px;line-height:1;cursor:pointer;color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.pclose:hover{background:#fff}
+.pgrid{display:grid;grid-template-columns:1fr 1fr}
+.pimg{background:var(--beige-light);min-height:420px}
+.pimg img{position:sticky;top:0;width:100%;height:auto;max-height:100vh;object-fit:contain}
+.pinfo{padding:36px 36px 32px}
+.pinfo h2{font-size:30px;line-height:1.2;margin:6px 0 4px}
+.porigin{color:var(--ink-soft);font-size:15px}
+.pprice{display:flex;align-items:baseline;gap:10px;margin:16px 0 14px}
+.pprice .price{font-size:26px}
+.pprice small{color:var(--ink-soft);font-size:14px}
+.pinfo .add-row{margin-bottom:6px}
+.padded{display:flex;align-items:center;gap:12px;margin:10px 0 0;font-size:14px;color:var(--teal-dark);font-weight:600}
+.padded button{background:none;border:0;color:var(--ink);text-decoration:underline;cursor:pointer;font-weight:600}
+.pdesc{margin:20px 0 6px;color:var(--ink-soft);font-size:16px;line-height:1.7}
+.psec{margin-top:22px}
+.psec h4{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal-dark);margin-bottom:10px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 14px;font-size:14px}
+.glance{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px}
+.glance-row dt{font-size:12px;color:var(--ink-soft)}
+.glance-row dd{font-size:15px;font-weight:600}
+.scale{display:grid;grid-template-columns:96px 1fr 22px;align-items:center;gap:10px;margin-bottom:8px;font-size:14px}
+.s-dots{display:flex;gap:4px}
+.s-dots i{flex:1;height:8px;border-radius:4px;background:var(--line)}
+.s-dots i.on{background:var(--teal-dark)}
+.s-val{font-weight:700;text-align:right}
+.pnote{background:var(--beige-light);border-radius:10px;padding:14px 16px;font-size:14px;color:var(--ink-soft);line-height:1.6}
+.pnote strong{color:var(--ink)}
+.related{padding:26px 36px 32px;border-top:1px solid var(--line);background:var(--paper)}
+.related h4{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal-dark);margin-bottom:14px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rel{display:flex;gap:12px;align-items:center;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;transition:border-color .2s,box-shadow .2s}
+.rel:hover{border-color:var(--teal);box-shadow:0 8px 20px rgba(31,42,46,.12)}
+.rel img,.rel .rel-ph{width:52px;height:64px;object-fit:cover;border-radius:6px;background:var(--beige-light);flex:none}
+.rel b{display:block;font-size:14px;line-height:1.3}
+.rel span{font-size:13px;color:var(--ink-soft)}
+
 /* Footer */
 footer{background:var(--ink);color:#d9dfe1;padding:56px 0 28px}
 .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px}
@@ -189,6 +239,15 @@ footer p{font-size:15px;color:#b9c4c8;max-width:340px}
   section{padding:56px 0}
   .section-head h2,.about-grid h2{font-size:28px}
   .form-cols{grid-template-columns:1fr 1fr}
+  .pmodal{padding:0}
+  .pbox{border-radius:0;min-height:100%}
+  .pgrid{grid-template-columns:1fr}
+  .pimg{min-height:0}
+  .pimg img{position:static;max-height:70vh}
+  .pinfo{padding:24px 20px}
+  .related{padding:22px 20px 28px}
+  .related-grid{grid-template-columns:1fr}
+  .glance{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
@@ -309,6 +368,14 @@ footer p{font-size:15px;color:#b9c4c8;max-width:340px}
   </div>
 </footer>
 
+<!-- Product detail view -->
+<div class="pmodal" id="pModal" role="dialog" aria-modal="true" aria-labelledby="pTitle" hidden>
+  <div class="pbox">
+    <button class="pclose" id="pClose" type="button" aria-label="Close">&times;</button>
+    <div id="pContent"></div>
+  </div>
+</div>
+
 <!-- Cart and order drawer -->
 <div class="overlay" id="overlay"></div>
 <aside class="drawer" id="drawer" aria-label="Shopping cart and checkout">
@@ -360,7 +427,7 @@ async function sb(path){
 
 async function loadStore(){
   const [prods, cats, zones, areas] = await Promise.all([
-    sb("products?select=id,slug,name,subtitle,tasting_notes,is_decaf,is_blend,category:categories(slug,name,sort_order),origin:origins(country,region),variants:product_variants(id,sku,grind,weight_grams,price,currency,is_active),images:product_images(url,alt_text,sort_order)&is_active=eq.true&order=name"),
+    sb("products?select=id,slug,name,subtitle,description,process,roast_level,body,acidity,aftertaste,sweetness,brew_methods,tasting_notes,is_decaf,is_blend,category:categories(slug,name,sort_order),origin:origins(country,region,locality,altitude_min_m,altitude_max_m,varietal,process),variants:product_variants(id,sku,grind,weight_grams,price,currency,is_active),images:product_images(url,alt_text,sort_order)&is_active=eq.true&order=name"),
     sb("categories?select=slug,name,sort_order&is_active=eq.true&order=sort_order"),
     sb("shipping_zones?select=name,governorates,fee,currency&is_active=eq.true"),
     sb("delivery_areas?select=governorate,name,name_ar,sort_order&is_active=eq.true&order=sort_order")
@@ -384,7 +451,8 @@ async function loadStore(){
       variant: variant,
       price: variant && variant.price !== null ? Number(variant.price) : null,
       image: images[0] ? images[0].url : (FALLBACK_PHOTOS[p.slug] || null),
-      imageAlt: images[0] ? (images[0].alt_text || p.name) : p.name
+      imageAlt: images[0] ? (images[0].alt_text || p.name) : p.name,
+      raw: p
     };
   });
 }
@@ -448,10 +516,10 @@ function renderGrid(){
       : "";
     return `
     <article class="card">
-      <div class="card-img">${img}</div>
+      <a class="card-img" href="#coffee/${esc(p.slug)}" aria-label="View details for ${esc(p.name)}">${img}</a>
       <div class="card-body">
         <span class="tag">${esc(p.origin)}</span>
-        <h3>${esc(p.name)}</h3>
+        <h3><a href="#coffee/${esc(p.slug)}">${esc(p.name)}</a></h3>
         <p class="notes">${esc(p.notes)}</p>
         <div class="card-foot">
           <div class="price-row"><span class="price">${priceText}</span><small>250g</small></div>
@@ -810,7 +878,127 @@ function closeCart(){
 $("cartOpen").addEventListener("click", openCart);
 $("cartClose").addEventListener("click", closeCart);
 $("overlay").addEventListener("click", closeCart);
-document.addEventListener("keydown", e => { if (e.key === "Escape") closeCart(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") { if (!$("pModal").hidden) closeProduct(); else closeCart(); } });
+
+/* ================= Product detail view ================= */
+const ROAST_LABELS = { light:"Light", medium:"Medium", medium_dark:"Medium dark", dark:"Dark" };
+const BREW_LABELS = { espresso:"Espresso", filter:"Filter", turkish:"Turkish", french_press:"French press", aeropress:"AeroPress" };
+const GRIND_LABELS = { whole_beans:"Whole beans", espresso:"Espresso grind", filter:"Filter grind", turkish:"Turkish grind" };
+const PROFILE = [["body","Body"],["acidity","Acidity"],["aftertaste","Aftertaste"],["sweetness","Sweetness"]];
+const PAGE_TITLE = document.title;
+let openSlug = null;
+
+function productBySlug(slug){ return products.find(p => p.slug === slug); }
+function glanceRow(label, value){ return value ? `<div class="glance-row"><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>` : ""; }
+
+function addToCart(id, qty){
+  const item = cart.find(i => i.id === id);
+  if (item) item.qty = Math.min(20, item.qty + qty); else cart.push({ id, qty });
+  saveCart(); updateCartBadge();
+  if ($("drawer").classList.contains("open")) renderDrawer();
+}
+
+function renderProduct(p){
+  const r = p.raw, o = r.origin || {};
+  const canBuy = p.variant && p.price !== null;
+  const place = o.country ? [o.locality, o.region, o.country].filter(Boolean).join(", ") : "";
+  const altitude = o.altitude_min_m && o.altitude_max_m
+    ? Number(o.altitude_min_m).toLocaleString("en-US") + " to " + Number(o.altitude_max_m).toLocaleString("en-US") + " m" : "";
+  const kind = r.is_decaf ? "Decaffeinated" : r.is_blend ? "Blend" : (o.country ? "Single origin" : "");
+  const format = p.variant ? p.variant.weight_grams + " g, " + (GRIND_LABELS[p.variant.grind] || p.variant.grind) : "";
+  const notes = (r.tasting_notes || []).map(n => `<span class="pill">${esc(n)}</span>`).join("");
+  const bars = PROFILE.filter(([k]) => r[k] !== null && r[k] !== undefined).map(([k, label]) =>
+    `<div class="scale"><span>${label}</span><span class="s-dots">${Array.from({ length: 7 }, (_, i) => `<i class="${i < r[k] ? "on" : ""}"></i>`).join("")}</span><span class="s-val">${r[k]}</span></div>`).join("");
+  const brew = (r.brew_methods || []).map(m => `<span class="pill">${esc(BREW_LABELS[m] || m)}</span>`).join("");
+  const zone = shippingZones[0];
+  const others = products.filter(x => x.id !== p.id)
+    .sort((a, b) => (b.category === p.category) - (a.category === p.category)).slice(0, 3);
+  return `
+  <div class="pgrid">
+    <div class="pimg">${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.imageAlt)} coffee bag">` : ""}</div>
+    <div class="pinfo">
+      <span class="tag">${esc(p.origin || kind)}</span>
+      <h2 id="pTitle">${esc(p.name)}</h2>
+      ${place ? `<p class="porigin">${esc(place)}</p>` : ""}
+      <div class="pprice"><span class="price">${canBuy ? money(p.price) : "NA"}</span><small>250g bag</small></div>
+      <div class="add-row">
+        <div class="qty-pick" aria-label="Quantity">
+          <button type="button" data-pq="-1" aria-label="Fewer bags" ${canBuy ? "" : "disabled"}>&minus;</button>
+          <span class="pq-val">1</span>
+          <button type="button" data-pq="1" aria-label="More bags" ${canBuy ? "" : "disabled"}>+</button>
+        </div>
+        <button class="add-btn" type="button" data-padd="${esc(p.id)}" ${canBuy ? "" : "disabled"}>${canBuy ? "Add to cart" : "Not available yet"}</button>
+      </div>
+      <div class="padded" id="pAdded" hidden><span>Added to your cart</span><button type="button" data-pcart>View cart</button></div>
+      <p class="pdesc">${esc(r.description || r.subtitle || "")}</p>
+      ${notes ? `<div class="psec"><h4>Tasting notes</h4><div class="pills">${notes}</div></div>` : ""}
+      ${bars ? `<div class="psec"><h4>Taste profile</h4>${bars}</div>` : ""}
+      <div class="psec"><h4>At a glance</h4>
+        <dl class="glance">
+          ${glanceRow("Type", kind)}
+          ${glanceRow("Origin", place)}
+          ${glanceRow("Altitude", altitude)}
+          ${glanceRow("Process", r.process || o.process || "")}
+          ${glanceRow("Variety", o.varietal || "")}
+          ${glanceRow("Roast", ROAST_LABELS[r.roast_level] || "")}
+          ${glanceRow("Format", format)}
+        </dl>
+      </div>
+      ${brew ? `<div class="psec"><h4>Best brewed as</h4><div class="pills">${brew}</div></div>` : ""}
+      <div class="psec"><h4>Delivery and payment</h4>
+        <div class="pnote">${zone ? `We deliver to <strong>${esc(zone.name)}</strong> for <strong>${money(zone.fee)}</strong>. ` : ""}Pay on delivery. We confirm every order by phone or WhatsApp before we ship.</div>
+      </div>
+    </div>
+  </div>
+  ${others.length ? `<div class="related"><h4>You might also like</h4><div class="related-grid">${others.map(x => `
+    <a class="rel" href="#coffee/${esc(x.slug)}">${x.image ? `<img src="${esc(x.image)}" alt="">` : `<div class="rel-ph"></div>`}<div><b>${esc(x.name)}</b><span>${x.price !== null ? money(x.price) : "NA"} &middot; 250g</span></div></a>`).join("")}</div></div>` : ""}`;
+}
+
+function showProduct(p){
+  openSlug = p.slug;
+  $("pContent").innerHTML = renderProduct(p);
+  $("pModal").hidden = false;
+  $("pModal").scrollTop = 0;
+  document.body.style.overflow = "hidden";
+  document.title = p.name + " - KAIF";
+  $("pClose").focus();
+}
+function hideProduct(){
+  if ($("pModal").hidden) return;
+  openSlug = null;
+  $("pModal").hidden = true;
+  if (!$("drawer").classList.contains("open")) document.body.style.overflow = "";
+  document.title = PAGE_TITLE;
+}
+function closeProduct(){
+  if (/^#coffee\//.test(location.hash)) history.replaceState(null, "", location.pathname + location.search + "#shop");
+  hideProduct();
+}
+function route(){
+  const m = location.hash.match(/^#coffee\/([a-z0-9-]+)$/);
+  const p = m && productBySlug(m[1]);
+  if (p) showProduct(p); else hideProduct();
+}
+window.addEventListener("hashchange", route);
+$("pClose").addEventListener("click", closeProduct);
+$("pModal").addEventListener("click", e => { if (e.target === $("pModal")) closeProduct(); });
+$("pContent").addEventListener("click", e => {
+  const q = e.target.closest("[data-pq]");
+  if (q && !q.disabled){
+    const el = $("pContent").querySelector(".pq-val");
+    el.textContent = Math.min(20, Math.max(1, Number(el.textContent) + Number(q.dataset.pq)));
+    return;
+  }
+  const add = e.target.closest("[data-padd]");
+  if (add && !add.disabled){
+    addToCart(add.dataset.padd, Number($("pContent").querySelector(".pq-val").textContent) || 1);
+    $("pAdded").hidden = false;
+    add.textContent = "Added ✓";
+    setTimeout(() => { add.textContent = "Add to cart"; }, 1200);
+    return;
+  }
+  if (e.target.closest("[data-pcart]")){ closeProduct(); openCart(); }
+});
 
 /* ---- Mobile menu ---- */
 const navLinks = $("navLinks");
@@ -834,6 +1022,7 @@ loadStore()
     renderChips();
     renderGrid();
     updateCartBadge();
+    route();
   })
   .catch(() => {
     loadFailed = true;
