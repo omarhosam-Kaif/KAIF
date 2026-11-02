@@ -327,7 +327,7 @@ footer p{font-size:15px;color:#b9c4c8;max-width:340px}
     <div class="policy-grid">
       <div class="policy">
         <h3>Delivery in Cairo &amp; Giza</h3>
-        <p>We deliver to Cairo and Giza. The delivery fee is <span id="shipFeeText">shown at checkout</span>, added to your order total.</p>
+        <p>We deliver to Cairo and Giza.</p>
       </div>
       <div class="policy">
         <h3>Confirmed orders</h3>
@@ -1008,8 +1008,6 @@ loadStore()
   .then(() => {
     cart = cart.filter(i => productById(i.id));
     saveCart();
-    const zone = shippingZones[0];
-    if (zone) $("shipFeeText").textContent = money(zone.fee);
     renderChips();
     renderGrid();
     updateCartBadge();
