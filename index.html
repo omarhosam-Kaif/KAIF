@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KAIF - Specialty Coffee Beans</title>
-<meta name="description" content="KAIF specialty coffee beans, roasted in small batches. Order online with payment on delivery.">
+<meta name="description" content="KAIF specialty coffee beans, roasted in small batches. Order online.">
 <style>
 :root{
   --ink:#1f2a2e; --ink-soft:#5b6a6f; --teal:#6BADBE; --teal-dark:#4A8A9E;
@@ -643,7 +643,7 @@ function renderCartStep(){
   $("drawerFoot").innerHTML = `
     <div class="sum-row total"><span>Subtotal</span><span>${t.unpriced ? "NA" : money(t.coffee)}</span></div>
     <button class="primary-btn" type="button" data-go="details" ${t.unpriced || loadFailed ? "disabled" : ""}>Continue to delivery</button>
-    <p class="fine">Payment on delivery. No card details needed.</p>`;
+`;
 }
 
 /* Step 2: delivery details */
@@ -732,12 +732,11 @@ function renderReviewStep(){
       <p style="margin-top:6px">${addr}</p>
       ${details.notes ? `<p style="margin-top:6px">Note: ${esc(details.notes)}</p>` : ""}
     </div>
-    <div class="review-box"><h3>Payment</h3><p>Pay on delivery. We confirm your order by phone or WhatsApp before we ship.</p></div>
     ${formError ? `<div class="err">${esc(formError)}</div>` : ""}`;
   $("drawerFoot").innerHTML = `
     <div class="sum-row"><span>Coffee</span><span>${money(t.coffee)}</span></div>
     <div class="sum-row"><span>Delivery <small>(${esc(details.gov)})</small></span><span>${fee === null ? "&ndash;" : money(fee)}</span></div>
-    <div class="sum-row total"><span>Total to pay on delivery</span><span>${fee === null ? "NA" : money(t.coffee + fee)}</span></div>
+    <div class="sum-row total"><span>Total</span><span>${fee === null ? "NA" : money(t.coffee + fee)}</span></div>
     <button class="primary-btn" type="button" data-go="place" ${placing ? "disabled" : ""}>${placing ? "Placing your order..." : "Place order"}</button>`;
 }
 
@@ -786,7 +785,7 @@ function renderDoneStep(){
       <h3>Thank you, ${esc(details.name.split(" ")[0])}!</h3>
       <p>Your order has been received.</p>
       <div class="order-no">${esc(r.order_number || "")}</div>
-      <p>Total to pay on delivery: <strong>${money(r.total || 0)}</strong><br>(coffee ${money(r.subtotal || 0)} + delivery ${money(r.shipping_fee || 0)})</p>
+      <p>Total: <strong>${money(r.total || 0)}</strong><br>(coffee ${money(r.subtotal || 0)} + delivery ${money(r.shipping_fee || 0)})</p>
       <p style="margin-top:14px">We'll call or WhatsApp you on <strong>${esc(details.phone)}</strong> to confirm your delivery.</p>
       ${wa}
     </div>`;
