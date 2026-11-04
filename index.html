@@ -228,6 +228,9 @@ footer p{font-size:15px;color:#b9c4c8;max-width:340px}
 .faq-item[open] summary::after{content:"\2212"}
 .faq-item p{color:var(--ink-soft);margin-top:12px}
 
+.sort select{padding:9px 14px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);cursor:pointer}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
 /* Responsive */
 @media (max-width:820px){
   .about-grid{grid-template-columns:1fr;gap:32px}
@@ -300,6 +303,16 @@ footer p{font-size:15px;color:#b9c4c8;max-width:340px}
     <div class="toolbar">
       <div class="chips" role="group" aria-label="Filter coffee" id="chips">
         <button class="chip active" data-filter="all" type="button">All</button>
+      </div>
+      <div class="sort">
+        <label class="sr" for="sort">Sort coffee</label>
+        <select id="sort">
+          <option value="featured">Featured</option>
+          <option value="best">Best Selling</option>
+          <option value="price-asc">Price: low to high</option>
+          <option value="price-desc">Price: high to low</option>
+          <option value="name">Name A&ndash;Z</option>
+        </select>
       </div>
     </div>
 
@@ -460,7 +473,7 @@ async function sb(path){
 
 async function loadStore(){
   const [prods, cats, zones, areas] = await Promise.all([
-    sb("products?select=id,slug,name,subtitle,description,process,roast_level,body,acidity,aftertaste,sweetness,brew_methods,tasting_notes,is_decaf,is_blend,category:categories(slug,name,sort_order),origin:origins(country,region,locality,altitude_min_m,altitude_max_m,varietal,process),variants:product_variants(id,sku,grind,weight_grams,price,currency,is_active),images:product_images(url,alt_text,sort_order)&is_active=eq.true&order=name"),
+    sb("products?select=id,slug,name,subtitle,description,process,roast_level,body,acidity,aftertaste,sweetness,brew_methods,tasting_notes,is_decaf,is_blend,best_seller,category:categories(slug,name,sort_order),origin:origins(country,region,locality,altitude_min_m,altitude_max_m,varietal,process),variants:product_variants(id,sku,grind,weight_grams,price,currency,is_active),images:product_images(url,alt_text,sort_order)&is_active=eq.true&order=name"),
     sb("categories?select=slug,name,sort_order&is_active=eq.true&order=sort_order"),
     sb("shipping_zones?select=name,governorates,fee,currency&is_active=eq.true"),
     sb("delivery_areas?select=governorate,name,name_ar,sort_order&is_active=eq.true&order=sort_order")
@@ -481,6 +494,7 @@ async function loadStore(){
       origin: p.origin ? [p.origin.country, p.origin.region].filter(Boolean).join(", ") : (p.is_blend ? "Blend" : ""),
       notes: (p.tasting_notes || []).join(" · ") || p.subtitle || "",
       category: p.category ? p.category.slug : "",
+      bestSeller: !!p.best_seller,
       variant: variant,
       price: variant && variant.price !== null ? Number(variant.price) : null,
       image: images[0] ? images[0].url : (FALLBACK_PHOTOS[p.slug] || null),
@@ -534,8 +548,20 @@ function cartTotals(){
 /* ---- Shop: filter and render ---- */
 let filter = "all";
 
+let sortBy = "featured";
+function compareByPrice(a, b){
+  if (a.price === null && b.price === null) return 0;
+  if (a.price === null) return 1;   // unpriced bags go last
+  if (b.price === null) return -1;
+  return a.price - b.price;
+}
 function visibleProducts(){
-  return products.filter(p => filter === "all" || p.category === filter);
+  let list = products.filter(p => filter === "all" || p.category === filter);
+  if (sortBy === "best")       list = [...list].sort((a, b) => (b.bestSeller - a.bestSeller) || a.name.localeCompare(b.name));
+  if (sortBy === "price-asc")  list = [...list].sort(compareByPrice);
+  if (sortBy === "price-desc") list = [...list].sort((a, b) => -compareByPrice(a, b));
+  if (sortBy === "name")       list = [...list].sort((a, b) => a.name.localeCompare(b.name));
+  return list;
 }
 
 function renderGrid(){
@@ -579,6 +605,7 @@ $("chips").addEventListener("click", e => {
   const chip = e.target.closest(".chip");
   if (chip) setFilter(chip.dataset.filter);
 });
+$("sort").addEventListener("change", e => { sortBy = e.target.value; renderGrid(); });
 $("footShop").addEventListener("click", e => {
   const a = e.target.closest("[data-filter-link]");
   if (a) setFilter(a.dataset.filterLink);
