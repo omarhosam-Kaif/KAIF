@@ -530,7 +530,7 @@ async function loadStore(){
       id: p.id,
       slug: p.slug,
       name: p.name,
-      origin: p.origin ? [p.origin.country, p.origin.region].filter(Boolean).join(", ") : (p.is_blend ? "Blend" : ""),
+      origin: p.origin ? [p.origin.country, p.origin.region].filter(Boolean).join(", ") : (p.category && p.category.slug === "flavoured" ? "Flavoured" : p.is_blend ? "Blend" : ""),
       notes: (p.tasting_notes || []).join(" · ") || p.subtitle || "",
       category: p.category ? p.category.slug : "",
       bestSeller: !!p.best_seller,
@@ -999,7 +999,7 @@ function renderProduct(p){
   const place = o.country ? [o.locality, o.region, o.country].filter(Boolean).join(", ") : "";
   const altitude = o.altitude_min_m && o.altitude_max_m
     ? Number(o.altitude_min_m).toLocaleString("en-US") + " to " + Number(o.altitude_max_m).toLocaleString("en-US") + " m" : "";
-  const kind = r.is_decaf ? "Decaffeinated" : r.is_blend ? "Blend" : (o.country ? "Single origin" : "");
+  const kind = r.is_decaf ? "Decaffeinated" : (r.category && r.category.slug === "flavoured") ? "Flavoured" : r.is_blend ? "Blend" : (o.country ? "Single origin" : "");
   const format = p.variant ? p.variant.weight_grams + " g, " + (GRIND_LABELS[p.variant.grind] || p.variant.grind) : "";
   const notes = (r.tasting_notes || []).map(n => `<span class="pill">${esc(n)}</span>`).join("");
   const bars = PROFILE.filter(([k]) => r[k] !== null && r[k] !== undefined).map(([k, label]) =>
