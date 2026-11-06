@@ -263,6 +263,11 @@ footer p{font-size:15px;color:#b9c4c8;max-width:340px}
 .wa-icon{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:#25D366;transition:transform .2s ease,background .2s ease}
 .wa-icon:hover{background:#1ebe5a;transform:scale(1.06)}
 .wa-icon svg{width:22px;height:22px;fill:#fff}
+.pay-opt{display:flex;align-items:center;gap:10px;padding:8px 0;cursor:pointer;font-size:15px}
+.pay-opt input{width:18px;height:18px;accent-color:var(--teal-dark)}
+.pay-opt.disabled{opacity:.55;cursor:not-allowed}
+.pay-opt .soon{font-size:11px;background:#e9e4da;color:#5d6a6e;padding:2px 8px;border-radius:10px;margin-left:4px}
+.pay-note{font-size:14px;margin:6px 0 4px;color:#3d4a4e}
 .foot-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:36px;padding-top:20px;font-size:13px;color:#9aa6ab}
 
 .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
@@ -704,6 +709,8 @@ let placing = false;
 let formError = "";
 let invalidField = "";
 let orderResult = null;
+let payMethod = "cash_on_delivery";
+const INSTAPAY_HANDLE = "";   // set to your InstaPay handle or number to show it at checkout
 
 const STEP_LABELS = [["cart","Cart"],["details","Delivery"],["review","Review"]];
 
@@ -849,6 +856,12 @@ function renderReviewStep(){
       <p style="margin-top:6px">${addr}</p>
       ${details.notes ? `<p style="margin-top:6px">Note: ${esc(details.notes)}</p>` : ""}
     </div>
+    <div class="review-box"><h3>Pay with</h3>
+      <label class="pay-opt"><input type="radio" name="pay" value="cash_on_delivery" ${payMethod === "cash_on_delivery" ? "checked" : ""}> Cash on delivery</label>
+      <label class="pay-opt"><input type="radio" name="pay" value="instapay" ${payMethod === "instapay" ? "checked" : ""}> InstaPay</label>
+      ${payMethod === "instapay" ? `<p class="pay-note">${INSTAPAY_HANDLE ? `Pay to InstaPay: <strong>${esc(INSTAPAY_HANDLE)}</strong>. Put your order number in the reference.` : "We'll send you our InstaPay details to confirm your order."}</p>` : ""}
+      <label class="pay-opt disabled"><input type="radio" disabled> Card <span class="soon">Coming soon</span></label>
+    </div>
     ${formError ? `<div class="err">${esc(formError)}</div>` : ""}`;
   $("drawerFoot").innerHTML = `
     <div class="sum-row"><span>Coffee</span><span>${money(t.coffee)}</span></div>
@@ -874,7 +887,7 @@ async function placeOrder(){
         p_governorate: details.gov, p_area: details.area, p_street: details.street.trim(),
         p_building: details.building.trim() || null, p_floor: details.floor.trim() || null,
         p_apartment: details.apartment.trim() || null, p_landmark: details.landmark.trim() || null,
-        p_notes: details.notes.trim() || null, p_items: items
+        p_notes: details.notes.trim() || null, p_items: items, p_payment_method: payMethod
       })
     });
     const data = await res.json().catch(() => ({}));
@@ -921,6 +934,13 @@ function goStep(next){
   renderDrawer();
   $("drawerBody").scrollTop = 0;
 }
+
+$("drawerBody").addEventListener("change", e => {
+  if (e.target.name === "pay" && (e.target.value === "cash_on_delivery" || e.target.value === "instapay")) {
+    payMethod = e.target.value;
+    renderReviewStep();
+  }
+});
 
 $("drawerBody").addEventListener("click", e => {
   const btn = e.target.closest("button");
