@@ -2,61 +2,609 @@
   "project": "snkzghazwdmhvomtythb (Supabase, eu-central-1)",
   "exported_on": "2026-11-04",
   "products": [
-    {"id":"b9f6625e-9e7d-4ec6-a2ac-7bb4a41d9224","slug":"aura-blend","name":"Aura Blend","subtitle":"Specialty blend · Medium roast","description":null,"category_id":"43f20ac5-de96-4ae9-96bf-835acb774846","origin_id":null,"is_blend":true,"is_decaf":false,"process":"Blend","roast_level":"medium","tasting_notes":["Floral","Berry","Apricot","Honey"],"body":null,"acidity":null,"aftertaste":null,"sweetness":null,"is_active":true,"best_seller":false,"brew_methods":[]},
-    {"id":"ee660274-1c2f-4366-85ed-0523fad3f4b1","slug":"brazil-parana","name":"Brazil Paraná","subtitle":"Single origin · Jacarezinho, Paraná","description":"A natural-process single origin from Jacarezinho in Paraná, Brazil, grown at 800 to 1,000 metres. Full-bodied, with cinnamon, red fruit and almond. Medium dark roast, brewed as filter.","category_id":"708ed08f-c93e-43c5-8b11-e0626defbf28","origin_id":"d26c54a4-098d-4136-bc0a-6c679197acb8","is_blend":false,"is_decaf":false,"process":"Natural","roast_level":"medium_dark","tasting_notes":["Cinnamon","Red Fruit","Almond"],"body":6,"acidity":4,"aftertaste":6,"sweetness":5,"is_active":true,"best_seller":false,"brew_methods":["filter"]},
-    {"id":"f8ee0609-3fc0-49f3-bb79-0023ec665d0d","slug":"caramel","name":"Caramel","subtitle":"Flavoured filter coffee · 80% Arabica, 20% Robusta","description":"A flavoured filter coffee with caramel. A blend of 80% Arabica and 20% Robusta, roasted medium dark and sold as whole beans.","category_id":"a4d3bc41-1c15-4980-a1db-84f89d7822f1","origin_id":null,"is_blend":true,"is_decaf":false,"process":null,"roast_level":"medium_dark","tasting_notes":["Caramel"],"body":4,"acidity":3,"aftertaste":7,"sweetness":5,"is_active":true,"best_seller":false,"brew_methods":["filter"]},
-    {"id":"b53b36bb-f35e-4ceb-91cb-f1116edafa71","slug":"colombia-huila","name":"Colombia Huila","subtitle":"Single origin · Castillo, Huila","description":"A washed Castillo from Huila, Colombia, grown at 1,500 to 2,000 metres. Soft and sweet, with orange blossom, fig and caramel. A balanced cup that works for espresso and filter.","category_id":"708ed08f-c93e-43c5-8b11-e0626defbf28","origin_id":"cca604c5-82fd-4718-bd8b-bd15a0513105","is_blend":false,"is_decaf":false,"process":"Washed","roast_level":null,"tasting_notes":["Orange Blossom","Fig","Caramel"],"body":5,"acidity":5,"aftertaste":5,"sweetness":7,"is_active":true,"best_seller":false,"brew_methods":["espresso","filter"]},
-    {"id":"4a259081-f430-4f13-a42b-4441ab4d2f32","slug":"decaf-coffee","name":"Decaf Coffee","subtitle":"99.9% decaffeinated","description":"99.9% decaffeinated specialty Arabica, with notes of nuts, brown sugar and dark chocolate. Sold as whole beans and brewed as espresso or filter.","category_id":"66156366-34af-49f3-ba66-d3635a8ad6bd","origin_id":null,"is_blend":false,"is_decaf":true,"process":null,"roast_level":null,"tasting_notes":["Nuts","Brown Sugar","Dark Chocolate"],"body":4,"acidity":3,"aftertaste":4,"sweetness":5,"is_active":true,"best_seller":false,"brew_methods":["espresso","filter"]},
-    {"id":"916ab2c3-89a6-43a6-96ab-8586c4b418b3","slug":"dolce-blend","name":"Dolce Blend","subtitle":"Specialty blend · Medium roast","description":null,"category_id":"43f20ac5-de96-4ae9-96bf-835acb774846","origin_id":null,"is_blend":true,"is_decaf":false,"process":"Blend","roast_level":"medium","tasting_notes":["Strawberry","Blueberry","Peach","Mango","Honey"],"body":null,"acidity":null,"aftertaste":null,"sweetness":null,"is_active":true,"best_seller":false,"brew_methods":[]},
-    {"id":"253d3d17-4855-45be-b113-900ac95d1f2d","slug":"ember-blend","name":"Ember Blend","subtitle":"Specialty blend · Dark roast","description":null,"category_id":"43f20ac5-de96-4ae9-96bf-835acb774846","origin_id":null,"is_blend":true,"is_decaf":false,"process":"Blend","roast_level":"dark","tasting_notes":["Dark Chocolate","Roasted Nuts","Caramel"],"body":null,"acidity":null,"aftertaste":null,"sweetness":null,"is_active":true,"best_seller":false,"brew_methods":[]},
-    {"id":"7d135124-9d5e-4533-adfe-90490e1c4426","slug":"ethiopia-dijammah","name":"Ethiopia Dijammah","subtitle":"Single origin · Kaffa, Ethiopia","description":"A natural-process coffee from Dijammah in Kaffa, Ethiopia, grown at 1,800 to 2,200 metres. Bright and fruity, with chocolate, lemon citrus and berry. Brewed as filter.","category_id":"708ed08f-c93e-43c5-8b11-e0626defbf28","origin_id":"5c7e4987-62b3-4e8b-a218-1bb3c2704a44","is_blend":false,"is_decaf":false,"process":"Natural","roast_level":null,"tasting_notes":["Chocolate","Lemon Citrus","Berry"],"body":4,"acidity":6,"aftertaste":5,"sweetness":4,"is_active":true,"best_seller":false,"brew_methods":["filter"]},
-    {"id":"1addb642-403a-4d46-b462-89b5c3496c8b","slug":"ethiopia-guji","name":"Ethiopia Guji","subtitle":"Single origin · Oromia, Guji","description":"A washed coffee from Guji in Oromia, Ethiopia, grown at 1,900 to 2,300 metres. Lively acidity and real sweetness, with strawberry, lime and caramel. Medium roast, for espresso and filter.","category_id":"708ed08f-c93e-43c5-8b11-e0626defbf28","origin_id":"b232d237-f4d8-4b4a-9048-9a12709b55ba","is_blend":false,"is_decaf":false,"process":"Washed","roast_level":"medium","tasting_notes":["Strawberry","Lime","Caramel"],"body":4,"acidity":7,"aftertaste":5,"sweetness":7,"is_active":true,"best_seller":false,"brew_methods":["espresso","filter"]},
-    {"id":"2d213533-e935-4037-a194-7f480043df11","slug":"hazelnut","name":"Hazelnut","subtitle":"Flavoured filter coffee","description":"A flavoured filter coffee with hazelnut. A blend of 80% Arabica and 20% Robusta, roasted medium dark and sold as whole beans.","category_id":"a4d3bc41-1c15-4980-a1db-84f89d7822f1","origin_id":null,"is_blend":true,"is_decaf":false,"process":null,"roast_level":"medium_dark","tasting_notes":["Hazelnut"],"body":null,"acidity":null,"aftertaste":null,"sweetness":null,"is_active":true,"best_seller":false,"brew_methods":["filter"]},
-    {"id":"be5d7991-e508-427f-aaa5-bf14879e2035","slug":"rwanda-ruhango","name":"Rwanda Ruhango","subtitle":"Single origin · Mbuye, Ruhango","description":"A washed Red Bourbon from Mbuye in Ruhango, Rwanda, grown at 1,650 to 1,875 metres. Sweet and lively in the cup, with cherry, molasses and mandarin. Roasted medium dark and suited to both espresso and filter.","category_id":"708ed08f-c93e-43c5-8b11-e0626defbf28","origin_id":"d250ef63-e05a-4e53-b85e-58b19ba70ee0","is_blend":false,"is_decaf":false,"process":"Washed","roast_level":"medium_dark","tasting_notes":["Cherry","Molasses","Mandarin"],"body":5,"acidity":6,"aftertaste":6,"sweetness":7,"is_active":false,"best_seller":false,"brew_methods":["espresso","filter"]},
-    {"id":"e725af5c-4836-43a7-83e6-f5097ef2c837","slug":"vanilla","name":"Vanilla","subtitle":"Flavoured filter coffee · 80% Arabica, 20% Robusta","description":"A flavoured filter coffee with vanilla. A blend of 80% Arabica and 20% Robusta, roasted medium dark and sold as whole beans.","category_id":"a4d3bc41-1c15-4980-a1db-84f89d7822f1","origin_id":null,"is_blend":true,"is_decaf":false,"process":null,"roast_level":"medium_dark","tasting_notes":["Vanilla"],"body":4,"acidity":3,"aftertaste":7,"sweetness":5,"is_active":true,"best_seller":false,"brew_methods":["filter"]}
+    {
+      "id": "b9f6625e-9e7d-4ec6-a2ac-7bb4a41d9224",
+      "slug": "aura-blend",
+      "name": "Aura Blend",
+      "subtitle": "Specialty blend · Medium roast",
+      "description": null,
+      "category_id": "43f20ac5-de96-4ae9-96bf-835acb774846",
+      "origin_id": null,
+      "is_blend": true,
+      "is_decaf": false,
+      "process": "Blend",
+      "roast_level": "medium",
+      "tasting_notes": [
+        "Floral",
+        "Berry",
+        "Apricot",
+        "Honey"
+      ],
+      "body": null,
+      "acidity": null,
+      "aftertaste": null,
+      "sweetness": null,
+      "is_active": true,
+      "best_seller": false,
+      "brew_methods": []
+    },
+    {
+      "id": "ee660274-1c2f-4366-85ed-0523fad3f4b1",
+      "slug": "brazil-parana",
+      "name": "Brazil Paraná",
+      "subtitle": "Single origin · Jacarezinho, Paraná",
+      "description": "A natural-process single origin from Jacarezinho in Paraná, Brazil, grown at 800 to 1,000 metres. Full-bodied, with cinnamon, red fruit and almond. Medium dark roast, brewed as filter.",
+      "category_id": "708ed08f-c93e-43c5-8b11-e0626defbf28",
+      "origin_id": "d26c54a4-098d-4136-bc0a-6c679197acb8",
+      "is_blend": false,
+      "is_decaf": false,
+      "process": "Natural",
+      "roast_level": "medium_dark",
+      "tasting_notes": [
+        "Cinnamon",
+        "Red Fruit",
+        "Almond"
+      ],
+      "body": 6,
+      "acidity": 4,
+      "aftertaste": 6,
+      "sweetness": 5,
+      "is_active": false,
+      "best_seller": false,
+      "brew_methods": [
+        "filter"
+      ]
+    },
+    {
+      "id": "f8ee0609-3fc0-49f3-bb79-0023ec665d0d",
+      "slug": "caramel",
+      "name": "Caramel",
+      "subtitle": "Flavoured filter coffee · 80% Arabica, 20% Robusta",
+      "description": "A flavoured filter coffee with caramel. A blend of 80% Arabica and 20% Robusta, roasted medium dark and sold as whole beans.",
+      "category_id": "a4d3bc41-1c15-4980-a1db-84f89d7822f1",
+      "origin_id": null,
+      "is_blend": true,
+      "is_decaf": false,
+      "process": null,
+      "roast_level": "medium_dark",
+      "tasting_notes": [
+        "Caramel"
+      ],
+      "body": 4,
+      "acidity": 3,
+      "aftertaste": 7,
+      "sweetness": 5,
+      "is_active": true,
+      "best_seller": false,
+      "brew_methods": [
+        "filter"
+      ]
+    },
+    {
+      "id": "b53b36bb-f35e-4ceb-91cb-f1116edafa71",
+      "slug": "colombia-huila",
+      "name": "Colombia Huila",
+      "subtitle": "Single origin · Castillo, Huila",
+      "description": "A washed Castillo from Huila, Colombia, grown at 1,500 to 2,000 metres. Soft and sweet, with orange blossom, fig and caramel. A balanced cup that works for espresso and filter.",
+      "category_id": "708ed08f-c93e-43c5-8b11-e0626defbf28",
+      "origin_id": "cca604c5-82fd-4718-bd8b-bd15a0513105",
+      "is_blend": false,
+      "is_decaf": false,
+      "process": "Washed",
+      "roast_level": null,
+      "tasting_notes": [
+        "Orange Blossom",
+        "Fig",
+        "Caramel"
+      ],
+      "body": 5,
+      "acidity": 5,
+      "aftertaste": 5,
+      "sweetness": 7,
+      "is_active": true,
+      "best_seller": false,
+      "brew_methods": [
+        "espresso",
+        "filter"
+      ]
+    },
+    {
+      "id": "4a259081-f430-4f13-a42b-4441ab4d2f32",
+      "slug": "decaf-coffee",
+      "name": "Decaf Coffee",
+      "subtitle": "99.9% decaffeinated",
+      "description": "99.9% decaffeinated specialty Arabica, with notes of nuts, brown sugar and dark chocolate. Sold as whole beans and brewed as espresso or filter.",
+      "category_id": "66156366-34af-49f3-ba66-d3635a8ad6bd",
+      "origin_id": null,
+      "is_blend": false,
+      "is_decaf": true,
+      "process": null,
+      "roast_level": null,
+      "tasting_notes": [
+        "Nuts",
+        "Brown Sugar",
+        "Dark Chocolate"
+      ],
+      "body": 4,
+      "acidity": 3,
+      "aftertaste": 4,
+      "sweetness": 5,
+      "is_active": true,
+      "best_seller": false,
+      "brew_methods": [
+        "espresso",
+        "filter"
+      ]
+    },
+    {
+      "id": "916ab2c3-89a6-43a6-96ab-8586c4b418b3",
+      "slug": "dolce-blend",
+      "name": "Dolce Blend",
+      "subtitle": "Specialty blend · Medium roast",
+      "description": null,
+      "category_id": "43f20ac5-de96-4ae9-96bf-835acb774846",
+      "origin_id": null,
+      "is_blend": true,
+      "is_decaf": false,
+      "process": "Blend",
+      "roast_level": "medium",
+      "tasting_notes": [
+        "Strawberry",
+        "Blueberry",
+        "Peach",
+        "Mango",
+        "Honey"
+      ],
+      "body": null,
+      "acidity": null,
+      "aftertaste": null,
+      "sweetness": null,
+      "is_active": true,
+      "best_seller": false,
+      "brew_methods": []
+    },
+    {
+      "id": "253d3d17-4855-45be-b113-900ac95d1f2d",
+      "slug": "ember-blend",
+      "name": "Ember Blend",
+      "subtitle": "Specialty blend · Dark roast",
+      "description": null,
+      "category_id": "43f20ac5-de96-4ae9-96bf-835acb774846",
+      "origin_id": null,
+      "is_blend": true,
+      "is_decaf": false,
+      "process": "Blend",
+      "roast_level": "dark",
+      "tasting_notes": [
+        "Dark Chocolate",
+        "Roasted Nuts",
+        "Caramel"
+      ],
+      "body": null,
+      "acidity": null,
+      "aftertaste": null,
+      "sweetness": null,
+      "is_active": true,
+      "best_seller": false,
+      "brew_methods": []
+    },
+    {
+      "id": "7d135124-9d5e-4533-adfe-90490e1c4426",
+      "slug": "ethiopia-dijammah",
+      "name": "Ethiopia Dijammah",
+      "subtitle": "Single origin · Kaffa, Ethiopia",
+      "description": "A natural-process coffee from Dijammah in Kaffa, Ethiopia, grown at 1,800 to 2,200 metres. Bright and fruity, with chocolate, lemon citrus and berry. Brewed as filter.",
+      "category_id": "708ed08f-c93e-43c5-8b11-e0626defbf28",
+      "origin_id": "5c7e4987-62b3-4e8b-a218-1bb3c2704a44",
+      "is_blend": false,
+      "is_decaf": false,
+      "process": "Natural",
+      "roast_level": null,
+      "tasting_notes": [
+        "Chocolate",
+        "Lemon Citrus",
+        "Berry"
+      ],
+      "body": 4,
+      "acidity": 6,
+      "aftertaste": 5,
+      "sweetness": 4,
+      "is_active": true,
+      "best_seller": false,
+      "brew_methods": [
+        "filter"
+      ]
+    },
+    {
+      "id": "1addb642-403a-4d46-b462-89b5c3496c8b",
+      "slug": "ethiopia-guji",
+      "name": "Ethiopia Guji",
+      "subtitle": "Single origin · Oromia, Guji",
+      "description": "A washed coffee from Guji in Oromia, Ethiopia, grown at 1,900 to 2,300 metres. Lively acidity and real sweetness, with strawberry, lime and caramel. Medium roast, for espresso and filter.",
+      "category_id": "708ed08f-c93e-43c5-8b11-e0626defbf28",
+      "origin_id": "b232d237-f4d8-4b4a-9048-9a12709b55ba",
+      "is_blend": false,
+      "is_decaf": false,
+      "process": "Washed",
+      "roast_level": "medium",
+      "tasting_notes": [
+        "Strawberry",
+        "Lime",
+        "Caramel"
+      ],
+      "body": 4,
+      "acidity": 7,
+      "aftertaste": 5,
+      "sweetness": 7,
+      "is_active": true,
+      "best_seller": false,
+      "brew_methods": [
+        "espresso",
+        "filter"
+      ]
+    },
+    {
+      "id": "2d213533-e935-4037-a194-7f480043df11",
+      "slug": "hazelnut",
+      "name": "Hazelnut",
+      "subtitle": "Flavoured filter coffee",
+      "description": "A flavoured filter coffee with hazelnut. A blend of 80% Arabica and 20% Robusta, roasted medium dark and sold as whole beans.",
+      "category_id": "a4d3bc41-1c15-4980-a1db-84f89d7822f1",
+      "origin_id": null,
+      "is_blend": true,
+      "is_decaf": false,
+      "process": null,
+      "roast_level": "medium_dark",
+      "tasting_notes": [
+        "Hazelnut"
+      ],
+      "body": null,
+      "acidity": null,
+      "aftertaste": null,
+      "sweetness": null,
+      "is_active": true,
+      "best_seller": false,
+      "brew_methods": [
+        "filter"
+      ]
+    },
+    {
+      "id": "be5d7991-e508-427f-aaa5-bf14879e2035",
+      "slug": "rwanda-ruhango",
+      "name": "Rwanda Ruhango",
+      "subtitle": "Single origin · Mbuye, Ruhango",
+      "description": "A washed Red Bourbon from Mbuye in Ruhango, Rwanda, grown at 1,650 to 1,875 metres. Sweet and lively in the cup, with cherry, molasses and mandarin. Roasted medium dark and suited to both espresso and filter.",
+      "category_id": "708ed08f-c93e-43c5-8b11-e0626defbf28",
+      "origin_id": "d250ef63-e05a-4e53-b85e-58b19ba70ee0",
+      "is_blend": false,
+      "is_decaf": false,
+      "process": "Washed",
+      "roast_level": "medium_dark",
+      "tasting_notes": [
+        "Cherry",
+        "Molasses",
+        "Mandarin"
+      ],
+      "body": 5,
+      "acidity": 6,
+      "aftertaste": 6,
+      "sweetness": 7,
+      "is_active": false,
+      "best_seller": false,
+      "brew_methods": [
+        "espresso",
+        "filter"
+      ]
+    },
+    {
+      "id": "e725af5c-4836-43a7-83e6-f5097ef2c837",
+      "slug": "vanilla",
+      "name": "Vanilla",
+      "subtitle": "Flavoured filter coffee · 80% Arabica, 20% Robusta",
+      "description": "A flavoured filter coffee with vanilla. A blend of 80% Arabica and 20% Robusta, roasted medium dark and sold as whole beans.",
+      "category_id": "a4d3bc41-1c15-4980-a1db-84f89d7822f1",
+      "origin_id": null,
+      "is_blend": true,
+      "is_decaf": false,
+      "process": null,
+      "roast_level": "medium_dark",
+      "tasting_notes": [
+        "Vanilla"
+      ],
+      "body": 4,
+      "acidity": 3,
+      "aftertaste": 7,
+      "sweetness": 5,
+      "is_active": true,
+      "best_seller": false,
+      "brew_methods": [
+        "filter"
+      ]
+    }
   ],
   "product_variants": [
-    {"sku":"RWANDA-RUHANGO-WB-250","product_slug":"rwanda-ruhango","grind":"whole_beans","weight_grams":250,"price":null,"currency":"EGP","stock_quantity":0,"is_active":false},
-    {"sku":"ETHIOPIA-GUJI-WB-250","product_slug":"ethiopia-guji","grind":"whole_beans","weight_grams":250,"price":590,"currency":"EGP","stock_quantity":0,"is_active":true},
-    {"sku":"EMBER-BLEND-WB-250","product_slug":"ember-blend","grind":"whole_beans","weight_grams":250,"price":345,"currency":"EGP","stock_quantity":0,"is_active":true},
-    {"sku":"HAZELNUT-WB-250","product_slug":"hazelnut","grind":"whole_beans","weight_grams":250,"price":645,"currency":"EGP","stock_quantity":0,"is_active":true},
-    {"sku":"DECAF-COFFEE-WB-250","product_slug":"decaf-coffee","grind":"whole_beans","weight_grams":250,"price":445,"currency":"EGP","stock_quantity":0,"is_active":true},
-    {"sku":"ETHIOPIA-DIJAMMAH-WB-250","product_slug":"ethiopia-dijammah","grind":"whole_beans","weight_grams":250,"price":445,"currency":"EGP","stock_quantity":0,"is_active":true},
-    {"sku":"DOLCE-BLEND-WB-250","product_slug":"dolce-blend","grind":"whole_beans","weight_grams":250,"price":370,"currency":"EGP","stock_quantity":0,"is_active":true},
-    {"sku":"COLOMBIA-HUILA-WB-250","product_slug":"colombia-huila","grind":"whole_beans","weight_grams":250,"price":500,"currency":"EGP","stock_quantity":0,"is_active":true},
-    {"sku":"AURA-BLEND-WB-250","product_slug":"aura-blend","grind":"whole_beans","weight_grams":250,"price":425,"currency":"EGP","stock_quantity":0,"is_active":true},
-    {"sku":"VANILLA-WB-250","product_slug":"vanilla","grind":"whole_beans","weight_grams":250,"price":645,"currency":"EGP","stock_quantity":0,"is_active":true},
-    {"sku":"BRAZIL-PARANA-WB-250","product_slug":"brazil-parana","grind":"whole_beans","weight_grams":250,"price":445,"currency":"EGP","stock_quantity":0,"is_active":true},
-    {"sku":"CARAMEL-WB-250","product_slug":"caramel","grind":"whole_beans","weight_grams":250,"price":645,"currency":"EGP","stock_quantity":0,"is_active":true}
+    {
+      "sku": "RWANDA-RUHANGO-WB-250",
+      "product_slug": "rwanda-ruhango",
+      "grind": "whole_beans",
+      "weight_grams": 250,
+      "price": null,
+      "currency": "EGP",
+      "stock_quantity": 0,
+      "is_active": false
+    },
+    {
+      "sku": "ETHIOPIA-GUJI-WB-250",
+      "product_slug": "ethiopia-guji",
+      "grind": "whole_beans",
+      "weight_grams": 250,
+      "price": 590,
+      "currency": "EGP",
+      "stock_quantity": 0,
+      "is_active": true
+    },
+    {
+      "sku": "EMBER-BLEND-WB-250",
+      "product_slug": "ember-blend",
+      "grind": "whole_beans",
+      "weight_grams": 250,
+      "price": 345,
+      "currency": "EGP",
+      "stock_quantity": 0,
+      "is_active": true
+    },
+    {
+      "sku": "HAZELNUT-WB-250",
+      "product_slug": "hazelnut",
+      "grind": "whole_beans",
+      "weight_grams": 250,
+      "price": 645,
+      "currency": "EGP",
+      "stock_quantity": 0,
+      "is_active": true
+    },
+    {
+      "sku": "DECAF-COFFEE-WB-250",
+      "product_slug": "decaf-coffee",
+      "grind": "whole_beans",
+      "weight_grams": 250,
+      "price": 445,
+      "currency": "EGP",
+      "stock_quantity": 0,
+      "is_active": true
+    },
+    {
+      "sku": "ETHIOPIA-DIJAMMAH-WB-250",
+      "product_slug": "ethiopia-dijammah",
+      "grind": "whole_beans",
+      "weight_grams": 250,
+      "price": 445,
+      "currency": "EGP",
+      "stock_quantity": 0,
+      "is_active": true
+    },
+    {
+      "sku": "DOLCE-BLEND-WB-250",
+      "product_slug": "dolce-blend",
+      "grind": "whole_beans",
+      "weight_grams": 250,
+      "price": 370,
+      "currency": "EGP",
+      "stock_quantity": 0,
+      "is_active": true
+    },
+    {
+      "sku": "COLOMBIA-HUILA-WB-250",
+      "product_slug": "colombia-huila",
+      "grind": "whole_beans",
+      "weight_grams": 250,
+      "price": 500,
+      "currency": "EGP",
+      "stock_quantity": 0,
+      "is_active": true
+    },
+    {
+      "sku": "AURA-BLEND-WB-250",
+      "product_slug": "aura-blend",
+      "grind": "whole_beans",
+      "weight_grams": 250,
+      "price": 425,
+      "currency": "EGP",
+      "stock_quantity": 0,
+      "is_active": true
+    },
+    {
+      "sku": "VANILLA-WB-250",
+      "product_slug": "vanilla",
+      "grind": "whole_beans",
+      "weight_grams": 250,
+      "price": 645,
+      "currency": "EGP",
+      "stock_quantity": 0,
+      "is_active": true
+    },
+    {
+      "sku": "BRAZIL-PARANA-WB-250",
+      "product_slug": "brazil-parana",
+      "grind": "whole_beans",
+      "weight_grams": 250,
+      "price": 445,
+      "currency": "EGP",
+      "stock_quantity": 0,
+      "is_active": true
+    },
+    {
+      "sku": "CARAMEL-WB-250",
+      "product_slug": "caramel",
+      "grind": "whole_beans",
+      "weight_grams": 250,
+      "price": 645,
+      "currency": "EGP",
+      "stock_quantity": 0,
+      "is_active": true
+    }
   ],
   "product_images": [
-    {"product_slug":"dolce-blend","url":"https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/5131db91d176d2cae342d8c09e2b95c5e733a232/product-photos/bag_photo_dolce.jpg","alt_text":"Dolce Blend","sort_order":0},
-    {"product_slug":"ember-blend","url":"https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/5131db91d176d2cae342d8c09e2b95c5e733a232/product-photos/bag_photo_ember.jpg","alt_text":"Ember Blend","sort_order":0},
-    {"product_slug":"aura-blend","url":"https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/5131db91d176d2cae342d8c09e2b95c5e733a232/product-photos/bag_photo_aura.jpg","alt_text":"Aura Blend","sort_order":0},
-    {"product_slug":"ethiopia-guji","url":"https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/5131db91d176d2cae342d8c09e2b95c5e733a232/product-photos/bag_photo_guji.jpg","alt_text":"Ethiopia Guji","sort_order":0},
-    {"product_slug":"ethiopia-dijammah","url":"https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/5131db91d176d2cae342d8c09e2b95c5e733a232/product-photos/bag_photo_dijammah.jpg","alt_text":"Ethiopia Dijammah","sort_order":0},
-    {"product_slug":"vanilla","url":"https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/5131db91d176d2cae342d8c09e2b95c5e733a232/product-photos/bag_photo_vanilla.jpg","alt_text":"Vanilla","sort_order":0},
-    {"product_slug":"brazil-parana","url":"https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/d1344743a81e2e1f20da58357b1c14194b6d8091/product-photos/bag_photo_brazil_parana.png","alt_text":"Brazil Paraná","sort_order":0},
-    {"product_slug":"colombia-huila","url":"https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/349d67202c8f3612d311cacd35462cc4aa878d97/product-photos/bag_photo_huila.png","alt_text":"Colombia Huila","sort_order":0},
-    {"product_slug":"decaf-coffee","url":"https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/f4248f0877075da6f543de921f821d8c2c3cea7c/product-photos/bag_photo_decaf.png","alt_text":"Decaf Coffee","sort_order":0},
-    {"product_slug":"hazelnut","url":"https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/7f82b1fc58d7a6c3e37034c620c58890aa148933/product-photos/bag_photo_hazelnut_v2.jpg","alt_text":"Hazelnut","sort_order":0},
-    {"product_slug":"caramel","url":"https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/4414ed087f4a9f7f607c4731cd43dbeddc72e9ae/product-photos/bag_photo_caramel.png","alt_text":"Caramel","sort_order":0}
+    {
+      "product_slug": "dolce-blend",
+      "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/5131db91d176d2cae342d8c09e2b95c5e733a232/product-photos/bag_photo_dolce.jpg",
+      "alt_text": "Dolce Blend",
+      "sort_order": 0
+    },
+    {
+      "product_slug": "ember-blend",
+      "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/5131db91d176d2cae342d8c09e2b95c5e733a232/product-photos/bag_photo_ember.jpg",
+      "alt_text": "Ember Blend",
+      "sort_order": 0
+    },
+    {
+      "product_slug": "aura-blend",
+      "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/5131db91d176d2cae342d8c09e2b95c5e733a232/product-photos/bag_photo_aura.jpg",
+      "alt_text": "Aura Blend",
+      "sort_order": 0
+    },
+    {
+      "product_slug": "ethiopia-guji",
+      "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/5131db91d176d2cae342d8c09e2b95c5e733a232/product-photos/bag_photo_guji.jpg",
+      "alt_text": "Ethiopia Guji",
+      "sort_order": 0
+    },
+    {
+      "product_slug": "ethiopia-dijammah",
+      "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/5131db91d176d2cae342d8c09e2b95c5e733a232/product-photos/bag_photo_dijammah.jpg",
+      "alt_text": "Ethiopia Dijammah",
+      "sort_order": 0
+    },
+    {
+      "product_slug": "vanilla",
+      "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/5131db91d176d2cae342d8c09e2b95c5e733a232/product-photos/bag_photo_vanilla.jpg",
+      "alt_text": "Vanilla",
+      "sort_order": 0
+    },
+    {
+      "product_slug": "brazil-parana",
+      "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/d1344743a81e2e1f20da58357b1c14194b6d8091/product-photos/bag_photo_brazil_parana.png",
+      "alt_text": "Brazil Paraná",
+      "sort_order": 0
+    },
+    {
+      "product_slug": "colombia-huila",
+      "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/349d67202c8f3612d311cacd35462cc4aa878d97/product-photos/bag_photo_huila.png",
+      "alt_text": "Colombia Huila",
+      "sort_order": 0
+    },
+    {
+      "product_slug": "decaf-coffee",
+      "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/f4248f0877075da6f543de921f821d8c2c3cea7c/product-photos/bag_photo_decaf.png",
+      "alt_text": "Decaf Coffee",
+      "sort_order": 0
+    },
+    {
+      "product_slug": "hazelnut",
+      "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/7f82b1fc58d7a6c3e37034c620c58890aa148933/product-photos/bag_photo_hazelnut_v2.jpg",
+      "alt_text": "Hazelnut",
+      "sort_order": 0
+    },
+    {
+      "product_slug": "caramel",
+      "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/4414ed087f4a9f7f607c4731cd43dbeddc72e9ae/product-photos/bag_photo_caramel.png",
+      "alt_text": "Caramel",
+      "sort_order": 0
+    }
   ],
   "categories": [
-    {"slug":"single-origin","name":"Single Origin","description":"Coffee from one farm, region or country.","sort_order":1,"is_active":true},
-    {"slug":"blends","name":"Blends","description":"Balanced blends built for everyday brewing.","sort_order":2,"is_active":true},
-    {"slug":"flavoured","name":"Flavoured","description":"Filter coffee with natural flavours.","sort_order":3,"is_active":true},
-    {"slug":"decaf","name":"Decaf","description":"Coffee with the caffeine removed.","sort_order":4,"is_active":true}
+    {
+      "slug": "single-origin",
+      "name": "Single Origin",
+      "description": "Coffee from one farm, region or country.",
+      "sort_order": 1,
+      "is_active": true
+    },
+    {
+      "slug": "blends",
+      "name": "Blends",
+      "description": "Balanced blends built for everyday brewing.",
+      "sort_order": 2,
+      "is_active": true
+    },
+    {
+      "slug": "flavoured",
+      "name": "Flavoured",
+      "description": "Filter coffee with natural flavours.",
+      "sort_order": 3,
+      "is_active": true
+    },
+    {
+      "slug": "decaf",
+      "name": "Decaf",
+      "description": "Coffee with the caffeine removed.",
+      "sort_order": 4,
+      "is_active": true
+    }
   ],
   "origins": [
-    {"slug":"ethiopia-guji","country":"Ethiopia","region":"Oromia (Guji)","altitude_min_m":1900,"altitude_max_m":2300,"varietal":null,"process":"Washed","locality":null},
-    {"slug":"rwanda-ruhango","country":"Rwanda","region":"Ruhango","altitude_min_m":1650,"altitude_max_m":1875,"varietal":"Red Bourbon","process":"Washed","locality":"Mbuye"},
-    {"slug":"colombia-huila","country":"Colombia","region":"Huila","altitude_min_m":1500,"altitude_max_m":2000,"varietal":"Castillo","process":"Washed","locality":null},
-    {"slug":"ethiopia-kaffa","country":"Ethiopia","region":"Kaffa","altitude_min_m":1800,"altitude_max_m":2200,"varietal":null,"process":"Natural","locality":"Dijammah"},
-    {"slug":"brazil-parana","country":"Brazil","region":"Paraná","altitude_min_m":800,"altitude_max_m":1000,"varietal":null,"process":"Natural","locality":"Jacarezinho"}
+    {
+      "slug": "ethiopia-guji",
+      "country": "Ethiopia",
+      "region": "Oromia (Guji)",
+      "altitude_min_m": 1900,
+      "altitude_max_m": 2300,
+      "varietal": null,
+      "process": "Washed",
+      "locality": null
+    },
+    {
+      "slug": "rwanda-ruhango",
+      "country": "Rwanda",
+      "region": "Ruhango",
+      "altitude_min_m": 1650,
+      "altitude_max_m": 1875,
+      "varietal": "Red Bourbon",
+      "process": "Washed",
+      "locality": "Mbuye"
+    },
+    {
+      "slug": "colombia-huila",
+      "country": "Colombia",
+      "region": "Huila",
+      "altitude_min_m": 1500,
+      "altitude_max_m": 2000,
+      "varietal": "Castillo",
+      "process": "Washed",
+      "locality": null
+    },
+    {
+      "slug": "ethiopia-kaffa",
+      "country": "Ethiopia",
+      "region": "Kaffa",
+      "altitude_min_m": 1800,
+      "altitude_max_m": 2200,
+      "varietal": null,
+      "process": "Natural",
+      "locality": "Dijammah"
+    },
+    {
+      "slug": "brazil-parana",
+      "country": "Brazil",
+      "region": "Paraná",
+      "altitude_min_m": 800,
+      "altitude_max_m": 1000,
+      "varietal": null,
+      "process": "Natural",
+      "locality": "Jacarezinho"
+    }
   ],
   "shipping_zones": [
-    {"name":"Cairo & Giza","governorates":["Cairo","Giza"],"fee":59,"currency":"EGP","is_active":true}
+    {
+      "name": "Cairo & Giza",
+      "governorates": [
+        "Cairo",
+        "Giza"
+      ],
+      "fee": 59,
+      "currency": "EGP",
+      "is_active": true
+    }
   ],
   "delivery_areas_note": "45 areas in Cairo and 23 in Giza are listed in delivery_areas.csv (English and Arabic names)."
 }
