@@ -46,13 +46,6 @@ GUIDES = [
         "answer": "Keep beans in their airtight bag, or move them to an airtight jar. Store them in a cool, dark place away from heat and sunlight. Do not keep them in the fridge, because moisture gets in every time you open it. Use the beans within a few weeks of opening for the best flavour.",
         "links": [],
     },
-    {
-        "slug": "single-origin",
-        "ar_title": "يعني إيه أحادي المصدر؟",
-        "en_title": "What does single origin mean?",
-        "answer": "Single origin means every bean in the bag comes from one farm, one region or one country. The flavour reflects that place, its altitude and how the beans were processed. A blend mixes beans from several origins to create one balanced taste.",
-        "links": [("brazil-parana", "Brazil Paraná"), ("colombia-huila", "Colombia Huila"), ("ethiopia-dijammah", "Ethiopia Dijammah"), ("ethiopia-guji", "Ethiopia Guji")],
-    },
 ]
 
 
