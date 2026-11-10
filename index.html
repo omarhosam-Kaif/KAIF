@@ -1179,9 +1179,9 @@ function showReorderBanner(){
   bar.setAttribute("role", "region");
   bar.setAttribute("aria-label", "Order the same again");
   bar.style.cssText = "position:fixed;left:12px;right:84px;bottom:18px;z-index:60;max-width:520px;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,.14);padding:14px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap";
-  bar.innerHTML = `<div style="font-size:15px"><strong>Order the same again?</strong><br><span style="color:var(--ink-soft);font-size:13px">Add your last order to your cart.</span></div>
+  bar.innerHTML = `<div style="font-size:15px"><strong>Welcome back to KAIF</strong><br><span style="color:var(--ink-soft);font-size:13px">Would you like to add your previous selection to your cart?</span></div>
     <div style="display:flex;gap:8px">
-      <button type="button" data-reorder="no" style="padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer">No thanks</button>
+      <button type="button" data-reorder="no" style="padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer">Not now</button>
       <button type="button" data-reorder="yes" style="padding:8px 14px;border-radius:999px;border:0;background:var(--teal-dark);color:#fff;font-weight:600;cursor:pointer">Add to cart</button>
     </div>`;
   bar.addEventListener("click", e => {
