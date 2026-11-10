@@ -609,6 +609,21 @@ function saveCart(){
 }
 let cart = loadCart();
 
+/* ---- Last order, used for a one-time "order the same again" prompt ---- */
+const LAST_ORDER_KEY = "kaif-last-order-v1";
+function saveLastOrder(items){
+  try { localStorage.setItem(LAST_ORDER_KEY, JSON.stringify({ items, shown: false })); } catch(e){}
+}
+function loadLastOrder(){
+  try { return JSON.parse(localStorage.getItem(LAST_ORDER_KEY)); } catch(e){ return null; }
+}
+function markLastOrderShown(){
+  const lo = loadLastOrder();
+  if (!lo) return;
+  lo.shown = true;
+  try { localStorage.setItem(LAST_ORDER_KEY, JSON.stringify(lo)); } catch(e){}
+}
+
 function cartTotals(){
   let coffee = 0, count = 0, unpriced = false;
   cart.forEach(item => {
@@ -918,6 +933,7 @@ async function placeOrder(){
     if (!res.ok) throw new Error(data.message || "We couldn't place your order. Please try again.");
     orderResult = data;
     saveDetails();
+    saveLastOrder(cart.map(i => ({ id: i.id, qty: i.qty })));
     cart = []; saveCart(); updateCartBadge();
     step = "done";
   } catch (err) {
@@ -1153,6 +1169,31 @@ navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => na
 /* ---- Footer WhatsApp link ---- */
 if (WHATSAPP_NUMBER) $("waLink").href = `https://wa.me/${WHATSAPP_NUMBER}`;
 
+/* One-time prompt after a real order: shown on the next visit in this browser, then never again */
+function showReorderBanner(){
+  const lo = loadLastOrder();
+  if (!lo || lo.shown || !Array.isArray(lo.items) || !lo.items.length) return;
+  const valid = lo.items.filter(i => productById(i.id));
+  if (!valid.length) { markLastOrderShown(); return; }
+  const bar = document.createElement("div");
+  bar.setAttribute("role", "region");
+  bar.setAttribute("aria-label", "Order the same again");
+  bar.style.cssText = "position:fixed;left:12px;right:84px;bottom:18px;z-index:60;max-width:520px;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,.14);padding:14px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap";
+  bar.innerHTML = `<div style="font-size:15px"><strong>Order the same again?</strong><br><span style="color:var(--ink-soft);font-size:13px">Add your last order to your cart.</span></div>
+    <div style="display:flex;gap:8px">
+      <button type="button" data-reorder="no" style="padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer">No thanks</button>
+      <button type="button" data-reorder="yes" style="padding:8px 14px;border-radius:999px;border:0;background:var(--teal-dark);color:#fff;font-weight:600;cursor:pointer">Add to cart</button>
+    </div>`;
+  bar.addEventListener("click", e => {
+    const b = e.target.closest("[data-reorder]");
+    if (!b) return;
+    markLastOrderShown();
+    if (b.dataset.reorder === "yes") valid.forEach(i => addToCart(i.id, i.qty));
+    bar.remove();
+  });
+  document.body.appendChild(bar);
+}
+
 /* ---- Start ---- */
 updateCartBadge();
 loadStore()
@@ -1163,6 +1204,7 @@ loadStore()
     renderGrid();
     updateCartBadge();
     route();
+    showReorderBanner();
   })
   .catch(() => {
     loadFailed = true;
