@@ -22,7 +22,7 @@ GUIDES = [
         "slug": "filter-coffee-at-home",
         "ar_title": "كيف أعمل قهوة فلتر في البيت؟",
         "en_title": "How to brew filter coffee at home",
-        "answer": "Use about 15 grams of water for every 1 gram of coffee as a starting point. Grind to a medium size, and use water just off the boil. Pour in slow circles, and finish the brew in about three to four minutes. Adjust the grind if the cup tastes sour or bitter.",
+        "answer": "Use 40 grams of water for 20 grams of coffee, a 2:1 ratio, as a starting point. Grind to a medium size, and use water just off the boil. Pour in slow circles, and finish the brew in about three to four minutes. Adjust the grind if the cup tastes sour or bitter.",
         "links": [("ethiopia-guji", "Ethiopia Guji"), ("ethiopia-dijammah", "Ethiopia Dijammah"), ("brazil-parana", "Brazil Paraná")],
     },
     {
