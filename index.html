@@ -815,6 +815,14 @@ function areaOptions(){
   return `<option value="">${details.gov ? "Choose your area" : "Choose a governorate first"}</option>` +
     list.map(a => `<option value="${esc(a.name)}" ${a.name === details.area ? "selected" : ""}>${esc(a.name)}${a.name_ar ? " &middot; " + esc(a.name_ar) : ""}</option>`).join("");
 }
+/* Governorates with a list of areas get a dropdown; others get a typed area */
+function areaField(){
+  const list = areasByGov[details.gov] || [];
+  if (details.gov && !list.length){
+    return `<input id="fArea" data-f="area" class="${fieldCls("area")}" autocomplete="address-level2" placeholder="Your city, town or neighbourhood" value="${esc(details.area)}">`;
+  }
+  return `<select id="fArea" data-f="area" class="${fieldCls("area")}" ${details.gov ? "" : "disabled"}>${areaOptions()}</select>`;
+}
 function fieldCls(name){ return invalidField === name ? "invalid" : ""; }
 
 function renderDetailsStep(){
@@ -837,7 +845,7 @@ function renderDetailsStep(){
           ${govs.map(g => `<option value="${esc(g)}" ${g === details.gov ? "selected" : ""}>${esc(g)}</option>`).join("")}
         </select></div>
       <div class="form-row"><label for="fArea">Area <i>*</i></label>
-        <select id="fArea" data-f="area" class="${fieldCls("area")}" ${details.gov ? "" : "disabled"}>${areaOptions()}</select></div>
+        ${areaField()}</div>
       <div class="form-row"><label for="fStreet">Street and number <i>*</i></label>
         <input id="fStreet" data-f="street" class="${fieldCls("street")}" autocomplete="address-line1" value="${esc(details.street)}"></div>
       <div class="form-cols">
