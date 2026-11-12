@@ -1200,7 +1200,7 @@ $("menuToggle").addEventListener("click", () => {
   const open = navLinks.classList.toggle("open");
   $("menuToggle").setAttribute("aria-expanded", open);
 });
-navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => navLinks.classList.remove("open")));
+navLinks.querySelectorAll("a:not(#shopMenuBtn)").forEach(a => a.addEventListener("click", () => navLinks.classList.remove("open")));
 
 /* ---- Footer WhatsApp link ---- */
 if (WHATSAPP_NUMBER) $("waLink").href = `https://wa.me/${WHATSAPP_NUMBER}`;
