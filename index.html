@@ -617,8 +617,8 @@ function shippingFor(governorate){
 function renderChips(){
   $("chips").innerHTML = `<button class="chip active" data-filter="all" type="button">All</button>` +
     categories.map(c => `<button class="chip" data-filter="${esc(c.slug)}" type="button">${esc(c.name)}</button>`).join("");
-  $("shopSub").innerHTML = `<a href="#shop" data-filter-link="all">All coffee</a>` +
-    categories.map(c => `<a href="#shop" data-filter-link="${esc(c.slug)}">${esc(c.name)}</a>`).join("");
+  $("shopSub").innerHTML = `<a href="#shop" data-filter-link="all" data-close-menu>All coffee</a>` +
+    categories.map(c => `<a href="#shop" data-filter-link="${esc(c.slug)}" data-close-menu>${esc(c.name)}</a>`).join("");
   $("footShop").innerHTML = categories.map(c =>
     `<li><a href="#shop" data-filter-link="${esc(c.slug)}">${esc(c.name)}</a></li>`).join("");
 }
