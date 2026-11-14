@@ -1253,7 +1253,8 @@ document.addEventListener("DOMContentLoaded", function(){
   const shopBtn = document.getElementById("shopMenuBtn");
   const setMenu = on => { menu.classList.toggle("open", on); shopBtn.setAttribute("aria-expanded", on ? "true" : "false"); };
   shopBtn.addEventListener("click", e => { e.preventDefault(); setMenu(!menu.classList.contains("open")); });
-  menu.addEventListener("click", e => { if (e.target.closest("[data-close-menu]")) setMenu(false); });
+  const closeMobileNav = () => { navLinks.classList.remove("open"); $("menuToggle").setAttribute("aria-expanded", "false"); };
+  menu.addEventListener("click", e => { if (e.target.closest("[data-close-menu]")) { setMenu(false); closeMobileNav(); } });
   const coffeeBtn = document.getElementById("coffeeToggle");
   coffeeBtn.addEventListener("click", () => {
     const open = document.getElementById("shopSub").classList.toggle("open");
@@ -1266,6 +1267,7 @@ document.addEventListener("DOMContentLoaded", function(){
   });
   document.querySelectorAll("[data-open-panel]").forEach(btn => btn.addEventListener("click", () => {
     setMenu(false);
+    closeMobileNav();
     closeAll();
     const ov = document.getElementById(btn.dataset.openPanel);
     ov.classList.add("open"); ov.setAttribute("aria-hidden", "false");
