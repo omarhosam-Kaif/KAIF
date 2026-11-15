@@ -561,6 +561,7 @@ const FALLBACK_PHOTOS = {
 
 const money = n => "EGP " + Number(n).toLocaleString("en-US", { maximumFractionDigits: 2 });
 const $ = id => document.getElementById(id);
+const sizeLabel = p => (p && p.category === "tools" ? "" : "250g");
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
 
 /* ---- Data from Supabase ---- */
@@ -824,7 +825,7 @@ function renderCartStep(){
         ${p.image ? `<img class="thumb" src="${esc(p.image)}" alt="">` : `<div class="thumb"></div>`}
         <div>
           <div class="ci-name">${esc(p.name)}</div>
-          <div class="ci-meta">250g</div>
+          <div class="ci-meta">${sizeLabel(p)}</div>
           <div class="qty">
             <button type="button" data-i="${idx}" data-step="-1" aria-label="Decrease">&minus;</button>
             <span>${item.qty}</span>
@@ -921,7 +922,7 @@ function renderReviewStep(){
   const lines = cart.map(item => {
     const p = productById(item.id);
     if (!p) return "";
-    return `<div class="review-line"><span>${esc(p.name)} (250g) &times; ${item.qty}</span><span>${money(p.price * item.qty)}</span></div>`;
+    return `<div class="review-line"><span>${esc(p.name)}${sizeLabel(p) ? " (" + sizeLabel(p) + ")" : ""} &times; ${item.qty}</span><span>${money(p.price * item.qty)}</span></div>`;
   }).join("");
   const addr = [
     [details.street, details.building && "Building " + details.building, details.floor && "Floor " + details.floor, details.apartment && "Apt " + details.apartment].filter(Boolean).join(", "),
