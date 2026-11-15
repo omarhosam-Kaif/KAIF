@@ -656,7 +656,7 @@ function compareByPrice(a, b){
   return a.price - b.price;
 }
 function visibleProducts(){
-  let list = products.filter(p => filter === "all" || p.category === filter);
+  let list = products.filter(p => p.category !== "tools" && (filter === "all" || p.category === filter));
   if (sortBy === "best")       list = [...list].sort((a, b) => (b.bestSeller - a.bestSeller) || a.name.localeCompare(b.name));
   if (sortBy === "price-asc")  list = [...list].sort(compareByPrice);
   if (sortBy === "price-desc") list = [...list].sort((a, b) => -compareByPrice(a, b));
@@ -1246,6 +1246,16 @@ document.addEventListener("DOMContentLoaded", function(){
   const closeAll = () => document.querySelectorAll(".tools-overlay.open").forEach(o => {
     o.classList.remove("open"); o.setAttribute("aria-hidden", "true");
   });
+  document.addEventListener("click", e => {
+    const b = e.target.closest("[data-tool-slug]");
+    if (!b) return;
+    const p = products.find(x => x.slug === b.dataset.toolSlug);
+    if (!p || p.price === null) { b.textContent = "Not available"; return; }
+    addToCart(p.id, 1);
+    b.textContent = "Added to cart";
+    setTimeout(() => { b.textContent = "Add to cart"; }, 1500);
+    openCart();
+  });
   document.querySelectorAll("[data-open-panel]").forEach(btn => btn.addEventListener("click", () => {
     setMenu(false);
     closeMobileNav();
@@ -1269,7 +1279,7 @@ document.addEventListener("DOMContentLoaded", function(){
         <div class="tool-body">
           <p class="tool-brand">AeroPress</p>
           <h3>AeroPress Original</h3>
-          <p class="tool-price">EGP 2,900</p>
+          <p class="tool-price">EGP 2,900</p><button class="add-btn" type="button" data-tool-slug="aeropress-original">Add to cart</button>
           <p>A quick, easy brewer that blends a few methods in one. You get a rich, clean cup in about two minutes, and you can change the recipe to suit your taste.</p>
         </div>
       </article>
@@ -1278,7 +1288,7 @@ document.addEventListener("DOMContentLoaded", function(){
         <div class="tool-body">
           <p class="tool-brand">Hario</p>
           <h3>Hario V60 Ceramic Dripper 02, White</h3>
-          <p class="tool-price">EGP 2,300</p>
+          <p class="tool-price">EGP 2,300</p><button class="add-btn" type="button" data-tool-slug="hario-v60-dripper-02-white">Add to cart</button>
           <p>A cone-shaped pour-over dripper that many baristas use. Its single large hole and spiral ribs keep the water flowing evenly, and changing how fast you pour lets you make a lighter or a stronger cup.</p>
         </div>
       </article>
@@ -1287,7 +1297,7 @@ document.addEventListener("DOMContentLoaded", function(){
         <div class="tool-body">
           <p class="tool-brand">Hario</p>
           <h3>Hario V60 Paper Filters, White, Size 02 (100 sheets)</h3>
-          <p class="tool-price">EGP 420</p>
+          <p class="tool-price">EGP 420</p><button class="add-btn" type="button" data-tool-slug="hario-v60-paper-filters-02">Add to cart</button>
           <p>Paper filters cut for the V60 size 02 dripper, for one to four cups. They&#39;re biodegradable and chemical-free, and they let the coffee&#39;s flavour come through clearly. Rinse them with hot water before brewing to remove any papery taste.</p>
         </div>
       </article>
@@ -1296,7 +1306,7 @@ document.addEventListener("DOMContentLoaded", function(){
         <div class="tool-body">
           <p class="tool-brand">Timemore</p>
           <h3>Timemore Scale, Black/White</h3>
-          <p class="tool-price">EGP 3,900</p>
+          <p class="tool-price">EGP 3,900</p><button class="add-btn" type="button" data-tool-slug="timemore-scale-black-white">Add to cart</button>
           <p>A compact digital scale for weighing beans and water. It reads from 0.1 g up to 2 kg, has a built-in timer and a flow-rate readout, and charges by USB so you can keep brewing the same cup every time.</p>
         </div>
       </article>
@@ -1305,7 +1315,7 @@ document.addEventListener("DOMContentLoaded", function(){
         <div class="tool-body">
           <p class="tool-brand">Nebula Coffee Roasters</p>
           <h3>Anti-Static Coffee Bean Spray Bottle</h3>
-          <p class="tool-price">EGP 300</p>
+          <p class="tool-price">EGP 300</p><button class="add-btn" type="button" data-tool-slug="anti-static-coffee-spray-bottle">Add to cart</button>
           <p>A small spray bottle for misting beans or grounds before grinding. One or two sprays cut down on static, so grounds don&#39;t clump or cling to the grinder. Its compact aluminium and glass body fits easily on any counter.</p>
         </div>
       </article>
@@ -1322,7 +1332,7 @@ document.addEventListener("DOMContentLoaded", function(){
         <div class="tool-body">
           <p class="tool-brand">Barista Space</p>
           <h3>BaristaSpace Stainless Steel Pitcher With Splash 600ml</h3>
-          <p class="tool-price">EGP 2,920</p>
+          <p class="tool-price">EGP 2,920</p><button class="add-btn" type="button" data-tool-slug="baristaspace-steel-pitcher-600ml">Add to cart</button>
           <p>A stainless steel pitcher for steaming and frothing milk for cappuccinos and lattes. Its moulded spout gives you precise control over the flow, which helps when you&#39;re pouring latte art. The 600 ml size holds enough milk for one or two drinks.</p>
         </div>
       </article>
@@ -1331,7 +1341,7 @@ document.addEventListener("DOMContentLoaded", function(){
         <div class="tool-body">
           <p class="tool-brand">Rhino</p>
           <h3>Rhino Shot Glass 2oz Lined</h3>
-          <p class="tool-price">EGP 430</p>
+          <p class="tool-price">EGP 430</p><button class="add-btn" type="button" data-tool-slug="rhino-shot-glass-2oz">Add to cart</button>
           <p>A small heat-resistant glass that holds about 60 ml, enough for a single espresso shot. Its measurement lines every half ounce help you check your shots and measure liquids or dry ingredients in the kitchen.</p>
         </div>
       </article>
