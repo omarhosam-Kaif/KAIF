@@ -342,6 +342,28 @@ footer p{font-size:15px;color:#b9c4c8;max-width:340px}
 .tool-body h3{margin:0 0 8px;font-size:17px;line-height:1.35}
 .tool-body p{margin:0;color:var(--ink-soft);font-size:14px;line-height:1.6}
 .tool-soon{display:inline-block;margin-top:12px;font-size:12px;color:var(--ink-soft);border:1px solid #d8d1c2;border-radius:999px;padding:4px 10px}
+
+/* Tool product page */
+.tdetail-overlay{position:fixed;inset:0;background:rgba(20,28,31,.55);z-index:95;display:none;align-items:flex-start;justify-content:center;overflow:auto;padding:40px 16px}
+.tdetail-overlay.open{display:flex}
+.tdetail-panel{position:relative;background:#fff;max-width:960px;width:100%;border-radius:16px;padding:40px 28px 28px}
+.tdetail-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:start}
+@media (max-width:720px){.tdetail-grid{grid-template-columns:1fr;gap:20px}}
+.td-main{position:relative;aspect-ratio:1/1;background:#f6f3ec;border-radius:12px;overflow:hidden}
+.td-main img{width:100%;height:100%;object-fit:contain;display:block}
+.td-arrow{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:22px;line-height:1;color:var(--ink)}
+.td-prev{left:8px}.td-next{right:8px}
+.td-thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto}
+.td-thumbs button{flex:0 0 64px;width:64px;height:64px;padding:0;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;overflow:hidden}
+.td-thumbs button.on{border-color:var(--teal);box-shadow:0 0 0 2px var(--teal)}
+.td-thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.td-brand{margin:0;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;color:var(--teal-dark)}
+.td-title{margin:6px 0 0;font-size:28px;line-height:1.2}
+.td-price{margin:14px 0;font-size:22px;font-weight:700}
+.td-add{display:flex;gap:12px;align-items:stretch;margin-bottom:18px}
+.td-add .add-btn{flex:1}
+.td-desc{color:var(--ink-soft);line-height:1.7;margin:0 0 14px}
+.td-meta{font-size:14px;color:var(--ink-soft);margin:0}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
@@ -1246,7 +1268,75 @@ document.addEventListener("DOMContentLoaded", function(){
   const closeAll = () => document.querySelectorAll(".tools-overlay.open").forEach(o => {
     o.classList.remove("open"); o.setAttribute("aria-hidden", "true");
   });
-  document.addEventListener("click", e => {
+  let tdState = null;
+function renderToolDetail(){
+  const { p, imgs, idx, qty } = tdState;
+  const canBuy = p.variant && p.price !== null;
+  $("tdContent").innerHTML = `
+    <div class="tdetail-grid">
+      <div>
+        <div class="td-main">
+          <img src="${esc(imgs[idx].url)}" alt="${esc(imgs[idx].alt_text || p.name)}">
+          ${imgs.length > 1 ? `<button class="td-arrow td-prev" type="button" data-tdnav="-1" aria-label="Previous photo">&lsaquo;</button><button class="td-arrow td-next" type="button" data-tdnav="1" aria-label="Next photo">&rsaquo;</button>` : ""}
+        </div>
+        ${imgs.length > 1 ? `<div class="td-thumbs">${imgs.map((im, i) => `<button type="button" data-tdi="${i}" class="${i === idx ? "on" : ""}" aria-label="Photo ${i + 1}"><img src="${esc(im.url)}" alt=""></button>`).join("")}</div>` : ""}
+      </div>
+      <div>
+        <p class="td-brand">${esc(p.raw.subtitle || "")}</p>
+        <h2 class="td-title" id="tdTitle">${esc(p.name)}</h2>
+        <div class="td-price">${canBuy ? money(p.price) : "Not available yet"}</div>
+        <div class="td-add">
+          <div class="qty-pick" aria-label="Quantity">
+            <button type="button" data-tdq="-1" aria-label="Fewer" ${canBuy ? "" : "disabled"}>&minus;</button>
+            <span class="pq-val">${qty}</span>
+            <button type="button" data-tdq="1" aria-label="More" ${canBuy ? "" : "disabled"}>+</button>
+          </div>
+          <button class="add-btn" type="button" data-tdadd ${canBuy ? "" : "disabled"}>${canBuy ? "Add to cart" : "Not available yet"}</button>
+        </div>
+        ${p.raw.description ? `<p class="td-desc">${esc(p.raw.description)}</p>` : ""}
+        <p class="td-meta">Delivery across Egypt. Shipping is calculated at checkout.</p>
+      </div>
+    </div>`;
+}
+function openToolDetail(slug){
+  const p = products.find(x => x.slug === slug);
+  if (!p) return;
+  const imgs = (p.raw.images && p.raw.images.length
+    ? p.raw.images.slice().sort((a, b) => a.sort_order - b.sort_order)
+    : [{ url: p.image, alt_text: p.imageAlt }]).filter(i => i.url);
+  if (!imgs.length) return;
+  tdState = { p, imgs, idx: 0, qty: 1 };
+  renderToolDetail();
+  $("toolDetail").classList.add("open");
+  $("toolDetail").setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+function closeToolDetail(){
+  $("toolDetail").classList.remove("open");
+  $("toolDetail").setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+$("tdContent").addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if (!b || !tdState) return;
+  if (b.dataset.tdnav) tdState.idx = (tdState.idx + Number(b.dataset.tdnav) + tdState.imgs.length) % tdState.imgs.length;
+  else if (b.dataset.tdi !== undefined) tdState.idx = Number(b.dataset.tdi);
+  else if (b.dataset.tdq) tdState.qty = Math.min(20, Math.max(1, tdState.qty + Number(b.dataset.tdq)));
+  else if (b.hasAttribute("data-tdadd")) {
+    addToCart(tdState.p.id, tdState.qty);
+    closeToolDetail();
+    openCart();
+    return;
+  } else return;
+  renderToolDetail();
+});
+document.addEventListener("click", e => {
+  const open = e.target.closest("[data-tool-open]");
+  if (open) { openToolDetail(open.dataset.toolOpen); return; }
+  if (e.target.closest("[data-close-tool]") || e.target.id === "toolDetail") closeToolDetail();
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeToolDetail(); });
+document.addEventListener("click", e => {
     const b = e.target.closest("[data-tool-slug]");
     if (!b) return;
     const p = products.find(x => x.slug === b.dataset.toolSlug);
@@ -1269,13 +1359,19 @@ document.addEventListener("DOMContentLoaded", function(){
   document.addEventListener("keydown", e => { if (e.key === "Escape") { closeAll(); setMenu(false); } });
 });
 </script>
+<div class="tdetail-overlay" id="toolDetail" aria-hidden="true">
+  <div class="tdetail-panel" role="dialog" aria-modal="true" aria-labelledby="tdTitle">
+    <button class="tools-close" type="button" data-close-tool aria-label="Close">&times;</button>
+    <div id="tdContent"></div>
+  </div>
+</div>
 <div class="tools-overlay" id="brewingPanel" aria-hidden="true">
   <div class="tools-panel" role="dialog" aria-modal="true" aria-labelledby="brewingTitle">
     <button class="tools-close" type="button" data-close-panel aria-label="Close">&times;</button>
     <div class="section-head"><h2 id="brewingTitle">Brewing tools</h2></div>
     <div class="tools-grid">
       <article class="tool-card">
-        <div class="tool-img"><img src="/aeropress.png" alt="AeroPress Original brewer making coffee into a glass" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div>
+        <div class="tool-img" data-tool-open="aeropress-original"><img src="/aeropress.png" alt="AeroPress Original brewer making coffee into a glass" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div>
         <div class="tool-body">
           <p class="tool-brand">AeroPress</p>
           <h3>AeroPress Original</h3>
@@ -1284,7 +1380,7 @@ document.addEventListener("DOMContentLoaded", function(){
         </div>
       </article>
       <article class="tool-card">
-        <div class="tool-img"><img src="/hario-v60-dripper.png" alt="Hario V60 ceramic dripper size 02, white" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div>
+        <div class="tool-img" data-tool-open="hario-v60-dripper-02-white"><img src="/hario-v60-dripper.png" alt="Hario V60 ceramic dripper size 02, white" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div>
         <div class="tool-body">
           <p class="tool-brand">Hario</p>
           <h3>Hario V60 Ceramic Dripper 02, White</h3>
@@ -1293,7 +1389,7 @@ document.addEventListener("DOMContentLoaded", function(){
         </div>
       </article>
       <article class="tool-card">
-        <div class="tool-img"><img src="/hario-v60-filters.png" alt="Hario V60 paper filters, white, size 02, 100 sheets" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div>
+        <div class="tool-img" data-tool-open="hario-v60-paper-filters-02"><img src="/hario-v60-filters.png" alt="Hario V60 paper filters, white, size 02, 100 sheets" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div>
         <div class="tool-body">
           <p class="tool-brand">Hario</p>
           <h3>Hario V60 Paper Filters, White, Size 02 (100 sheets)</h3>
@@ -1302,7 +1398,7 @@ document.addEventListener("DOMContentLoaded", function(){
         </div>
       </article>
       <article class="tool-card">
-        <div class="tool-img"><img src="/timemore-scale.png" alt="Timemore digital coffee scale, black and white" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div>
+        <div class="tool-img" data-tool-open="timemore-scale-black-white"><img src="/timemore-scale.png" alt="Timemore digital coffee scale, black and white" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div>
         <div class="tool-body">
           <p class="tool-brand">Timemore</p>
           <h3>Timemore Scale, Black/White</h3>
@@ -1311,7 +1407,7 @@ document.addEventListener("DOMContentLoaded", function(){
         </div>
       </article>
       <article class="tool-card">
-        <div class="tool-img"><img src="/anti-static-spray.png" alt="Anti-static coffee bean spray bottle" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div>
+        <div class="tool-img" data-tool-open="anti-static-coffee-spray-bottle"><img src="/anti-static-spray.png" alt="Anti-static coffee bean spray bottle" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div>
         <div class="tool-body">
           <p class="tool-brand">Nebula Coffee Roasters</p>
           <h3>Anti-Static Coffee Bean Spray Bottle</h3>
@@ -1328,7 +1424,7 @@ document.addEventListener("DOMContentLoaded", function(){
     <div class="section-head"><h2 id="baristaTitle">Barista tools</h2></div>
     <div class="tools-grid">
       <article class="tool-card">
-        <div class="tool-img"><img src="/barista-pitcher.png" alt="BaristaSpace stainless steel pitcher with splash finish" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div>
+        <div class="tool-img" data-tool-open="baristaspace-steel-pitcher-600ml"><img src="/barista-pitcher.png" alt="BaristaSpace stainless steel pitcher with splash finish" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div>
         <div class="tool-body">
           <p class="tool-brand">Barista Space</p>
           <h3>BaristaSpace Stainless Steel Pitcher With Splash 600ml</h3>
@@ -1337,7 +1433,7 @@ document.addEventListener("DOMContentLoaded", function(){
         </div>
       </article>
       <article class="tool-card">
-        <div class="tool-img"><img src="/rhino-shot-glass.png" alt="Rhino lined shot glass with measurement lines" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div>
+        <div class="tool-img" data-tool-open="rhino-shot-glass-2oz"><img src="/rhino-shot-glass.png" alt="Rhino lined shot glass with measurement lines" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div>
         <div class="tool-body">
           <p class="tool-brand">Rhino</p>
           <h3>Rhino Shot Glass 2oz Lined</h3>
