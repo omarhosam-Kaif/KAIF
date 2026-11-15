@@ -561,7 +561,8 @@ const FALLBACK_PHOTOS = {
 
 const money = n => "EGP " + Number(n).toLocaleString("en-US", { maximumFractionDigits: 2 });
 const $ = id => document.getElementById(id);
-const sizeLabel = p => (p && p.category === "tools" ? "" : "250g");
+const isTool = p => !p || !p.category || p.category === "tools";
+const sizeLabel = p => (isTool(p) ? "" : "250g");
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
 
 /* ---- Data from Supabase ---- */
@@ -679,7 +680,7 @@ function compareByPrice(a, b){
   return a.price - b.price;
 }
 function visibleProducts(){
-  let list = products.filter(p => p.category !== "tools" && (filter === "all" || p.category === filter));
+  let list = products.filter(p => !isTool(p) && (filter === "all" || p.category === filter));
   if (sortBy === "best")       list = [...list].sort((a, b) => (b.bestSeller - a.bestSeller) || a.name.localeCompare(b.name));
   if (sortBy === "price-asc")  list = [...list].sort(compareByPrice);
   if (sortBy === "price-desc") list = [...list].sort((a, b) => -compareByPrice(a, b));
@@ -704,7 +705,7 @@ function renderGrid(){
         <h3><a href="/${esc(p.slug)}">${esc(p.name)}</a></h3>
         <p class="notes">${esc(p.notes)}</p>
         <div class="card-foot">
-          <div class="price-row"><span class="price">${priceText}</span><small>250g</small></div>
+          <div class="price-row"><span class="price">${priceText}</span>${sizeLabel(p) ? `<small>${sizeLabel(p)}</small>` : ""}</div>
           <div class="add-row">
             <div class="qty-pick" aria-label="Quantity">
               <button type="button" data-qty="-1" aria-label="Fewer bags" ${canBuy ? "" : "disabled"}>&minus;</button>
