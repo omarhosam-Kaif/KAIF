@@ -119,6 +119,7 @@ header{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:1p
 .card-body{padding:20px;display:flex;flex-direction:column;gap:8px;flex:1}
 .tag{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal-dark);font-weight:600}
 .card h3{font-size:20px;line-height:1.3}
+.card .name-ar{display:block;font-size:17px;font-weight:600;color:var(--ink-soft);margin-top:4px;font-family:inherit}
 .notes{font-size:14px;color:var(--ink-soft)}
 .card-foot{margin-top:auto;display:flex;flex-direction:column;gap:12px;padding-top:10px}
 .price-row{display:flex;justify-content:space-between;align-items:baseline}
@@ -580,7 +581,7 @@ async function sb(path){
 
 async function loadStore(){
   const [prods, cats, zones, areas] = await Promise.all([
-    sb("products?select=id,slug,name,subtitle,description,process,roast_level,body,acidity,aftertaste,sweetness,brew_methods,tasting_notes,is_decaf,is_blend,best_seller,category:categories(slug,name,sort_order),origin:origins(country,region,locality,altitude_min_m,altitude_max_m,varietal,process),variants:product_variants(id,sku,grind,weight_grams,price,currency,is_active),images:product_images(url,alt_text,sort_order)&is_active=eq.true&order=name"),
+    sb("products?select=id,slug,name,name_ar,subtitle,description,process,roast_level,body,acidity,aftertaste,sweetness,brew_methods,tasting_notes,is_decaf,is_blend,best_seller,category:categories(slug,name,sort_order),origin:origins(country,region,locality,altitude_min_m,altitude_max_m,varietal,process),variants:product_variants(id,sku,grind,weight_grams,price,currency,is_active),images:product_images(url,alt_text,sort_order)&is_active=eq.true&order=name"),
     sb("categories?select=slug,name,sort_order&is_active=eq.true&order=sort_order"),
     sb("shipping_zones?select=name,governorates,fee,currency&is_active=eq.true"),
     sb("delivery_areas?select=governorate,name,name_ar,sort_order&is_active=eq.true&order=sort_order")
@@ -702,7 +703,7 @@ function renderGrid(){
       <a class="card-img" href="#coffee/${esc(p.slug)}" aria-label="View details for ${esc(p.name)}">${img}</a>
       <div class="card-body">
         <span class="tag">${esc(p.origin)}</span>
-        <h3><a href="#coffee/${esc(p.slug)}">${esc(p.name)}</a></h3>
+        <h3><a href="#coffee/${esc(p.slug)}">${esc(p.name)}</a>${p.raw.name_ar ? `<span class="name-ar" dir="rtl" lang="ar">${esc(p.raw.name_ar)}</span>` : ""}</h3>
         <p class="notes">${esc(p.notes)}</p>
         <div class="card-foot">
           <div class="price-row"><span class="price">${priceText}</span>${sizeLabel(p) ? `<small>${sizeLabel(p)}</small>` : ""}</div>
