@@ -637,7 +637,8 @@ function renderChips(){
   $("shopSub").innerHTML = `<a href="#shop" data-filter-link="all" data-close-menu>All coffee</a>` +
     categories.map(c => `<a href="#shop" data-filter-link="${esc(c.slug)}" data-close-menu>${esc(c.name)}</a>`).join("");
   $("footShop").innerHTML = categories.map(c =>
-    `<li><a href="#shop" data-filter-link="${esc(c.slug)}">${esc(c.name)}</a></li>`).join("");
+    `<li><a href="#shop" data-filter-link="${esc(c.slug)}">${esc(c.name)}</a></li>`).join("") +
+    `<li><a href="#shop" data-open-panel="brewingPanel">Brewing tools</a></li><li><a href="#shop" data-open-panel="baristaPanel">Barista tools</a></li>`;
 }
 
 /* ---- Cart state (saved in this browser only) ---- */
@@ -746,6 +747,14 @@ $("chips").addEventListener("click", e => {
 });
 $("sort").addEventListener("change", e => { sortBy = e.target.value; renderGrid(); });
 $("footShop").addEventListener("click", e => {
+  const toolLink = e.target.closest("[data-open-panel]");
+  if (toolLink) {
+    e.preventDefault();
+    document.querySelectorAll(".tools-overlay.open").forEach(o => { o.classList.remove("open"); o.setAttribute("aria-hidden", "true"); });
+    const ov = document.getElementById(toolLink.dataset.openPanel);
+    ov.classList.add("open"); ov.setAttribute("aria-hidden", "false");
+    return;
+  }
   const a = e.target.closest("[data-filter-link]");
   if (a) setFilter(a.dataset.filterLink);
 });
