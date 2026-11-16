@@ -344,7 +344,7 @@ footer p{font-size:15px;color:#b9c4c8;max-width:340px}
 .tool-card{background:#fbfaf6;border:1px solid #e3ddd0;border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
 .tool-img{aspect-ratio:4/3;background:linear-gradient(135deg,#eef4f5,#e3ecee);display:flex;align-items:center;justify-content:center;color:#6b7c81;font-size:13px}
 .tool-body{padding:16px 18px 18px;flex:1;display:flex;flex-direction:column}
-.tool-brand{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal-dark);margin:0 0 6px}
+.tool-brand{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal-dark);margin:0 0 6px;min-height:1.5em}
 .tool-body h3{margin:0 0 8px;font-size:17px;line-height:1.35;min-height:2.7em}
 .tool-body p{margin:0;color:var(--ink-soft);font-size:14px;line-height:1.6}
 .tool-soon{display:inline-block;margin-top:12px;font-size:12px;color:var(--ink-soft);border:1px solid #d8d1c2;border-radius:999px;padding:4px 10px}
@@ -1436,6 +1436,7 @@ document.addEventListener("click", e => {
       <article class="tool-card">
         <div class="tool-img" data-tool-open="anti-static-coffee-spray-bottle"><img src="/anti-static-spray.png" alt="Anti-static coffee bean spray bottle" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div>
         <div class="tool-body">
+          <p class="tool-brand">&nbsp;</p>
           <h3>Anti-Static Coffee Bean Spray Bottle</h3>
           <p class="tool-price">EGP 300</p><button class="add-btn" type="button" data-tool-slug="anti-static-coffee-spray-bottle">Add to cart</button>
           <p>A small spray bottle for misting beans or grounds before grinding. One or two sprays cut down on static, so grounds don&#39;t clump or cling to the grinder. Its compact aluminium and glass body fits easily on any counter.</p>
