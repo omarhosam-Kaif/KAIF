@@ -626,7 +626,8 @@ function shippingFor(governorate){
 /* ---- Filter chips from categories ---- */
 function renderChips(){
   $("chips").innerHTML = `<button class="chip active" data-filter="all" type="button">All</button>` +
-    categories.map(c => `<button class="chip" data-filter="${esc(c.slug)}" type="button">${esc(c.name)}</button>`).join("");
+    categories.map(c => `<button class="chip" data-filter="${esc(c.slug)}" type="button">${esc(c.name)}</button>`).join("") +
+    `<button class="chip chip-tools" data-open-panel="brewingPanel" type="button">Brewing tools</button><button class="chip chip-tools" data-open-panel="baristaPanel" type="button">Barista tools</button>`;
   $("shopSub").innerHTML = `<a href="#shop" data-filter-link="all" data-close-menu>All coffee</a>` +
     categories.map(c => `<a href="#shop" data-filter-link="${esc(c.slug)}" data-close-menu>${esc(c.name)}</a>`).join("");
   $("footShop").innerHTML = categories.map(c =>
@@ -727,6 +728,13 @@ function setFilter(f){
   renderGrid();
 }
 $("chips").addEventListener("click", e => {
+  const toolChip = e.target.closest("[data-open-panel]");
+  if (toolChip) {
+    document.querySelectorAll(".tools-overlay.open").forEach(o => { o.classList.remove("open"); o.setAttribute("aria-hidden", "true"); });
+    const ov = document.getElementById(toolChip.dataset.openPanel);
+    ov.classList.add("open"); ov.setAttribute("aria-hidden", "false");
+    return;
+  }
   const chip = e.target.closest(".chip");
   if (chip) setFilter(chip.dataset.filter);
 });
