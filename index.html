@@ -605,7 +605,7 @@ async function loadStore(){
       id: p.id,
       slug: p.slug,
       name: p.name,
-      origin: p.origin ? [p.origin.country, p.origin.region].filter(Boolean).join(", ") : (p.category && p.category.slug === "flavoured" ? "Flavoured" : p.is_blend ? "Blend" : ""),
+      origin: p.origin ? [p.origin.country, p.origin.region].filter(Boolean).join(", ") : (p.category && p.category.slug === "flavoured" ? "Flavoured" : p.category && p.category.slug === "turkish-coffee" ? "Turkish" : p.is_blend ? "Blend" : ""),
       notes: (p.tasting_notes || []).join(" · ") || p.subtitle || "",
       category: p.category ? p.category.slug : "",
       bestSeller: !!p.best_seller,
