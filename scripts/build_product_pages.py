@@ -44,8 +44,18 @@ def describe(p):
 
 
 def meta_description(p):
-    text = f"{describe(p)} Order from KAIF, roasted in small batches in Egypt."
-    return text if len(text) <= 160 else text[:157].rsplit(" ", 1)[0] + "..."
+    base = describe(p)
+    text = f"{base} Order from KAIF, roasted in small batches in Egypt."
+    if len(text) <= 160:
+        return text
+    # Keep whole sentences so the snippet never ends mid-thought.
+    out = ""
+    for sentence in re.split(r"(?<=\.)\s+", base):
+        candidate = f"{out} {sentence}".strip()
+        if len(candidate) > 160:
+            break
+        out = candidate
+    return out or base[:157].rsplit(" ", 1)[0] + "..."
 
 
 def build_page(p, variant, images, styles):
