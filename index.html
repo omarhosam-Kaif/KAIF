@@ -598,8 +598,6 @@ h1,h2,h3,.brand span,.td-title,.price,.td-price{font-family:var(--display)}
 .journey-steps p{font-size:14px;color:#c8d1d4;line-height:1.5}
 
 /* ---- Cat moods ---- */
-.night .brand .cat .lid{animation-name:catSleepy}
-@keyframes catSleepy{0%,86%,100%{transform:scaleY(.55)}90%,96%{transform:scaleY(1)}}
 .cat.happy{animation:catHop .7s ease-in-out infinite;transform-origin:50% 100%}
 @keyframes catHop{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
 .done-view .cat{width:110px;margin-bottom:6px}
@@ -634,7 +632,7 @@ h1,h2,h3,.brand span,.td-title,.price,.td-price{font-family:var(--display)}
   .again .go{order:5;width:100%}
 }
 @media (prefers-reduced-motion:reduce){
-  .cat.happy,.night .brand .cat .lid{animation:none}
+  .cat.happy{animation:none}
   .confetti{display:none}
 }
 
@@ -1679,7 +1677,6 @@ function showReorderBanner(){
 /* ================= Delight: add-to-cart moment, cat, reveals, quiz ================= */
 const PEEK_LINES = ["Nice pick.", "Good taste.", "Added. I approve.", "In the cart it goes.", "Excellent choice."];
 const NIGHT = (h => h >= 0 && h < 5)(new Date().getHours());
-if (NIGHT) document.body.classList.add("night");
 function moodLine(before, after){
   if (before < 3 && after >= 3) return "Three bags. Now we're talking.";
   if (before < 5 && after >= 5) return "Stocking up, I see.";
