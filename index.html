@@ -84,7 +84,7 @@ header{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:1p
 .menu-toggle span{display:block;height:2px;width:22px;margin:0 auto;background:var(--ink)}
 
 /* Hero */
-.hero{background:linear-gradient(rgba(31,42,46,.6),rgba(31,42,46,.6)),url('hero_bg.jpg') center/cover no-repeat;color:#fff;text-align:center;padding:120px 0}
+.hero{color:#fff;text-align:center;padding:120px 0}
 .eyebrow{letter-spacing:3px;text-transform:uppercase;font-size:13px;color:#e9dcc3}
 .hero h1{font-size:56px;letter-spacing:6px;margin:14px 0 14px;font-weight:700}
 .brand-cat{width:44px;height:44px;object-fit:contain;margin-right:-2px;transform-origin:50% 90%;transition:transform .3s ease}
@@ -94,7 +94,7 @@ header{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:1p
 .btn{display:inline-block;padding:13px 28px;border-radius:999px;text-decoration:none;font-weight:600;border:2px solid transparent;transition:background .2s,color .2s;cursor:pointer}
 .btn-primary{background:var(--beige);color:var(--ink)}
 .btn-primary:hover{background:#fff}
-.btn-outline{border-color:#fff;color:#fff}
+.btn-outline{border-color:#fff;color:#fff;background:transparent;font-size:inherit}
 .btn-outline:hover{background:#fff;color:var(--ink)}
 
 /* Section headings */
@@ -299,7 +299,7 @@ footer p{font-size:15px;color:#b9c4c8;max-width:340px}
   .nav-links{display:none;position:absolute;top:72px;left:0;right:0;flex-direction:column;gap:0;background:#fff;border-bottom:1px solid var(--line);padding:8px 20px;box-shadow:0 10px 20px rgba(0,0,0,.06)}
   .nav-links.open{display:flex}
   .nav-links a{display:block;padding:12px 0}
-  .hero{padding:72px 0 64px;background:linear-gradient(to bottom,rgba(31,42,46,.1) 0%,rgba(31,42,46,.55) 35%,rgba(31,42,46,.93) 62%,#1f2a2e 100%),url('hero_bg_mobile.jpg') center top/100% auto no-repeat,#1f2a2e}
+  .hero{padding:72px 0 64px}
   .hero h1{font-size:40px;letter-spacing:4px}
   section{padding:56px 0}
   .section-head h2,.about-grid h2{font-size:28px}
@@ -443,7 +443,7 @@ h1,h2,h3,.brand span,.td-title,.price,.td-price{font-family:var(--display)}
   .foot-grid{grid-template-columns:1fr 1fr}
 }
 @media (max-width:768px){
-  .hero{padding:400px 0 44px;background:linear-gradient(to bottom,rgba(31,42,46,0) 0,rgba(31,42,46,0) 270px,#1f2a2e 405px),url('hero_bg_mobile.jpg') center top/100% auto no-repeat,#1f2a2e}
+  .hero{padding:400px 0 44px}
   .hero h1{font-size:31px;letter-spacing:-.5px;margin:10px auto 12px}
   .hero p.lead{font-size:16px;margin-bottom:24px}
   .trust-grid li{padding:14px 12px;font-size:13px;gap:10px}
@@ -476,6 +476,109 @@ h1,h2,h3,.brand span,.td-title,.price,.td-price{font-family:var(--display)}
   .starter{flex:0 0 78%;scroll-snap-align:start}
   .toolbar{gap:12px}
 }
+
+/* ---- Living cat ---- */
+.cat{position:relative;display:inline-block;width:44px;aspect-ratio:1/1;flex:none;line-height:0}
+.cat img{width:100%;height:100%;object-fit:contain;display:block}
+.cat .lid{position:absolute;background:#181818;border-radius:50%;transform:scaleY(0);transform-origin:50% 0;animation:catBlink 5.2s infinite}
+.cat .lid-l{left:25.5%;top:41.5%;width:24%;height:13%}
+.cat .lid-r{left:49.5%;top:37%;width:22%;height:16.5%}
+.cat .steam{position:absolute;left:39%;top:50%;width:5%;height:14%;border-radius:50%;background:rgba(255,255,255,.75);filter:blur(1px);opacity:0;animation:catSteam 2.6s ease-in infinite}
+.cat .steam.s2{left:45%;animation-delay:1.3s}
+@keyframes catBlink{0%,93%,100%{transform:scaleY(0)}95.5%,97%{transform:scaleY(1)}}
+@keyframes catSteam{0%{opacity:0;transform:translate(0,0) scale(.6)}25%{opacity:.8}100%{opacity:0;transform:translate(18%,-150%) scale(1.5)}}
+.brand .cat{width:44px;margin-right:-2px;transform-origin:50% 90%;transition:transform .3s ease}
+.brand:hover .cat{transform:rotate(-8deg) scale(1.05)}
+.cat.sleep .lid{animation:none;transform:scaleY(1)}
+.cat.sleep img,.cat.sleep .lid{animation:none}
+.cat.sleep{animation:catBreathe 3.4s ease-in-out infinite;transform-origin:50% 100%}
+.cat.sleep .steam{display:none}
+.cat .zz{position:absolute;right:6%;top:8%;font:700 18px/1 var(--display);color:var(--teal-dark);opacity:0;animation:catZz 3s ease-in infinite}
+.cat .zz:nth-of-type(2){animation-delay:1s;font-size:14px}
+.cat .zz:nth-of-type(3){animation-delay:2s;font-size:11px}
+@keyframes catBreathe{0%,100%{transform:scale(1,1)}50%{transform:scale(1.02,.975)}}
+@keyframes catZz{0%{opacity:0;transform:translate(0,0)}20%{opacity:1}100%{opacity:0;transform:translate(22px,-34px) rotate(12deg)}}
+.cat.shrug{animation:catShrug 2.4s ease-in-out infinite;transform-origin:50% 95%}
+.cat .qm{position:absolute;top:0;font:800 22px/1 var(--display);color:var(--beige);animation:catQm 2.4s ease-in-out infinite}
+.cat .qm.q1{left:4%}.cat .qm.q2{right:4%;animation-delay:1.2s}
+@keyframes catShrug{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+@keyframes catQm{0%,100%{opacity:.25;transform:translateY(4px)}50%{opacity:1;transform:translateY(-4px)}}
+.cat-state{text-align:center;padding:36px 12px;color:var(--ink-soft);grid-column:1/-1}
+.cat-state .cat{width:120px;margin-bottom:10px}
+.cat-state h3{color:var(--ink);font-size:20px;margin-bottom:4px}
+.cart-empty .cat{width:130px;margin-bottom:8px}
+
+/* cat peeking in when something is added */
+.cat-peek{position:fixed;left:14px;bottom:0;z-index:210;display:flex;align-items:flex-end;gap:8px;transform:translateY(115%);transition:transform .45s cubic-bezier(.2,1.4,.4,1);pointer-events:none}
+.cat-peek.show{transform:translateY(18%)}
+.cat-peek .cat{width:96px}
+.cat-peek p{background:#fff;border:1px solid var(--line);border-radius:14px 14px 14px 4px;padding:8px 14px;font-size:14px;font-weight:600;color:var(--ink);box-shadow:0 8px 22px rgba(31,42,46,.18);margin-bottom:52px;white-space:nowrap}
+
+/* ---- Add-to-cart moment ---- */
+.fly-img{position:fixed;z-index:220;object-fit:cover;border-radius:12px;pointer-events:none;transition:transform .7s cubic-bezier(.5,-.2,.7,.4),opacity .7s ease-in;box-shadow:0 10px 26px rgba(31,42,46,.3);will-change:transform}
+.cart-count.bump{animation:cartBump .5s ease}
+.cart-btn.bump{animation:cartWiggle .5s ease}
+@keyframes cartBump{0%{transform:scale(1)}40%{transform:scale(1.7)}100%{transform:scale(1)}}
+@keyframes cartWiggle{0%,100%{transform:rotate(0)}30%{transform:rotate(-8deg)}60%{transform:rotate(6deg)}}
+.add-btn.added{background:#2f8f5b !important;color:#fff}
+
+/* ---- Hero drift ---- */
+.hero{position:relative;overflow:hidden;background:#1f2a2e}
+.hero::before{content:"";position:absolute;inset:-30px 0;background:url('hero_bg.jpg') center/cover no-repeat;transform:translate3d(0,var(--hy,0px),0);will-change:transform}
+.hero::after{content:"";position:absolute;inset:0;background:rgba(31,42,46,.6)}
+.hero .container{position:relative;z-index:1}
+
+/* ---- Scroll reveals ---- */
+.js-reveal .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1);transition-delay:var(--rd,0ms)}
+.js-reveal .reveal.in{opacity:1;transform:none}
+
+/* ---- Quiz ---- */
+.quiz-cta{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;margin:0 0 28px}
+.quiz-cta .cat{width:56px}
+.quiz-cta div{flex:1}
+.quiz-cta b{display:block;font-family:var(--display);font-size:18px}
+.quiz-cta small{color:var(--ink-soft);font-size:14px}
+.quiz-cta button{flex:none;border:0;border-radius:999px;background:var(--ink);color:#fff;font-weight:600;padding:11px 20px;cursor:pointer}
+.quiz-cta button:hover{background:var(--teal-dark)}
+.quiz-overlay{position:fixed;inset:0;background:rgba(20,28,31,.6);z-index:96;display:none;align-items:center;justify-content:center;padding:16px}
+.quiz-overlay.open{display:flex}
+.quiz-box{position:relative;background:#fff;border-radius:18px;max-width:460px;width:100%;padding:26px 24px 24px;box-shadow:0 30px 70px rgba(0,0,0,.35);max-height:calc(100vh - 32px);overflow:auto}
+.quiz-close{position:absolute;top:8px;right:12px;background:none;border:0;font-size:30px;line-height:1;cursor:pointer;color:var(--ink-soft)}
+.quiz-dots{display:flex;gap:6px;margin-bottom:16px}
+.quiz-dots i{height:5px;flex:1;border-radius:3px;background:var(--line);transition:background .3s}
+.quiz-dots i.on{background:var(--teal-dark)}
+.quiz-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.quiz-head .cat{width:64px}
+.quiz-head h3{font-size:22px;line-height:1.2}
+.quiz-step{animation:quizIn .35s ease}
+@keyframes quizIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+.quiz-opts{display:grid;gap:10px}
+.quiz-opts button{text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:14px 16px;font-size:16px;font-weight:600;color:var(--ink);cursor:pointer;transition:border-color .2s,transform .15s,background .2s}
+.quiz-opts button small{display:block;font-weight:400;color:var(--ink-soft);font-size:13px;margin-top:2px}
+.quiz-opts button:hover{border-color:var(--teal);background:#fff;transform:translateX(4px)}
+.quiz-result{text-align:center}
+.quiz-result .bag{width:170px;aspect-ratio:4/5;object-fit:cover;border-radius:12px;margin:4px auto 12px;background:var(--beige-light);animation:quizBag .6s cubic-bezier(.2,1.5,.4,1)}
+@keyframes quizBag{from{opacity:0;transform:translateY(30px) rotate(-8deg) scale(.8)}to{opacity:1;transform:none}}
+.quiz-result .tag{display:block}
+.quiz-result h4{font-family:var(--display);font-size:22px;margin:2px 0}
+.quiz-result p{color:var(--ink-soft);font-size:14px}
+.quiz-result .price{display:block;margin:8px 0 12px}
+.quiz-links{display:flex;justify-content:center;gap:18px;margin-top:12px;font-size:14px}
+.quiz-links a,.quiz-links button{background:none;border:0;color:var(--ink-soft);text-decoration:underline;cursor:pointer;font-size:14px}
+
+@media (max-width:768px){
+  .hero::before{inset:-30px 0 auto 0;height:470px;background:url('hero_bg_mobile.jpg') center top/100% auto no-repeat}
+  .hero::after{background:linear-gradient(to bottom,rgba(31,42,46,0) 0,rgba(31,42,46,0) 270px,#1f2a2e 405px)}
+  .quiz-cta{flex-wrap:wrap;padding:12px 14px}
+  .quiz-cta button{width:100%}
+  .cat-peek .cat{width:80px}
+}
+@media (prefers-reduced-motion:reduce){
+  .cat .lid,.cat .steam,.cat.sleep,.cat.shrug,.cat .zz,.cat .qm,.quiz-step,.quiz-result .bag{animation:none}
+  .js-reveal .reveal{opacity:1;transform:none;transition:none}
+  .hero::before{transform:none}
+  .fly-img{display:none}
+}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
@@ -484,7 +587,7 @@ h1,h2,h3,.brand span,.td-title,.price,.td-price{font-family:var(--display)}
 <header>
   <div class="container nav">
     <a href="#home" class="brand" aria-label="KAIF home">
-      <img class="brand-cat" src="cat-hero.png" alt="" aria-hidden="true" width="44" height="44">
+      <span class="cat " aria-hidden="true"><img src="cat-hero.png" alt="" width="44" height="44"><i class="lid lid-l"></i><i class="lid lid-r"></i><i class="steam"></i><i class="steam s2"></i></span>
       <span>KAIF</span>
     </a>
     <ul class="nav-links" id="navLinks">
@@ -510,6 +613,7 @@ h1,h2,h3,.brand span,.td-title,.price,.td-price{font-family:var(--display)}
     <p class="lead">Beans from around the world, roasted in Egypt and delivered to your door.</p>
     <div class="hero-actions">
       <a href="#shop" class="btn btn-primary">Shop Now</a>
+      <button type="button" class="btn btn-outline" data-quiz-open>Find your coffee</button>
     </div>
   </div>
 </section>
@@ -530,6 +634,12 @@ h1,h2,h3,.brand span,.td-title,.price,.td-price{font-family:var(--display)}
     <div class="section-head">
       <h2>Our Specialty Coffee</h2>
       <p>Every bag is 250g. Add it to your cart, and we&rsquo;ll confirm your order.</p>
+    </div>
+
+    <div class="quiz-cta reveal">
+      <span class="cat " aria-hidden="true"><img src="cat-hero.png" alt="" width="56" height="56"><i class="lid lid-l"></i><i class="lid lid-r"></i><i class="steam"></i><i class="steam s2"></i></span>
+      <div><b>Find your coffee in 3 taps</b><small>Tell the cat how you brew and what you like.</small></div>
+      <button type="button" data-quiz-open>Start</button>
     </div>
 
     <div class="starters" id="starters" hidden>
@@ -683,6 +793,14 @@ h1,h2,h3,.brand span,.td-title,.price,.td-price{font-family:var(--display)}
     <div id="pContent"></div>
   </div>
 </div>
+
+<div class="quiz-overlay" id="quizOverlay" role="dialog" aria-modal="true" aria-label="Find your coffee" aria-hidden="true">
+  <div class="quiz-box">
+    <button class="quiz-close" type="button" data-quiz-close aria-label="Close">&times;</button>
+    <div id="quizBody"></div>
+  </div>
+</div>
+<div class="cat-peek" id="catPeek" aria-hidden="true"><span class="cat " aria-hidden="true"><img src="cat-hero.png" alt="" width="96" height="96"><i class="lid lid-l"></i><i class="lid lid-r"></i><i class="steam"></i><i class="steam s2"></i></span><p id="catPeekText">Nice pick.</p></div>
 
 <!-- Cart and order drawer -->
 <div class="overlay" id="overlay"></div>
@@ -906,6 +1024,7 @@ function renderGrid(){
       </div>
     </article>`;
   }).join("");
+  if (typeof revealCards === "function" && products.length) revealCards();
 }
 
 function setFilter(f){
@@ -1014,7 +1133,8 @@ function renderCartStep(){
   if (!cart.length){
     $("drawerBody").innerHTML = `
       <div class="cart-empty">
-        <p>Your cart is empty.</p>
+        <span class="cat sleep" aria-hidden="true"><img src="cat-hero.png" alt="" width="130" height="130"><i class="lid lid-l"></i><i class="lid lid-r"></i><i class="steam"></i><i class="steam s2"></i><b class="zz">z</b><b class="zz">z</b><b class="zz">z</b></span>
+        <p>Your cart is empty. The cat is napping until you pick a bag.</p>
         <p style="margin-top:16px"><button class="btn btn-primary" type="button" data-close-cart>Browse coffee</button></p>
       </div>`;
     $("drawerFoot").innerHTML = "";
@@ -1440,6 +1560,202 @@ function showReorderBanner(){
   document.body.appendChild(bar);
 }
 
+/* ================= Delight: add-to-cart moment, cat, reveals, quiz ================= */
+const PEEK_LINES = ["Nice pick.", "Good taste.", "Added. I approve.", "That one is a favourite.", "In the cart it goes."];
+let peekTimer = null;
+function catPeek(text){
+  $("catPeekText").textContent = text || PEEK_LINES[Math.floor(Math.random() * PEEK_LINES.length)];
+  $("catPeek").classList.add("show");
+  clearTimeout(peekTimer);
+  peekTimer = setTimeout(() => $("catPeek").classList.remove("show"), 2000);
+}
+function bumpCart(){
+  [$("cartCount"), $("cartOpen")].forEach(el => { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); });
+}
+function flyToCart(img){
+  const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!img || reduce || !img.getBoundingClientRect().width) { bumpCart(); return; }
+  const a = img.getBoundingClientRect(), b = $("cartOpen").getBoundingClientRect();
+  const size = Math.min(a.width, 150), ratio = a.height / a.width;
+  const f = document.createElement("img");
+  f.src = img.currentSrc || img.src; f.className = "fly-img"; f.alt = "";
+  f.style.width = size + "px"; f.style.height = size * ratio + "px";
+  f.style.left = (a.left + a.width / 2 - size / 2) + "px";
+  f.style.top = (a.top + a.height / 2 - size * ratio / 2) + "px";
+  document.body.appendChild(f);
+  const dx = (b.left + b.width / 2) - (a.left + a.width / 2), dy = (b.top + b.height / 2) - (a.top + a.height / 2);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    f.style.transform = `translate(${dx}px,${dy}px) scale(.12) rotate(18deg)`;
+    f.style.opacity = ".35";
+  }));
+  setTimeout(() => { f.remove(); bumpCart(); }, 720);
+}
+function addMoment(btn){
+  const host = btn.closest(".card, .tool-card, .quiz-result") || (btn.closest("#pContent") && $("pContent")) || (btn.closest("#tdContent") && $("tdContent")) || document;
+  const img = host.querySelector(".card-img img, .tool-img img, .pimg img, .td-main img, img.bag");
+  flyToCart(img);
+  btn.classList.add("added");
+  setTimeout(() => btn.classList.remove("added"), 1200);
+  catPeek();
+}
+document.addEventListener("click", e => {
+  const btn = e.target.closest("[data-add], [data-padd], [data-tool-slug], [data-tdadd], [data-quiz-add]");
+  if (!btn || btn.disabled || btn.tagName !== "BUTTON") return;
+  const before = cartTotals().count;
+  setTimeout(() => { if (cartTotals().count > before) addMoment(btn); }, 0);
+}, true);
+
+/* Scroll reveals */
+const revealIO = ("IntersectionObserver" in window) ? new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    const el = en.target;
+    el.classList.add("in"); el.dataset.rv = "1"; revealIO.unobserve(el);
+    setTimeout(() => el.classList.remove("reveal", "in"), 1100);   // hand hover effects back to the element
+  });
+}, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }) : null;
+function watchReveals(root){
+  if (!revealIO) return;
+  (root || document).querySelectorAll(".reveal:not(.in)").forEach(el => revealIO.observe(el));
+}
+if (revealIO) {
+  document.documentElement.classList.add("js-reveal");
+  document.querySelectorAll(".section-head, .trust-grid li, .about-grid > *, .faq-item, .origin-map, .origin-card, .foot-grid > div").forEach((el, i) => {
+    el.classList.add("reveal");
+    if (el.matches(".trust-grid li, .faq-item, .foot-grid > div")) el.style.setProperty("--rd", (Array.prototype.indexOf.call(el.parentNode.children, el) % 6) * 70 + "ms");
+  });
+  watchReveals();
+}
+function revealCards(){
+  if (!revealIO) return;
+  document.querySelectorAll("#grid .card:not([data-rv]), #starterRow .starter:not([data-rv])").forEach((el, i) => {
+    el.classList.add("reveal");
+    el.style.setProperty("--rd", (i % 4) * 70 + "ms");
+  });
+  watchReveals();
+}
+
+/* Hero photo drifts a little slower than the page */
+(function(){
+  const hero = document.querySelector(".hero");
+  if (!hero || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
+  let ticking = false;
+  window.addEventListener("scroll", () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      hero.style.setProperty("--hy", Math.min(30, window.scrollY * 0.1) + "px");
+      ticking = false;
+    });
+  }, { passive: true });
+})();
+
+/* Find-your-coffee quiz */
+const QUIZ_CAT = `<span class="cat" aria-hidden="true"><img src="cat-hero.png" alt=""><i class="lid lid-l"></i><i class="lid lid-r"></i><i class="steam"></i><i class="steam s2"></i></span>`;
+const FRUITY = /berry|strawberry|blueberry|lime|lemon|citrus|apricot|peach|mango|fruit|floral|blossom|fig/i;
+const CHOC = /chocolate|nut|almond|caramel|brown sugar|cinnamon/i;
+let quiz = { step: 0, brew: null, taste: null, strength: null };
+function quizStrength(p){
+  const r = p.raw.roast_level;
+  return r === "light" ? "light" : (r === "dark" || r === "medium_dark") ? "bold" : "balanced";
+}
+function quizPick(){
+  const coffee = products.filter(p => !isTool(p) && p.variant && p.price !== null);
+  if (quiz.brew === "turkish") {
+    return coffee.find(p => p.category === "turkish-coffee" && p.slug.includes(quiz.taste) && p.slug.endsWith(quiz.strength))
+      || coffee.find(p => p.category === "turkish-coffee");
+  }
+  if (quiz.strength === "decaf") return coffee.find(p => p.raw.is_decaf) || coffee[0];
+  let best = null, bestScore = -1;
+  coffee.filter(p => p.category !== "turkish-coffee" && !p.raw.is_decaf).forEach(p => {
+    const notes = (p.raw.tasting_notes || []).join(" ");
+    const methods = p.raw.brew_methods || [];
+    let score = 0;
+    if (quiz.brew === "any" || !methods.length || methods.includes(quiz.brew)) score += 4;
+    if (quiz.taste === "flavoured") score += p.category === "flavoured" ? 5 : 0;
+    else {
+      if (p.category === "flavoured") score -= 3;
+      const hits = (p.raw.tasting_notes || []).filter(n => (quiz.taste === "fruity" ? FRUITY : CHOC).test(n)).length;
+      score += Math.min(3, hits * 1.2);
+    }
+    if (quizStrength(p) === quiz.strength) score += 2;
+    if (score > bestScore) { best = p; bestScore = score; }
+  });
+  return best || coffee[0];
+}
+function quizQuestions(){
+  const turkish = quiz.brew === "turkish";
+  return [
+    { key: "brew", title: "How do you brew at home?", opts: [
+      ["espresso", "Espresso machine", "Or a moka pot"],
+      ["filter", "Filter or V60", "Pour-over, drip, French press"],
+      ["turkish", "Turkish, in a kanaka", "قهوة تركي"],
+      ["any", "Not sure yet", "Show me something easy"] ] },
+    turkish
+      ? { key: "taste", title: "Plain or spiced?", opts: [["plain", "Plain", "سادة"], ["spiced", "Spiced", "محوج"]] }
+      : { key: "taste", title: "What taste do you enjoy?", opts: [
+          ["fruity", "Fruity and bright", "Berries, citrus, floral"],
+          ["choc", "Chocolatey and nutty", "Chocolate, nuts, caramel"],
+          ["flavoured", "Sweet and flavoured", "Caramel, hazelnut, vanilla"] ] },
+    turkish
+      ? { key: "strength", title: "Which roast?", opts: [["light", "Light roast", "فاتح"], ["medium", "Medium roast", "وسط"]] }
+      : { key: "strength", title: "How strong do you like it?", opts: [
+          ["light", "Light and smooth", ""],
+          ["balanced", "Balanced", "Medium roast"],
+          ["bold", "Bold and dark", "Darker roast"],
+          ["decaf", "No caffeine, please", "Decaf"] ] }
+  ];
+}
+function renderQuiz(){
+  const dots = `<div class="quiz-dots">${[0, 1, 2].map(i => `<i class="${i <= Math.min(quiz.step, 2) ? "on" : ""}"></i>`).join("")}</div>`;
+  if (quiz.step < 3) {
+    const q = quizQuestions()[quiz.step];
+    $("quizBody").innerHTML = dots + `<div class="quiz-step">
+      <div class="quiz-head">${QUIZ_CAT}<h3>${q.title}</h3></div>
+      <div class="quiz-opts">${q.opts.map(([v, label, sub]) => `<button type="button" data-quiz-key="${q.key}" data-quiz-val="${v}">${esc(label)}${sub ? `<small>${esc(sub)}</small>` : ""}</button>`).join("")}</div>
+      ${quiz.step ? `<div class="quiz-links"><button type="button" data-quiz-back>&larr; Back</button></div>` : ""}
+    </div>`;
+    return;
+  }
+  const p = quizPick();
+  if (!p) { $("quizBody").innerHTML = `<div class="quiz-step"><div class="quiz-head">${QUIZ_CAT}<h3>The shop is still loading. Try again in a moment.</h3></div></div>`; return; }
+  $("quizBody").innerHTML = dots + `<div class="quiz-step quiz-result">
+    <div class="quiz-head" style="justify-content:center">${QUIZ_CAT}<h3>This one is for you.</h3></div>
+    ${p.image ? `<img class="bag" src="${esc(p.image)}" alt="${esc(p.name)} coffee bag">` : ""}
+    <span class="tag">${esc(p.origin)}</span>
+    <h4>${esc(p.name)}</h4>
+    <p>${esc(cardNote(p))}</p>
+    <span class="price">${money(p.price)} <small style="font-size:13px;font-weight:400;color:var(--ink-soft)">250g</small></span>
+    <button class="add-btn" type="button" data-quiz-add="${esc(p.id)}">Add to cart</button>
+    <div class="quiz-links"><a href="#coffee/${esc(p.slug)}" data-quiz-close>View details</a><button type="button" data-quiz-restart>Start again</button></div>
+  </div>`;
+}
+function openQuiz(){
+  quiz = { step: 0, brew: null, taste: null, strength: null };
+  renderQuiz();
+  $("quizOverlay").classList.add("open");
+  $("quizOverlay").setAttribute("aria-hidden", "false");
+}
+function closeQuiz(){
+  $("quizOverlay").classList.remove("open");
+  $("quizOverlay").setAttribute("aria-hidden", "true");
+}
+document.addEventListener("click", e => {
+  if (e.target.closest("[data-quiz-open]")) { openQuiz(); return; }
+  if (e.target.closest("[data-quiz-close]") || e.target.id === "quizOverlay") { closeQuiz(); return; }
+  const opt = e.target.closest("[data-quiz-key]");
+  if (opt) { quiz[opt.dataset.quizKey] = opt.dataset.quizVal; quiz.step++; renderQuiz(); return; }
+  if (e.target.closest("[data-quiz-back]")) { quiz.step = Math.max(0, quiz.step - 1); renderQuiz(); return; }
+  if (e.target.closest("[data-quiz-restart]")) { openQuiz(); return; }
+  const add = e.target.closest("[data-quiz-add]");
+  if (add) {
+    addToCart(add.dataset.quizAdd, 1);
+    add.textContent = "Added ✓";
+    setTimeout(() => { add.textContent = "Add to cart"; }, 1200);
+  }
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeQuiz(); });
+
 /* ---- Start ---- */
 updateCartBadge();
 loadStore()
@@ -1449,13 +1765,14 @@ loadStore()
     renderChips();
     renderGrid();
     renderStarters();
+    revealCards();
     updateCartBadge();
     route();
     showReorderBanner();
   })
   .catch(() => {
     loadFailed = true;
-    $("grid").innerHTML = `<p class="loading">Coffee is unavailable right now. Please try again in a moment.</p>`;
+    $("grid").innerHTML = `<div class="cat-state"><span class="cat shrug" aria-hidden="true"><img src="cat-hero.png" alt="" width="120" height="120"><i class="lid lid-l"></i><i class="lid lid-r"></i><i class="steam"></i><i class="steam s2"></i><b class="qm q1">?</b><b class="qm q2">?</b></span><h3>The coffee didn&rsquo;t load</h3><p>Please check your connection and try again.</p><p style="margin-top:14px"><button class="btn btn-primary" type="button" onclick="location.reload()">Try again</button></p></div>`;
   });
 /* Shop menu (Coffee / Brewing tools / Barista tools) and its panels */
 document.addEventListener("DOMContentLoaded", function(){

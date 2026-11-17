@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found | KAIF</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:#fbfaf7;color:#1f2a2e;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
+.cat{position:relative;display:inline-block;width:180px;aspect-ratio:1/1;animation:shrug 2.4s ease-in-out infinite;transform-origin:50% 95%}
+.cat img{width:100%;height:100%;display:block}
+.cat b{position:absolute;top:0;font:800 34px/1 "Bricolage Grotesque",system-ui,sans-serif;color:#C9A876;animation:qm 2.4s ease-in-out infinite}
+.cat .q1{left:2%}.cat .q2{right:2%;animation-delay:1.2s}
+@keyframes shrug{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+@keyframes qm{0%,100%{opacity:.25;transform:translateY(5px)}50%{opacity:1;transform:translateY(-5px)}}
+h1{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:34px;letter-spacing:-.5px;margin:14px 0 6px}
+p{color:#5b6a6f;max-width:380px;margin:0 auto 22px}
+a{display:inline-block;padding:13px 28px;border-radius:999px;background:#C9A876;color:#1f2a2e;font-weight:600;text-decoration:none}
+a:hover{background:#1f2a2e;color:#fff}
+@media (prefers-reduced-motion:reduce){.cat,.cat b{animation:none}}
+</style>
+</head>
+<body>
+<main>
+  <span class="cat" aria-hidden="true"><img src="/cat-hero.png" alt=""><b class="q1">?</b><b class="q2">?</b></span>
+  <h1>This page wandered off</h1>
+  <p>The cat looked everywhere and found only coffee. Head back to the shop and pick a bag.</p>
+  <a href="/">Back to the shop</a>
+</main>
+</body>
+</html>
