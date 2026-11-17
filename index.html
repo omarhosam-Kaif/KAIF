@@ -50,6 +50,13 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VR9WPM6ZKX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-VR9WPM6ZKX');
+</script>
 <meta name="theme-color" content="#4AA9BA">
 <style>
 :root{
@@ -1448,7 +1455,10 @@ function renderDoneStep(){
       ${wa}
     </div>`;
   $("drawerFoot").innerHTML = `<button class="primary-btn" type="button" data-close-cart>Continue shopping</button>`;
-  if (orderResult && !orderResult._celebrated) { orderResult._celebrated = true; confetti(); }
+  if (orderResult && !orderResult._celebrated) {
+    orderResult._celebrated = true; confetti();
+    track("purchase", { transaction_id: String(r.order_number || ""), currency: "EGP", value: Number(r.total || 0), shipping: Number(r.shipping_fee || 0) });
+  }
 }
 
 /* ---- Drawer events ---- */
@@ -1459,6 +1469,7 @@ function goStep(next){
     if (bad){ invalidField = bad[0]; formError = bad[1]; renderDrawer(); const el = document.querySelector(`[data-f="${bad[0]}"]`); if (el) el.focus(); return; }
     saveDetails();
   }
+  if (next === "details" && step === "cart") track("begin_checkout", { currency: "EGP", value: cartTotals().coffee });
   step = next;
   renderDrawer();
   $("drawerBody").scrollTop = 0;
@@ -1687,6 +1698,7 @@ function showReorderBanner(){
 }
 
 /* ================= Delight: add-to-cart moment, cat, reveals, quiz ================= */
+function track(name, params){ try { if (typeof gtag === "function") gtag("event", name, params || {}); } catch(e){} }
 const PEEK_LINES = ["Nice pick.", "Good taste.", "Added. I approve.", "In the cart it goes.", "Excellent choice."];
 const NIGHT = (h => h >= 0 && h < 5)(new Date().getHours());
 function moodLine(before, after){
@@ -1750,8 +1762,13 @@ function addMoment(btn, before, after){
 document.addEventListener("click", e => {
   const btn = e.target.closest("[data-add], [data-padd], [data-tool-slug], [data-tdadd], [data-quiz-add]");
   if (!btn || btn.disabled || btn.tagName !== "BUTTON") return;
-  const before = cartTotals().count;
-  setTimeout(() => { const after = cartTotals().count; if (after > before) addMoment(btn, before, after); }, 0);
+  const before = cartTotals().count, valueBefore = cartTotals().coffee;
+  setTimeout(() => {
+    const after = cartTotals().count;
+    if (after <= before) return;
+    addMoment(btn, before, after);
+    track("add_to_cart", { currency: "EGP", value: cartTotals().coffee - valueBefore });
+  }, 0);
 }, true);
 
 /* Scroll reveals */
