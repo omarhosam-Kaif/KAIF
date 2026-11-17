@@ -652,6 +652,10 @@ h1,h2,h3,.brand span,.td-title,.price,.td-price{font-family:var(--display)}
 @keyframes aboutSpin{to{transform:rotate(360deg)}}
 .about-facts{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
 .about-facts li{background:#fff;border-radius:var(--radius);padding:20px 22px;border:1px solid #e6d9c1}
+.about-facts .about-quiz{cursor:pointer;background:var(--ink);border-color:var(--ink);transition:transform .2s,background .2s}
+.about-facts .about-quiz b{color:#fff}
+.about-facts .about-quiz span{color:#c8d1d4}
+.about-facts .about-quiz:hover{background:var(--teal-dark);border-color:var(--teal-dark);transform:translateY(-3px)}
 .about-facts b{display:block;font-family:var(--display);font-size:20px;margin-bottom:4px}
 .about-facts span{color:var(--ink-soft);font-size:15px;line-height:1.5}
 @media (max-width:820px){
@@ -788,7 +792,7 @@ h1,h2,h3,.brand span,.td-title,.price,.td-price{font-family:var(--display)}
     <ul class="about-facts">
       <li class="reveal"><b>Small batches</b><span>Roasted in Egypt, a little at a time</span></li>
       <li class="reveal"><b>Clear labels</b><span>Origin, roast and tasting notes on every bag</span></li>
-      <li class="reveal"><b>A bag for every taste</b><span>Single origins, blends, flavoured, decaf and Turkish coffee</span></li>
+      <li class="reveal about-quiz" data-quiz-open role="button" tabindex="0"><b>Find your match &rarr;</b><span>Three taps and the cat picks a bag for you</span></li>
     </ul>
   </div>
 </section>
@@ -1890,7 +1894,10 @@ document.addEventListener("click", e => {
     setTimeout(() => { add.textContent = "Add to cart"; }, 1200);
   }
 });
-document.addEventListener("keydown", e => { if (e.key === "Escape") closeQuiz(); });
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeQuiz();
+  if ((e.key === "Enter" || e.key === " ") && e.target.matches && e.target.matches("li[data-quiz-open]")) { e.preventDefault(); openQuiz(); }
+});
 
 /* ================= Farm to cup ================= */
 /* the cat walks as you scroll */
