@@ -127,7 +127,7 @@ def build():
     listing = "".join(
         f'<li><a href="/guides/{esc(g["slug"])}">{esc(g["en_title"])}</a></li>' for g in GUIDES
     )
-    index_body = f"""<style>.guides-index{{background:linear-gradient(rgba(251,250,247,.92),rgba(251,250,247,.92)),url('/hero_bg.jpg') center/cover no-repeat;border-radius:16px;padding:40px 28px}}</style>
+    index_body = f"""<style>body{{background:linear-gradient(rgba(251,250,247,.6),rgba(251,250,247,.6)),url('/hero_bg.jpg') center/cover fixed no-repeat;min-height:100vh}}.guides-index{{background:rgba(251,250,247,.82);border-radius:16px;padding:40px 28px;margin:32px auto}}</style>
 <article class="guide guides-index">
   <h1>Coffee guides</h1>
   <p class="answer">Short, practical answers about brewing, grinding and buying specialty coffee.</p>
