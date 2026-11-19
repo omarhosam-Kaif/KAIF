@@ -26,6 +26,13 @@ GUIDES = [
         "links": [("ethiopia-guji", "Ethiopia Guji"), ("ethiopia-dijammah", "Ethiopia Dijammah"), ("brazil-parana", "Brazil Paraná")],
     },
     {
+        "slug": "french-press",
+        "ar_title": "إزاي تعمل قهوة الفرنش برس في البيت؟",
+        "en_title": "How to brew French press at home",
+        "answer": "Use 300 ml of water for 20 grams of coffee as a starting point. Grind coarse, like sea salt, and use water just off the boil. Pour the water over the grounds, stir gently, and put the lid on with the plunger up. Wait four minutes, then press down slowly and pour out the whole cup at once so the coffee stops brewing. If the cup tastes bitter, use a slightly coarser grind or a shorter wait. If it tastes sour, wait a little longer or grind a little finer.",
+        "links": [("ethiopia-guji", "Ethiopia Guji"), ("colombia-huila", "Colombia Huila"), ("brazil-parana", "Brazil Paraná")],
+    },
+    {
         "slug": "grind-size",
         "ar_title": "درجة الطحن المناسبة لكل طريقة تحضير",
         "en_title": "How to choose your grind size",
