@@ -649,10 +649,15 @@ h1,h2,h3,.brand span,.td-title,.price,.td-price{font-family:var(--display)}
 <body>
 <header>
   <div class="container nav">
-    <a href="/" class="brand" aria-label="KAIF home"><span>KAIF</span></a>
-    <ul class="nav-links"><li><a href="/#shop">Shop</a></li><li><a href="/guides/">Guides</a></li></ul>
+    <a href="/" class="brand" aria-label="KAIF home"><span class="cat " aria-hidden="true"><img src="/cat-hero.png" alt="" width="44" height="44"><i class="lid lid-l"></i><i class="lid lid-r"></i><i class="steam"></i><i class="steam s2"></i></span><span>KAIF</span></a>
+    <ul class="nav-links" id="navLinks"><li><a href="/#shop">Shop</a></li><li><a href="/guides/">Guides</a></li><li><a href="/#about">About</a></li><li><a href="/#contact">Contact</a></li></ul>
+    <div class="nav-actions">
+      <a class="cart-btn" href="/#shop" aria-label="Open cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.5L21 8H6"/></svg></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </header>
+<script>document.getElementById("menuToggle").addEventListener("click",function(){var n=document.getElementById("navLinks");n.classList.toggle("open");this.setAttribute("aria-expanded",n.classList.contains("open"));});</script>
 <main>
 <article class="guide">
   <h1 lang="ar" dir="rtl">درجة الطحن المناسبة لكل طريقة تحضير</h1>
