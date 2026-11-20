@@ -996,7 +996,7 @@ async function sb(path){
 
 async function loadStore(){
   const [prods, cats, zones, areas] = await Promise.all([
-    sb("products?select=id,slug,name,name_ar,subtitle,description,process,roast_level,body,acidity,aftertaste,sweetness,brew_methods,tasting_notes,is_decaf,is_blend,best_seller,category:categories(slug,name,sort_order),origin:origins(country,region,locality,altitude_min_m,altitude_max_m,varietal,process),variants:product_variants(id,sku,grind,weight_grams,price,currency,is_active),images:product_images(url,alt_text,sort_order)&is_active=eq.true&order=name"),
+    sb("products?select=id,slug,name,name_ar,subtitle,description,process,roast_level,body,acidity,aftertaste,sweetness,brew_methods,tasting_notes,is_decaf,is_blend,best_seller,best_seller_rank,category:categories(slug,name,sort_order),origin:origins(country,region,locality,altitude_min_m,altitude_max_m,varietal,process),variants:product_variants(id,sku,grind,weight_grams,price,currency,is_active),images:product_images(url,alt_text,sort_order)&is_active=eq.true&order=name"),
     sb("categories?select=slug,name,sort_order&is_active=eq.true&order=sort_order"),
     sb("shipping_zones?select=name,governorates,fee,currency&is_active=eq.true"),
     sb("delivery_areas?select=governorate,name,name_ar,sort_order&is_active=eq.true&order=sort_order")
@@ -1018,6 +1018,7 @@ async function loadStore(){
       notes: (p.tasting_notes || []).join(" · ") || p.subtitle || "",
       category: p.category ? p.category.slug : "",
       bestSeller: !!p.best_seller,
+      bestRank: p.best_seller_rank == null ? 999 : p.best_seller_rank,
       variant: variant,
       price: variant && variant.price !== null ? Number(variant.price) : null,
       image: images[0] ? images[0].url : (FALLBACK_PHOTOS[p.slug] || null),
@@ -1099,7 +1100,7 @@ function compareByPrice(a, b){
 }
 function visibleProducts(){
   let list = products.filter(p => !isTool(p) && (filter === "all" || p.category === filter));
-  if (sortBy === "best")       list = [...list].sort((a, b) => (b.bestSeller - a.bestSeller) || a.name.localeCompare(b.name));
+  if (sortBy === "best")       list = [...list].sort((a, b) => (a.bestRank - b.bestRank) || a.name.localeCompare(b.name));
   if (sortBy === "price-asc")  list = [...list].sort(compareByPrice);
   if (sortBy === "price-desc") list = [...list].sort((a, b) => -compareByPrice(a, b));
   if (sortBy === "name")       list = [...list].sort((a, b) => a.name.localeCompare(b.name));
