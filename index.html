@@ -353,10 +353,15 @@ footer p{font-size:15px;color:#b9c4c8;max-width:340px}
 .tools-panel{position:relative;background:#fff;max-width:960px;width:100%;border-radius:16px;padding:32px 24px 28px}
 .tools-close{position:absolute;top:10px;right:14px;background:none;border:0;font-size:30px;line-height:1;cursor:pointer;color:var(--ink)}
 .tools-panel .section-head{margin-bottom:20px}
-.tools-inline{margin-top:8px}
-.tools-block{margin-top:56px}
-.tools-block h3{font-size:24px;margin:0 0 4px}
+.tools-inline{margin-top:24px}
+.tools-block{margin-top:24px}
+.tools-block:first-child,.tools-block[hidden]+.tools-block{margin-top:0}
+.tools-block h3{display:none}
+.tools-inline .tools-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px;margin-top:0}
+.tools-inline.solo{margin-top:0}
 .tools-inline.solo .tools-block{margin-top:0}
+.tools-inline.solo .tools-block + .tools-block{margin-top:0}
+@media (max-width:720px){.tools-inline .tools-grid{grid-template-columns:1fr 1fr;gap:12px}.tools-inline,.tools-block{margin-top:12px}}
 #toolsBarista .tool-img{aspect-ratio:auto;height:440px;background:#f6f3ec}
 .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;margin-top:8px}
 .tool-card{background:#fbfaf6;border:1px solid #e3ddd0;border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
