@@ -355,6 +355,7 @@ footer p{font-size:15px;color:#b9c4c8;max-width:340px}
 .tools-panel{position:relative;background:#fff;max-width:960px;width:100%;border-radius:16px;padding:32px 24px 28px}
 .tools-close{position:absolute;top:10px;right:14px;background:none;border:0;font-size:30px;line-height:1;cursor:pointer;color:var(--ink)}
 .tools-panel .section-head{margin-bottom:20px}
+.tal-note{background:var(--beige-light);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:0 0 18px;font-size:14px;color:var(--ink-soft)}
 .tools-inline{margin-top:24px}
 .tools-block{margin-top:24px}
 .tools-block:first-child,.tools-block[hidden]+.tools-block{margin-top:0}
@@ -780,6 +781,7 @@ h1,h2,h3,.brand span,.td-title,.price,.td-price{font-family:var(--display)}
       </div>
     </div>
 
+    <p class="tal-note" id="talNote" hidden>Tal2eema bags are 20 g each. If you order only Tal2eema, the minimum is 4 bags. Add any other coffee and there is no minimum.</p>
     <div class="grid" id="grid"><p class="loading">Loading coffee&hellip;</p></div>
     <p class="empty" id="empty">More coming soon in this category.</p>
   </div>
@@ -1088,6 +1090,18 @@ function cartTotals(){
   return { coffee, count, unpriced };
 }
 
+/* Tal2eema (20 g) bags: if the cart has only Tal2eema bags, at least 4 are needed */
+const TAL_MIN = 4;
+function tal2eemaShort(){
+  let tal = 0, other = 0;
+  cart.forEach(item => {
+    const p = productById(item.id);
+    if (!p) return;
+    if (p.category === "tal2eema") tal += item.qty; else other += item.qty;
+  });
+  return (tal > 0 && other === 0 && tal < TAL_MIN) ? TAL_MIN - tal : 0;
+}
+
 /* ---- Shop: filter and render ---- */
 let filter = "all";
 
@@ -1165,6 +1179,7 @@ function toolCardsFor(f){
 }
 function renderGrid(){
   const isTool = filter === "brewing" || filter === "barista";
+  $("talNote").hidden = filter !== "tal2eema";
   document.querySelector(".toolbar .sort").style.display = isTool ? "none" : "";
   const list = visibleProducts();
   $("empty").style.display = (list.length || isTool) ? "none" : "block";
@@ -1338,9 +1353,11 @@ function renderCartStep(){
         <div class="ci-right">${priced ? money(p.price * item.qty) : "NA"}</div>
       </div>`;
   }).join("");
+  const short = tal2eemaShort();
   $("drawerFoot").innerHTML = `
+    ${short ? `<p class="err" style="margin:0 0 10px">Tal2eema bags need a minimum of ${TAL_MIN} when ordered on their own. Add ${short} more, or add any other coffee.</p>` : ""}
     <div class="sum-row total"><span>Subtotal</span><span>${t.unpriced ? "NA" : money(t.coffee)}</span></div>
-    <button class="primary-btn" type="button" data-go="details" ${t.unpriced || loadFailed ? "disabled" : ""}>Continue to delivery</button>
+    <button class="primary-btn" type="button" data-go="details" ${t.unpriced || loadFailed || short ? "disabled" : ""}>Continue to delivery</button>
 `;
 }
 
@@ -1454,6 +1471,7 @@ function renderReviewStep(){
 
 async function placeOrder(){
   if (placing) return;
+  if (tal2eemaShort()) { step = "cart"; renderDrawer(); return; }
   placing = true; formError = "";
   renderReviewStep();
   try {
@@ -1513,6 +1531,7 @@ function renderDoneStep(){
 /* ---- Drawer events ---- */
 function goStep(next){
   formError = ""; invalidField = "";
+  if ((next === "details" || next === "review") && tal2eemaShort()) { step = "cart"; renderDrawer(); return; }
   if (next === "review"){
     const bad = validateDetails();
     if (bad){ invalidField = bad[0]; formError = bad[1]; renderDrawer(); const el = document.querySelector(`[data-f="${bad[0]}"]`); if (el) el.focus(); return; }
