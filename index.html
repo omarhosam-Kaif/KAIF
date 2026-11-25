@@ -1621,7 +1621,7 @@ function renderProduct(p){
   const bars = PROFILE.filter(([k]) => r[k] !== null && r[k] !== undefined).map(([k, label]) =>
     `<div class="scale"><span>${label}</span><span class="s-dots">${Array.from({ length: 7 }, (_, i) => `<i class="${i < r[k] ? "on" : ""}"></i>`).join("")}</span><span class="s-val">${r[k]}</span></div>`).join("");
   const brew = (r.brew_methods || []).map(m => `<span class="pill">${esc(BREW_LABELS[m] || m)}</span>`).join("");
-  const others = products.filter(x => x.id !== p.id)
+  const others = products.filter(x => x.id !== p.id && (x.category !== "tal2eema" || p.category === "tal2eema"))
     .sort((a, b) => (b.category === p.category) - (a.category === p.category)).slice(0, 3);
   return `
   <div class="pgrid">
@@ -1875,7 +1875,7 @@ function quizStrength(p){
   return r === "light" ? "light" : (r === "dark" || r === "medium_dark") ? "bold" : "balanced";
 }
 function quizPick(){
-  const coffee = products.filter(p => !isTool(p) && p.variant && p.price !== null);
+  const coffee = products.filter(p => !isTool(p) && p.category !== "tal2eema" && p.variant && p.price !== null);
   if (quiz.brew === "turkish") {
     return coffee.find(p => p.category === "turkish-coffee" && p.slug.includes(quiz.taste) && p.slug.endsWith(quiz.strength))
       || coffee.find(p => p.category === "turkish-coffee");
