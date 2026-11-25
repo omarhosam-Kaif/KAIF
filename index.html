@@ -749,7 +749,7 @@ h1,h2,h3,.brand span,.td-title,.price,.td-price{font-family:var(--display)}
   <div class="container">
     <div class="section-head">
       <h2>Our Specialty Coffee</h2>
-      <p>Every bag is 250g. Add it to your cart, and we&rsquo;ll confirm your order.</p>
+      <p>Bags are 250g, or 20g in Tal2eema. Add it to your cart, and we&rsquo;ll confirm your order.</p>
     </div>
 
     <div id="againSlot"></div>
@@ -978,7 +978,7 @@ const FALLBACK_PHOTOS = {
 const money = n => "EGP " + Number(n).toLocaleString("en-US", { maximumFractionDigits: 2 });
 const $ = id => document.getElementById(id);
 const isTool = p => !p || !p.category || p.category === "tools";
-const sizeLabel = p => (isTool(p) ? "" : "250g");
+const sizeLabel = p => (isTool(p) ? "" : ((p.variant && p.variant.weight_grams) || 250) + "g");
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
 
 /* ---- Data from Supabase ---- */
@@ -1630,7 +1630,7 @@ function renderProduct(p){
       <span class="tag">${esc(p.origin || kind)}</span>
       <h2 id="pTitle">${esc(p.name)}</h2>
       ${place ? `<p class="porigin">${esc(place)}</p>` : ""}
-      <div class="pprice"><span class="price">${canBuy ? money(p.price) : "NA"}</span><small>250g bag</small></div>
+      <div class="pprice"><span class="price">${canBuy ? money(p.price) : "NA"}</span><small>${sizeLabel(p)} bag</small></div>
       <div class="add-row">
         <div class="qty-pick" aria-label="Quantity">
           <button type="button" data-pq="-1" aria-label="Fewer bags" ${canBuy ? "" : "disabled"}>&minus;</button>
@@ -1659,7 +1659,7 @@ function renderProduct(p){
   </div>
   ${others.length ? `<div class="related"><h4>You might also like</h4><div class="related-grid">${others.map(x => `
     <a class="rel" href="#coffee/${esc(x.slug)}">${x.image ? `<img src="${esc(x.image)}" alt="">` : `<div class="rel-ph"></div>`}<div><b>${esc(x.name)}</b><span>${x.price !== null ? money(x.price) : "NA"} &middot; 250g</span></div></a>`).join("")}</div></div>` : ""}
-  ${canBuy ? `<div class="pbar"><div><b>${esc(p.name)}</b><span>${money(p.price)} &middot; 250g</span></div><button class="add-btn" type="button" data-padd="${esc(p.id)}">Add to cart</button></div>` : ""}`;
+  ${canBuy ? `<div class="pbar"><div><b>${esc(p.name)}</b><span>${money(p.price)} &middot; ${sizeLabel(p)}</span></div><button class="add-btn" type="button" data-padd="${esc(p.id)}">Add to cart</button></div>` : ""}`;
 }
 
 function showProduct(p){
@@ -1940,7 +1940,7 @@ function renderQuiz(){
     <span class="tag">${esc(p.origin)}</span>
     <h4>${esc(p.name)}</h4>
     <p>${esc(cardNote(p))}</p>
-    <span class="price">${money(p.price)} <small style="font-size:13px;font-weight:400;color:var(--ink-soft)">250g</small></span>
+    <span class="price">${money(p.price)} <small style="font-size:13px;font-weight:400;color:var(--ink-soft)">${sizeLabel(p)}</small></span>
     <button class="add-btn" type="button" data-quiz-add="${esc(p.id)}">Add to cart</button>
     <div class="quiz-links"><a href="#coffee/${esc(p.slug)}" data-quiz-close>View details</a><button type="button" data-quiz-restart>Start again</button></div>
   </div>`;

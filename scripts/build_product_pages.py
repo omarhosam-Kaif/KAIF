@@ -183,7 +183,7 @@ def build_page(p, variant, images, styles):
         <p class="eyebrow">{esc(p.get("subtitle") or "")}</p>
         <h1>{esc(name)}</h1>
         <p>{esc(desc)}</p>
-        <p class="price" id="price">{esc(price_text)} <small>/ 250 g</small></p>
+        <p class="price" id="price">{esc(price_text)} <small>/ {(variant or {}).get("weight_grams", 250)} g</small></p>
         <p><a class="btn btn-primary" href="/#shop">Order this coffee</a></p>
         {notes_html}
         <h2>Details</h2>
