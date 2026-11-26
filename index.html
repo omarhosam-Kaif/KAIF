@@ -583,6 +583,11 @@ h1,h2,h3,.brand span,.td-title,.price,.td-price{font-family:var(--display)}
 .quiz-result h4{font-family:var(--display);font-size:22px;margin:2px 0}
 .quiz-result p{color:var(--ink-soft);font-size:14px}
 .quiz-result .price{display:block;margin:8px 0 12px}
+.quiz-note{margin-top:10px;font-size:13px}
+.quiz-try{margin-top:14px;padding:12px 14px;border:1px dashed var(--line);border-radius:12px;background:var(--beige-light);text-align:left;display:grid;gap:6px;font-size:14px}
+.quiz-try b{font-size:15px}
+.quiz-try span{color:var(--ink-soft)}
+.quiz-try .add-btn{background:#fff;color:var(--ink);border:1px solid var(--ink)}
 .quiz-links{display:flex;justify-content:center;gap:18px;margin-top:12px;font-size:14px}
 .quiz-links a,.quiz-links button{background:none;border:0;color:var(--ink-soft);text-decoration:underline;cursor:pointer;font-size:14px}
 
@@ -1898,18 +1903,23 @@ function quizStrength(p){
   return r === "light" ? "light" : (r === "dark" || r === "medium_dark") ? "bold" : "balanced";
 }
 function quizPick(){
-  const coffee = products.filter(p => !isTool(p) && p.category !== "tal2eema" && p.variant && p.price !== null);
+  const small = quiz.brew === "small";
+  const coffee = products.filter(p => !isTool(p) && (small ? p.category === "tal2eema" : p.category !== "tal2eema") && p.variant && p.price !== null);
+  if (small && quiz.strength === "decaf") {
+    const decaf = products.find(p => !isTool(p) && p.raw.is_decaf && p.variant && p.price !== null);
+    if (decaf) return decaf;
+  }
   if (quiz.brew === "turkish") {
     return coffee.find(p => p.category === "turkish-coffee" && p.slug.includes(quiz.taste) && p.slug.endsWith(quiz.strength))
       || coffee.find(p => p.category === "turkish-coffee");
   }
   if (quiz.strength === "decaf") return coffee.find(p => p.raw.is_decaf) || coffee[0];
   let best = null, bestScore = -1;
-  coffee.filter(p => p.category !== "turkish-coffee" && !p.raw.is_decaf).forEach(p => {
+  coffee.filter(p => !/^turkish-coffee/.test(p.slug) && !p.raw.is_decaf).forEach(p => {
     const notes = (p.raw.tasting_notes || []).join(" ");
     const methods = p.raw.brew_methods || [];
     let score = 0;
-    if (quiz.brew === "any" || !methods.length || methods.includes(quiz.brew)) score += 4;
+    if (quiz.brew === "any" || small || !methods.length || methods.includes(quiz.brew)) score += 4;
     if (quiz.taste === "flavoured") score += p.category === "flavoured" ? 5 : 0;
     else {
       if (p.category === "flavoured") score -= 3;
@@ -1928,7 +1938,8 @@ function quizQuestions(){
       ["espresso", "Espresso machine", "Or a moka pot"],
       ["filter", "Filter or V60", "Pour-over, drip, French press"],
       ["turkish", "Turkish, in a kanaka", "قهوة تركي"],
-      ["any", "Not sure yet", "Show me something easy"] ] },
+      ["any", "Not sure yet", "Show me something easy"],
+      ["small", "Just a small bag to try", "20 g bags, easy to carry or travel with"] ] },
     turkish
       ? { key: "taste", title: "Plain or spiced?", opts: [["plain", "Plain", "سادة"], ["spiced", "Spiced", "محوج"]] }
       : { key: "taste", title: "What taste do you enjoy?", opts: [
@@ -1956,6 +1967,7 @@ function renderQuiz(){
     return;
   }
   const p = quizPick();
+  const mini = p && quiz.brew !== "small" && p.category !== "tal2eema" ? products.find(x => x.slug === p.slug + "-20g" && x.price !== null && x.variant) : null;
   if (!p) { $("quizBody").innerHTML = `<div class="quiz-step"><div class="quiz-head">${QUIZ_CAT}<h3>The shop is still loading. Try again in a moment.</h3></div></div>`; return; }
   $("quizBody").innerHTML = dots + `<div class="quiz-step quiz-result">
     <div class="quiz-head" style="justify-content:center">${QUIZ_CAT}<h3>This one is for you.</h3></div>
@@ -1965,6 +1977,8 @@ function renderQuiz(){
     <p>${esc(cardNote(p))}</p>
     <span class="price">${money(p.price)} <small style="font-size:13px;font-weight:400;color:var(--ink-soft)">${sizeLabel(p)}</small></span>
     <button class="add-btn" type="button" data-quiz-add="${esc(p.id)}">Add to cart</button>
+    ${p.category === "tal2eema" ? `<p class="quiz-note">Ordering only Tal2eema? The minimum is ${TAL_MIN} bags. Add any other coffee and there is no minimum.</p>` : ""}
+    ${mini ? `<div class="quiz-try"><b>Not ready for a full bag?</b><span>Try the 20 g Tal2eema bag for ${money(mini.price)}. Small enough to take in your bag.</span><button class="add-btn alt" type="button" data-quiz-add="${esc(mini.id)}">Add the 20 g bag</button></div>` : ""}
     <div class="quiz-links"><a href="#coffee/${esc(p.slug)}" data-quiz-close>View details</a><button type="button" data-quiz-restart>Start again</button></div>
   </div>`;
 }
@@ -1988,8 +2002,10 @@ document.addEventListener("click", e => {
   const add = e.target.closest("[data-quiz-add]");
   if (add) {
     addToCart(add.dataset.quizAdd, 1);
+    const label = add.dataset.label || add.textContent;
+    add.dataset.label = label;
     add.textContent = "Added ✓";
-    setTimeout(() => { add.textContent = "Add to cart"; }, 1200);
+    setTimeout(() => { add.textContent = label; }, 1200);
   }
 });
 document.addEventListener("keydown", e => {
