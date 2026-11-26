@@ -1897,29 +1897,27 @@ function revealCards(){
 const QUIZ_CAT = `<span class="cat" aria-hidden="true"><img src="cat-hero.png" alt=""><i class="lid lid-l"></i><i class="lid lid-r"></i><i class="steam"></i><i class="steam s2"></i></span>`;
 const FRUITY = /berry|strawberry|blueberry|lime|lemon|citrus|apricot|peach|mango|fruit|floral|blossom|fig/i;
 const CHOC = /chocolate|nut|almond|caramel|brown sugar|cinnamon/i;
-let quiz = { step: 0, brew: null, taste: null, strength: null };
+let quiz = { step: 0, brew: null, taste: null, strength: null, size: null };
 function quizStrength(p){
   const r = p.raw.roast_level;
   return r === "light" ? "light" : (r === "dark" || r === "medium_dark") ? "bold" : "balanced";
 }
 function quizPick(){
-  const small = quiz.brew === "small";
-  const coffee = products.filter(p => !isTool(p) && (small ? p.category === "tal2eema" : p.category !== "tal2eema") && p.variant && p.price !== null);
-  if (small && quiz.strength === "decaf") {
-    const decaf = products.find(p => !isTool(p) && p.raw.is_decaf && p.variant && p.price !== null);
-    if (decaf) return decaf;
-  }
+  const small = quiz.size === "small";
+  const usable = p => !isTool(p) && p.variant && p.price !== null;
+  const coffee = products.filter(p => usable(p) && (small ? p.category === "tal2eema" : p.category !== "tal2eema"));
+  const isTurk = p => /^turkish-coffee/.test(p.slug);
   if (quiz.brew === "turkish") {
-    return coffee.find(p => p.category === "turkish-coffee" && p.slug.includes(quiz.taste) && p.slug.endsWith(quiz.strength))
-      || coffee.find(p => p.category === "turkish-coffee");
+    return coffee.find(p => isTurk(p) && p.slug.includes(quiz.taste) && p.slug.includes("-" + quiz.strength))
+      || coffee.find(isTurk)
+      || products.find(p => usable(p) && p.category !== "tal2eema" && isTurk(p));
   }
-  if (quiz.strength === "decaf") return coffee.find(p => p.raw.is_decaf) || coffee[0];
+  if (quiz.strength === "decaf") return products.find(p => usable(p) && p.category !== "tal2eema" && p.raw.is_decaf) || coffee[0];
   let best = null, bestScore = -1;
-  coffee.filter(p => !/^turkish-coffee/.test(p.slug) && !p.raw.is_decaf).forEach(p => {
-    const notes = (p.raw.tasting_notes || []).join(" ");
+  coffee.filter(p => !isTurk(p) && !p.raw.is_decaf).forEach(p => {
     const methods = p.raw.brew_methods || [];
     let score = 0;
-    if (quiz.brew === "any" || small || !methods.length || methods.includes(quiz.brew)) score += 4;
+    if (quiz.brew === "any" || !methods.length || methods.includes(quiz.brew)) score += 4;
     if (quiz.taste === "flavoured") score += p.category === "flavoured" ? 5 : 0;
     else {
       if (p.category === "flavoured") score -= 3;
@@ -1938,8 +1936,7 @@ function quizQuestions(){
       ["espresso", "Espresso machine", "Or a moka pot"],
       ["filter", "Filter or V60", "Pour-over, drip, French press"],
       ["turkish", "Turkish, in a kanaka", "قهوة تركي"],
-      ["any", "Not sure yet", "Show me something easy"],
-      ["small", "Just a small bag to try", "20 g bags, easy to carry or travel with"] ] },
+      ["any", "Not sure yet", "Show me something easy"] ] },
     turkish
       ? { key: "taste", title: "Plain or spiced?", opts: [["plain", "Plain", "سادة"], ["spiced", "Spiced", "محوج"]] }
       : { key: "taste", title: "What taste do you enjoy?", opts: [
@@ -1952,12 +1949,15 @@ function quizQuestions(){
           ["light", "Light and smooth", ""],
           ["balanced", "Balanced", "Medium roast"],
           ["bold", "Bold and dark", "Darker roast"],
-          ["decaf", "No caffeine, please", "Decaf"] ] }
+          ["decaf", "No caffeine, please", "Decaf"] ] },
+    { key: "size", title: "What size would you like?", opts: [
+      ["full", "A full bag", "250 g"],
+      ["small", "A small bag to try", "20 g, easy to carry or travel with"] ] }
   ];
 }
 function renderQuiz(){
-  const dots = `<div class="quiz-dots">${[0, 1, 2].map(i => `<i class="${i <= Math.min(quiz.step, 2) ? "on" : ""}"></i>`).join("")}</div>`;
-  if (quiz.step < 3) {
+  const dots = `<div class="quiz-dots">${[0, 1, 2, 3].map(i => `<i class="${i <= Math.min(quiz.step, 3) ? "on" : ""}"></i>`).join("")}</div>`;
+  if (quiz.step < 4) {
     const q = quizQuestions()[quiz.step];
     $("quizBody").innerHTML = dots + `<div class="quiz-step">
       <div class="quiz-head">${QUIZ_CAT}<h3>${q.title}</h3></div>
@@ -1967,7 +1967,7 @@ function renderQuiz(){
     return;
   }
   const p = quizPick();
-  const mini = p && quiz.brew !== "small" && p.category !== "tal2eema" ? products.find(x => x.slug === p.slug + "-20g" && x.price !== null && x.variant) : null;
+  const mini = p && quiz.size !== "small" && p.category !== "tal2eema" ? products.find(x => x.slug === p.slug + "-20g" && x.price !== null && x.variant) : null;
   if (!p) { $("quizBody").innerHTML = `<div class="quiz-step"><div class="quiz-head">${QUIZ_CAT}<h3>The shop is still loading. Try again in a moment.</h3></div></div>`; return; }
   $("quizBody").innerHTML = dots + `<div class="quiz-step quiz-result">
     <div class="quiz-head" style="justify-content:center">${QUIZ_CAT}<h3>This one is for you.</h3></div>
@@ -1983,7 +1983,7 @@ function renderQuiz(){
   </div>`;
 }
 function openQuiz(){
-  quiz = { step: 0, brew: null, taste: null, strength: null };
+  quiz = { step: 0, brew: null, taste: null, strength: null, size: null };
   renderQuiz();
   $("quizOverlay").classList.add("open");
   $("quizOverlay").setAttribute("aria-hidden", "false");
