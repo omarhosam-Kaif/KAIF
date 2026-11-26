@@ -19,6 +19,20 @@ TODAY = date.today().isoformat()
 
 GUIDES = [
     {
+        "slug": "moka-pot",
+        "ar_title": "إزاي تعمل قهوة بالموكا بوت؟",
+        "en_title": "How to brew coffee in a moka pot",
+        "answer": "Fill the bottom chamber with hot water up to just below the valve. Fill the basket with medium-fine coffee, a little coarser than espresso, level it without pressing, and screw the top on tight. Heat on low to medium. When the coffee starts to flow, wait until it turns pale and begins to sputter, then take the pot off the heat and run the base under cold water to stop the brew. Stir, and pour. If the cup tastes bitter or burnt, use lower heat or a slightly coarser grind.",
+        "links": [("ember-blend", "Ember Blend"), ("aura-blend", "Aura Blend"), ("dolce-blend", "Dolce Blend")],
+    },
+    {
+        "slug": "cold-brew",
+        "ar_title": "إزاي تعمل كولد برو في البيت؟",
+        "en_title": "How to make cold brew at home",
+        "answer": "Mix 100 grams of coarsely ground coffee with 1 litre of cold water in a jar. Stir so all the grounds are wet, cover, and leave in the fridge for 12 to 16 hours. Strain through a paper filter or fine cloth. This makes a strong concentrate, so serve it over ice and dilute with water or milk to taste. Keep it in the fridge and drink it within about five days.",
+        "links": [("brazil-parana", "Brazil Paraná"), ("colombia-huila", "Colombia Huila"), ("ember-blend", "Ember Blend")],
+    },
+    {
         "slug": "v60-pour-over",
         "ar_title": "إزاي تعمل قهوة V60 في البيت؟",
         "en_title": "How to brew V60 pour-over at home",
