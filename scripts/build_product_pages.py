@@ -65,6 +65,8 @@ def build_page(p, variant, images, styles):
     desc = describe(p)
     price = variant.get("price") if variant else None
     image = images[0]["url"] if images else f"{SITE}/icon-512.png"
+    if image.startswith("/"):
+        image = SITE + image
     image_alt = images[0].get("alt_text") or name if images else name
 
     details = []
@@ -75,7 +77,8 @@ def build_page(p, variant, images, styles):
     if p.get("brew_methods"):
         details.append(("Brew", ", ".join(m.capitalize() for m in p["brew_methods"])))
     if variant:
-        details.append(("Pack", f"{variant['weight_grams']} g whole beans"))
+        form = "ground for Turkish coffee" if variant.get("grind") == "turkish" else "whole beans"
+        details.append(("Pack", f"{variant['weight_grams']} g {form}"))
     detail_rows = "".join(
         f"<div><dt>{esc(k)}</dt><dd>{esc(v)}</dd></div>" for k, v in details
     )
@@ -184,7 +187,7 @@ def build_page(p, variant, images, styles):
         <h1>{esc(name)}</h1>
         <p>{esc(desc)}</p>
         <p class="price" id="price">{esc(price_text)} <small>/ {(variant or {}).get("weight_grams", 250)} g</small></p>
-        <p><a class="btn btn-primary" href="/#shop">Order this coffee</a></p>
+        <p><a class="btn btn-primary" href="/#coffee/{slug}">Order this coffee</a></p>
         {notes_html}
         <h2>Details</h2>
         <dl>{detail_rows}</dl>
@@ -201,7 +204,7 @@ def build_page(p, variant, images, styles):
 <script>
 // Refresh the price from Supabase so database changes show without a redeploy.
 (function () {{
-  var url = "{SUPABASE_URL}/rest/v1/product_variants?select=price,grind,is_active,product:products!inner(slug)&product.slug=eq.{slug}&grind=eq.whole_beans&is_active=eq.true&limit=1";
+  var url = "{SUPABASE_URL}/rest/v1/product_variants?select=price,grind,is_active,product:products!inner(slug)&product.slug=eq.{slug}&grind=eq.{(variant or {}).get("grind", "whole_beans")}&is_active=eq.true&limit=1";
   fetch(url, {{ headers: {{ apikey: "{SUPABASE_KEY}" }} }})
     .then(function (r) {{ return r.ok ? r.json() : null; }})
     .then(function (rows) {{
@@ -221,7 +224,7 @@ def main():
     styles = shared_styles()
     variants = {}
     for v in data["product_variants"]:
-        if v.get("is_active") and v.get("grind") == "whole_beans":
+        if v.get("is_active"):
             variants.setdefault(v["product_slug"], v)
     images = {}
     for img in sorted(data["product_images"], key=lambda i: i.get("sort_order", 0)):
@@ -239,6 +242,11 @@ def main():
         slugs.append(slug)
         print("wrote", slug)
 
+    # keep guide entries that build_guides.py wrote into the sitemap
+    old_sitemap = (ROOT / "sitemap.xml")
+    guide_blocks = []
+    if old_sitemap.exists():
+        guide_blocks = re.findall(r"  <url>\n    <loc>[^<]*/guides[^<]*</loc>.*?</url>", old_sitemap.read_text(encoding="utf-8"), re.S)
     today = date.today().isoformat()
     urls = [f"  <url>\n    <loc>{SITE}/</loc>\n    <lastmod>{today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>"]
     for slug in slugs:
@@ -246,6 +254,7 @@ def main():
             f"  <url>\n    <loc>{SITE}/{slug}</loc>\n    <lastmod>{today}</lastmod>\n"
             f"    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>"
         )
+    urls.extend(guide_blocks)
     (ROOT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -253,7 +262,7 @@ def main():
         + "\n</urlset>\n",
         encoding="utf-8",
     )
-    print("sitemap updated with", len(slugs) + 1, "URLs")
+    print("sitemap updated with", len(slugs) + 1 + len(guide_blocks), "URLs")
 
 
 if __name__ == "__main__":

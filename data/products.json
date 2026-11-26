@@ -505,6 +505,174 @@
    "brew_methods": [
     "filter"
    ]
+  },
+  {
+   "id": "7a5a9c69-30c1-4b4f-a793-a5fe54d0bb59",
+   "slug": "turkish-coffee-plain-light",
+   "name": "Turkish Coffee, Plain, Light Roast",
+   "subtitle": "Plain · Light roast",
+   "description": "Finely ground Turkish coffee with a light roast. Clean, bright flavour with no added ingredients. Brew in a cezve and serve unfiltered. 250 g.",
+   "category_id": "e291721e-5365-4775-bab3-61145feb2456",
+   "origin_id": null,
+   "is_blend": false,
+   "is_decaf": false,
+   "process": null,
+   "roast_level": "light",
+   "tasting_notes": [],
+   "body": null,
+   "acidity": null,
+   "aftertaste": null,
+   "sweetness": null,
+   "is_active": true,
+   "best_seller": false,
+   "brew_methods": []
+  },
+  {
+   "id": "15d07137-95cc-4ed6-a5ae-a50689a2cbff",
+   "slug": "turkish-coffee-plain-medium",
+   "name": "Turkish Coffee, Plain, Medium Roast",
+   "subtitle": "Plain · Medium roast",
+   "description": "Finely ground Turkish coffee with a medium roast. Fuller, rounder flavour with no added ingredients. Brew in a cezve and serve unfiltered. 250 g.",
+   "category_id": "e291721e-5365-4775-bab3-61145feb2456",
+   "origin_id": null,
+   "is_blend": false,
+   "is_decaf": false,
+   "process": null,
+   "roast_level": "medium",
+   "tasting_notes": [],
+   "body": null,
+   "acidity": null,
+   "aftertaste": null,
+   "sweetness": null,
+   "is_active": true,
+   "best_seller": false,
+   "brew_methods": []
+  },
+  {
+   "id": "b4402271-f817-41fc-94f9-1a128e7dc387",
+   "slug": "turkish-coffee-spiced-light",
+   "name": "Turkish Coffee, Spiced, Light Roast",
+   "subtitle": "Spiced · Light roast",
+   "description": "Finely ground Turkish coffee with a light roast and added spices. Bright base with a warm, aromatic finish. Brew in a cezve and serve unfiltered. 250 g.",
+   "category_id": "e291721e-5365-4775-bab3-61145feb2456",
+   "origin_id": null,
+   "is_blend": false,
+   "is_decaf": false,
+   "process": null,
+   "roast_level": "light",
+   "tasting_notes": [],
+   "body": null,
+   "acidity": null,
+   "aftertaste": null,
+   "sweetness": null,
+   "is_active": true,
+   "best_seller": false,
+   "brew_methods": []
+  },
+  {
+   "id": "80d49ec4-04f5-41ce-af09-ef4503e57223",
+   "slug": "turkish-coffee-spiced-medium",
+   "name": "Turkish Coffee, Spiced, Medium Roast",
+   "subtitle": "Spiced · Medium roast",
+   "description": "Finely ground Turkish coffee with a medium roast and added spices. Fuller base with a warm, aromatic finish. Brew in a cezve and serve unfiltered. 250 g.",
+   "category_id": "e291721e-5365-4775-bab3-61145feb2456",
+   "origin_id": null,
+   "is_blend": false,
+   "is_decaf": false,
+   "process": null,
+   "roast_level": "medium",
+   "tasting_notes": [],
+   "body": null,
+   "acidity": null,
+   "aftertaste": null,
+   "sweetness": null,
+   "is_active": true,
+   "best_seller": false,
+   "brew_methods": []
+  },
+  {
+   "id": "8abd4a48-1ac9-4cff-aae5-b9df1ef9e7a9",
+   "slug": "turkish-coffee-plain-light-20g",
+   "name": "Turkish Coffee, Plain, Light Roast (20 g)",
+   "subtitle": "Plain · Light roast",
+   "description": "Finely ground Turkish coffee with a light roast. Clean, bright flavour with no added ingredients. Brew in a cezve and serve unfiltered. 20 g.",
+   "category_id": "c96b5e7f-bfbc-476b-82d1-c4349ae34832",
+   "origin_id": null,
+   "is_blend": false,
+   "is_decaf": false,
+   "process": null,
+   "roast_level": "light",
+   "tasting_notes": [],
+   "body": null,
+   "acidity": null,
+   "aftertaste": null,
+   "sweetness": null,
+   "is_active": true,
+   "best_seller": false,
+   "brew_methods": []
+  },
+  {
+   "id": "baed5309-3050-4250-88b7-7d6be1e5259a",
+   "slug": "turkish-coffee-plain-medium-20g",
+   "name": "Turkish Coffee, Plain, Medium Roast (20 g)",
+   "subtitle": "Plain · Medium roast",
+   "description": "Finely ground Turkish coffee with a medium roast. Fuller, rounder flavour with no added ingredients. Brew in a cezve and serve unfiltered. 20 g.",
+   "category_id": "c96b5e7f-bfbc-476b-82d1-c4349ae34832",
+   "origin_id": null,
+   "is_blend": false,
+   "is_decaf": false,
+   "process": null,
+   "roast_level": "medium",
+   "tasting_notes": [],
+   "body": null,
+   "acidity": null,
+   "aftertaste": null,
+   "sweetness": null,
+   "is_active": true,
+   "best_seller": false,
+   "brew_methods": []
+  },
+  {
+   "id": "4471b833-1b26-4c09-8b53-014040a21db7",
+   "slug": "turkish-coffee-spiced-light-20g",
+   "name": "Turkish Coffee, Spiced, Light Roast (20 g)",
+   "subtitle": "Spiced · Light roast",
+   "description": "Finely ground Turkish coffee with a light roast and added spices. Bright base with a warm, aromatic finish. Brew in a cezve and serve unfiltered. 20 g.",
+   "category_id": "c96b5e7f-bfbc-476b-82d1-c4349ae34832",
+   "origin_id": null,
+   "is_blend": false,
+   "is_decaf": false,
+   "process": null,
+   "roast_level": "light",
+   "tasting_notes": [],
+   "body": null,
+   "acidity": null,
+   "aftertaste": null,
+   "sweetness": null,
+   "is_active": true,
+   "best_seller": false,
+   "brew_methods": []
+  },
+  {
+   "id": "91957a30-1f2e-42bc-a7aa-fb7c0aecc457",
+   "slug": "turkish-coffee-spiced-medium-20g",
+   "name": "Turkish Coffee, Spiced, Medium Roast (20 g)",
+   "subtitle": "Spiced · Medium roast",
+   "description": "Finely ground Turkish coffee with a medium roast and added spices. Fuller base with a warm, aromatic finish. Brew in a cezve and serve unfiltered. 20 g.",
+   "category_id": "c96b5e7f-bfbc-476b-82d1-c4349ae34832",
+   "origin_id": null,
+   "is_blend": false,
+   "is_decaf": false,
+   "process": null,
+   "roast_level": "medium",
+   "tasting_notes": [],
+   "body": null,
+   "acidity": null,
+   "aftertaste": null,
+   "sweetness": null,
+   "is_active": true,
+   "best_seller": false,
+   "brew_methods": []
   }
  ],
  "product_variants": [
@@ -697,72 +865,152 @@
    "currency": "EGP",
    "stock_quantity": 100,
    "is_active": true
+  },
+  {
+   "sku": "TURK-PLAIN-LIGHT",
+   "product_slug": "turkish-coffee-plain-light",
+   "grind": "turkish",
+   "weight_grams": 250,
+   "price": 300,
+   "currency": "EGP",
+   "stock_quantity": 100,
+   "is_active": true
+  },
+  {
+   "sku": "TURK-PLAIN-MEDIUM",
+   "product_slug": "turkish-coffee-plain-medium",
+   "grind": "turkish",
+   "weight_grams": 250,
+   "price": 310,
+   "currency": "EGP",
+   "stock_quantity": 100,
+   "is_active": true
+  },
+  {
+   "sku": "TURK-SPICED-LIGHT",
+   "product_slug": "turkish-coffee-spiced-light",
+   "grind": "turkish",
+   "weight_grams": 250,
+   "price": 330,
+   "currency": "EGP",
+   "stock_quantity": 100,
+   "is_active": true
+  },
+  {
+   "sku": "TURK-SPICED-MEDIUM",
+   "product_slug": "turkish-coffee-spiced-medium",
+   "grind": "turkish",
+   "weight_grams": 250,
+   "price": 335,
+   "currency": "EGP",
+   "stock_quantity": 100,
+   "is_active": true
+  },
+  {
+   "sku": "TURK-PLAIN-LIGHT-20",
+   "product_slug": "turkish-coffee-plain-light-20g",
+   "grind": "turkish",
+   "weight_grams": 20,
+   "price": 30,
+   "currency": "EGP",
+   "stock_quantity": 100,
+   "is_active": true
+  },
+  {
+   "sku": "TURK-PLAIN-MEDIUM-20",
+   "product_slug": "turkish-coffee-plain-medium-20g",
+   "grind": "turkish",
+   "weight_grams": 20,
+   "price": 35,
+   "currency": "EGP",
+   "stock_quantity": 100,
+   "is_active": true
+  },
+  {
+   "sku": "TURK-SPICED-LIGHT-20",
+   "product_slug": "turkish-coffee-spiced-light-20g",
+   "grind": "turkish",
+   "weight_grams": 20,
+   "price": 40,
+   "currency": "EGP",
+   "stock_quantity": 100,
+   "is_active": true
+  },
+  {
+   "sku": "TURK-SPICED-MEDIUM-20",
+   "product_slug": "turkish-coffee-spiced-medium-20g",
+   "grind": "turkish",
+   "weight_grams": 20,
+   "price": 45,
+   "currency": "EGP",
+   "stock_quantity": 100,
+   "is_active": true
   }
  ],
  "product_images": [
   {
    "product_slug": "dolce-blend",
-   "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/5131db91d176d2cae342d8c09e2b95c5e733a232/product-photos/bag_photo_dolce.jpg",
+   "url": "/product-photos/bag_photo_dolce.webp",
    "alt_text": "Dolce Blend",
    "sort_order": 0
   },
   {
    "product_slug": "ember-blend",
-   "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/5131db91d176d2cae342d8c09e2b95c5e733a232/product-photos/bag_photo_ember.jpg",
+   "url": "/product-photos/bag_photo_ember.webp",
    "alt_text": "Ember Blend",
    "sort_order": 0
   },
   {
    "product_slug": "aura-blend",
-   "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/5131db91d176d2cae342d8c09e2b95c5e733a232/product-photos/bag_photo_aura.jpg",
+   "url": "/product-photos/bag_photo_aura.webp",
    "alt_text": "Aura Blend",
    "sort_order": 0
   },
   {
    "product_slug": "ethiopia-guji",
-   "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/5131db91d176d2cae342d8c09e2b95c5e733a232/product-photos/bag_photo_guji.jpg",
+   "url": "/product-photos/bag_photo_guji.webp",
    "alt_text": "Ethiopia Guji",
    "sort_order": 0
   },
   {
    "product_slug": "ethiopia-dijammah",
-   "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/5131db91d176d2cae342d8c09e2b95c5e733a232/product-photos/bag_photo_dijammah.jpg",
+   "url": "/product-photos/bag_photo_dijammah.webp",
    "alt_text": "Ethiopia Dijammah",
    "sort_order": 0
   },
   {
    "product_slug": "vanilla",
-   "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/5131db91d176d2cae342d8c09e2b95c5e733a232/product-photos/bag_photo_vanilla.jpg",
+   "url": "/product-photos/bag_photo_vanilla.webp",
    "alt_text": "Vanilla",
    "sort_order": 0
   },
   {
    "product_slug": "brazil-parana",
-   "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/d1344743a81e2e1f20da58357b1c14194b6d8091/product-photos/bag_photo_brazil_parana.png",
+   "url": "/product-photos/bag_photo_brazil_parana.webp",
    "alt_text": "Brazil Paraná",
    "sort_order": 0
   },
   {
    "product_slug": "colombia-huila",
-   "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/349d67202c8f3612d311cacd35462cc4aa878d97/product-photos/bag_photo_huila.png",
+   "url": "/product-photos/bag_photo_huila.webp",
    "alt_text": "Colombia Huila",
    "sort_order": 0
   },
   {
    "product_slug": "decaf-coffee",
-   "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/f4248f0877075da6f543de921f821d8c2c3cea7c/product-photos/bag_photo_decaf.png",
+   "url": "/product-photos/bag_photo_decaf.webp",
    "alt_text": "Decaf Coffee",
    "sort_order": 0
   },
   {
    "product_slug": "hazelnut",
-   "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/7f82b1fc58d7a6c3e37034c620c58890aa148933/product-photos/bag_photo_hazelnut_v2.jpg",
+   "url": "/product-photos/bag_photo_hazelnut_v2.webp",
    "alt_text": "Hazelnut",
    "sort_order": 0
   },
   {
    "product_slug": "caramel",
-   "url": "https://raw.githubusercontent.com/omarhosam-Kaif/KAIF/4414ed087f4a9f7f607c4731cd43dbeddc72e9ae/product-photos/bag_photo_caramel.png",
+   "url": "/product-photos/bag_photo_caramel.webp",
    "alt_text": "Caramel",
    "sort_order": 0
   },
@@ -806,6 +1054,54 @@
    "product_slug": "vanilla-20g",
    "url": "/product-photos/tal2eema_vanilla.webp",
    "alt_text": "Vanilla 20 g bag",
+   "sort_order": 0
+  },
+  {
+   "product_slug": "turkish-coffee-plain-light",
+   "url": "/turkish-coffee-bag.webp",
+   "alt_text": "KAIF Turkish Coffee 250 g bag",
+   "sort_order": 0
+  },
+  {
+   "product_slug": "turkish-coffee-plain-medium",
+   "url": "/turkish-coffee-bag.webp",
+   "alt_text": "KAIF Turkish Coffee 250 g bag",
+   "sort_order": 0
+  },
+  {
+   "product_slug": "turkish-coffee-spiced-light",
+   "url": "/turkish-coffee-bag.webp",
+   "alt_text": "KAIF Turkish Coffee 250 g bag",
+   "sort_order": 0
+  },
+  {
+   "product_slug": "turkish-coffee-spiced-medium",
+   "url": "/turkish-coffee-bag.webp",
+   "alt_text": "KAIF Turkish Coffee 250 g bag",
+   "sort_order": 0
+  },
+  {
+   "product_slug": "turkish-coffee-plain-light-20g",
+   "url": "/product-photos/tal2eema_turkish.webp",
+   "alt_text": "Turkish Coffee 20 g bag",
+   "sort_order": 0
+  },
+  {
+   "product_slug": "turkish-coffee-plain-medium-20g",
+   "url": "/product-photos/tal2eema_turkish.webp",
+   "alt_text": "Turkish Coffee 20 g bag",
+   "sort_order": 0
+  },
+  {
+   "product_slug": "turkish-coffee-spiced-light-20g",
+   "url": "/product-photos/tal2eema_turkish.webp",
+   "alt_text": "Turkish Coffee 20 g bag",
+   "sort_order": 0
+  },
+  {
+   "product_slug": "turkish-coffee-spiced-medium-20g",
+   "url": "/product-photos/tal2eema_turkish.webp",
+   "alt_text": "Turkish Coffee 20 g bag",
    "sort_order": 0
   }
  ],
