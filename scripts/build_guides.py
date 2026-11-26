@@ -19,6 +19,13 @@ TODAY = date.today().isoformat()
 
 GUIDES = [
     {
+        "slug": "v60-pour-over",
+        "ar_title": "إزاي تعمل قهوة V60 في البيت؟",
+        "en_title": "How to brew V60 pour-over at home",
+        "answer": "Use 15 grams of coffee and 250 ml of water as a starting point. Grind medium-fine, a little finer than table salt, and use water just off the boil. Rinse the paper filter, add the coffee, and pour 50 ml to wet the grounds. Wait 30 seconds, then pour the rest in slow circles. Aim to finish in about two and a half to three minutes. If it drips through too fast and tastes sour, grind finer. If it drips slowly and tastes bitter, grind coarser.",
+        "links": [("ethiopia-guji", "Ethiopia Guji"), ("ethiopia-dijammah", "Ethiopia Dijammah"), ("colombia-huila", "Colombia Huila")],
+    },
+    {
         "slug": "turkish-coffee-at-home",
         "ar_title": "إزاي تعمل قهوة تركي في البيت؟",
         "en_title": "How to make Turkish coffee at home",
