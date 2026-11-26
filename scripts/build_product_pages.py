@@ -246,7 +246,7 @@ def main():
     old_sitemap = (ROOT / "sitemap.xml")
     guide_blocks = []
     if old_sitemap.exists():
-        guide_blocks = re.findall(r"  <url>\n    <loc>[^<]*/guides[^<]*</loc>.*?</url>", old_sitemap.read_text(encoding="utf-8"), re.S)
+        guide_blocks = re.findall(r"  <url>\n    <loc>[^<]*/(?:guides|articles)[^<]*</loc>.*?</url>", old_sitemap.read_text(encoding="utf-8"), re.S)
     today = date.today().isoformat()
     urls = [f"  <url>\n    <loc>{SITE}/</loc>\n    <lastmod>{today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>"]
     for slug in slugs:
