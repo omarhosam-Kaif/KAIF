@@ -19,6 +19,13 @@ TODAY = date.today().isoformat()
 
 GUIDES = [
     {
+        "slug": "turkish-coffee-at-home",
+        "ar_title": "إزاي تعمل قهوة تركي في البيت؟",
+        "en_title": "How to make Turkish coffee at home",
+        "answer": "Use about 7 grams of finely ground Turkish coffee and 70 ml of cold water for each small cup. Put both in a cezve, add sugar now if you want it, and stir once. Heat on low and do not stir again. When the foam rises to the rim, take the cezve off the heat before it boils over. Pour slowly so the foam lands in the cup, and let it rest for a minute so the grounds settle. Sip, and leave the grounds at the bottom. A 20 g bag makes about 2 to 3 cups, so it is an easy way to try.",
+        "links": [("turkish-coffee-plain-light", "Turkish Plain Light"), ("turkish-coffee-plain-medium", "Turkish Plain Medium"), ("turkish-coffee-spiced-light", "Turkish Spiced Light"), ("turkish-coffee-spiced-medium", "Turkish Spiced Medium"), ("turkish-coffee-plain-light-20g", "Try a 20 g bag")],
+    },
+    {
         "slug": "filter-coffee-at-home",
         "ar_title": "كيف أعمل قهوة فلتر في البيت؟",
         "en_title": "How to brew filter coffee at home",
