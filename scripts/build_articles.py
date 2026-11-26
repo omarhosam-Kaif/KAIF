@@ -15,6 +15,10 @@ from build_guides import ROOT, SITE, esc, page, shared_styles  # noqa: E402
 
 TODAY = date.today().isoformat()
 
+# While True: no header link, pages are noindex and left out of the sitemap.
+# Set to False (and add the nav link back) when the articles are ready.
+HIDDEN = True
+
 ARTICLES = [
     {
         "slug": "what-is-specialty-coffee",
@@ -101,6 +105,12 @@ def body(a):
 EXTRA_CSS = "<style>.article-body h2{font-size:24px;margin:32px 0 8px}.article-body p{margin:0 0 14px}</style>"
 
 
+def hide(html_text):
+    if not HIDDEN:
+        return html_text
+    return html_text.replace("<meta charset=\"UTF-8\">", "<meta charset=\"UTF-8\">\n<meta name=\"robots\" content=\"noindex, nofollow\">", 1)
+
+
 def build():
     styles = shared_styles()
     out_dir = ROOT / "articles"
@@ -114,8 +124,8 @@ def build():
   <ul class="answer" style="list-style:none;padding:0">{listing}</ul>
 </article>"""
     (out_dir / "index.html").write_text(
-        page("Articles | KAIF", "Longer reads about specialty coffee from KAIF in Egypt: what it is, single origin vs blend, and keeping beans fresh.",
-             f"{SITE}/articles/", index_body, styles),
+        hide(page("Articles | KAIF", "Longer reads about specialty coffee from KAIF in Egypt: what it is, single origin vs blend, and keeping beans fresh.",
+             f"{SITE}/articles/", index_body, styles)),
         encoding="utf-8",
     )
     urls = [f"{SITE}/articles/"]
@@ -124,7 +134,7 @@ def build():
         d.mkdir(exist_ok=True)
         desc = a["intro"] if len(a["intro"]) <= 160 else a["intro"][:157].rsplit(" ", 1)[0] + "..."
         (d / "index.html").write_text(
-            page(f'{a["en_title"]} | KAIF', desc, f'{SITE}/articles/{a["slug"]}', EXTRA_CSS + body(a), styles),
+            hide(page(f'{a["en_title"]} | KAIF', desc, f'{SITE}/articles/{a["slug"]}', EXTRA_CSS + body(a), styles)),
             encoding="utf-8",
         )
         urls.append(f'{SITE}/articles/{a["slug"]}')
@@ -135,7 +145,8 @@ def build():
         f"\n  <url>\n    <loc>{u}</loc>\n    <lastmod>{TODAY}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.6</priority>\n  </url>"
         for u in urls
     )
-    text = text.replace("</urlset>", entries + "\n</urlset>")
+    if not HIDDEN:
+        text = text.replace("</urlset>", entries + "\n</urlset>")
     sm.write_text(text, encoding="utf-8")
     print(f"built {len(ARTICLES)} articles + index")
 
