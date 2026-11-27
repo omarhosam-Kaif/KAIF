@@ -743,6 +743,18 @@ html[dir="rtl"] .card-img::after{left:50%}
   html[dir="rtl"] .nav-links{left:0;right:0}
   html[dir="rtl"] .wa-float{right:auto;left:12px}
 }
+
+.ip-box{margin:10px 0 4px;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff;text-align:center}
+.ip-title{font-weight:700;margin:0 0 8px;color:var(--ink)}
+.ip-qr{display:block;margin:0 auto 8px;width:200px;height:200px;max-width:70%;height:auto;border-radius:8px}
+.ip-hint{font-size:14px;margin:6px 0;color:#3d4a4e}
+.ip-handle{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;direction:ltr}
+.ip-handle strong{font-size:16px;word-break:break-all}
+.ip-copy{border:1px solid var(--teal-dark);background:none;color:var(--teal-dark);border-radius:999px;padding:5px 14px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.ip-amount{margin:10px 0 4px;font-size:15px}
+.ip-open{display:inline-block;margin:8px 0 4px;padding:10px 18px;border-radius:999px;background:var(--teal-dark);color:#fff;text-decoration:none;font-weight:600;font-size:15px}
+.ip-order{margin:8px 0 0;font-size:15px}
+.ip-note{font-size:13px;margin:8px 0 0;color:#5d6a6e;line-height:1.5}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
@@ -1349,7 +1361,21 @@ let formError = "";
 let invalidField = "";
 let orderResult = null;
 let payMethod = "cash_on_delivery";
-const INSTAPAY_HANDLE = "";   // set to your InstaPay handle or number to show it at checkout
+const INSTAPAY_HANDLE = "omarhosam4689@instapay";
+const INSTAPAY_LINK = "https://ipn.eg/S/omarhosam4689/instapay/7OPg2y";
+let paidWith = "cash_on_delivery";
+function instapayBox(amount, orderNo){
+  return `<div class="ip-box">
+    <p class="ip-title">Pay with InstaPay</p>
+    <img class="ip-qr" src="/instapay-qr.png" alt="InstaPay QR code" width="200" height="200" loading="lazy">
+    <p class="ip-hint">Scan the QR code with your InstaPay app, or send to:</p>
+    <div class="ip-handle"><strong id="ipHandle">${esc(INSTAPAY_HANDLE)}</strong><button type="button" class="ip-copy" data-copy="${esc(INSTAPAY_HANDLE)}">Copy</button></div>
+    ${amount ? `<p class="ip-amount">Amount: <strong>${money(amount)}</strong></p>` : ""}
+    <a class="ip-open" href="${INSTAPAY_LINK}" target="_blank" rel="noopener">Open InstaPay</a>
+    ${orderNo ? `<p class="ip-order">Order number: <strong>${esc(orderNo)}</strong></p>` : ""}
+    <p class="ip-note">${orderNo ? "Write the order number in the InstaPay reference." : "After you place the order, write your order number in the InstaPay reference."} We confirm your order once the payment arrives.</p>
+  </div>`;
+}
 
 const STEP_LABELS = [["cart","Cart"],["details","Delivery"],["review","Review"]];
 
@@ -1509,7 +1535,7 @@ function renderReviewStep(){
     <div class="review-box"><h3>Pay with</h3>
       <label class="pay-opt"><input type="radio" name="pay" value="cash_on_delivery" ${payMethod === "cash_on_delivery" ? "checked" : ""}> Cash on delivery</label>
       <label class="pay-opt"><input type="radio" name="pay" value="instapay" ${payMethod === "instapay" ? "checked" : ""}> InstaPay</label>
-      ${payMethod === "instapay" ? `<p class="pay-note">${INSTAPAY_HANDLE ? `Pay to InstaPay: <strong>${esc(INSTAPAY_HANDLE)}</strong>. Put your order number in the reference.` : "We'll send you our InstaPay details to confirm your order."}</p>` : ""}
+      ${payMethod === "instapay" ? instapayBox(t.coffee + (fee || 0), "") : ""}
       <label class="pay-opt disabled"><input type="radio" disabled> Card <span class="soon">Coming soon</span></label>
     </div>
     ${formError ? `<div class="err">${esc(formError)}</div>` : ""}`;
@@ -1544,6 +1570,7 @@ async function placeOrder(){
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.message || "We couldn't place your order. Please try again.");
     orderResult = data;
+    paidWith = payMethod;
     saveDetails();
     saveLastOrder(cart.map(i => ({ id: i.id, qty: i.qty })));
     cart = []; saveCart(); updateCartBadge();
@@ -1554,6 +1581,16 @@ async function placeOrder(){
   placing = false;
   renderDrawer();
 }
+
+
+document.addEventListener("click", function(e){
+  const b = e.target.closest && e.target.closest(".ip-copy");
+  if (!b) return;
+  const text = b.getAttribute("data-copy") || "";
+  const done = () => { b.textContent = (window.KAIF_LANG === "ar") ? "تم النسخ ✓" : "Copied ✓"; setTimeout(() => { b.textContent = (window.KAIF_LANG === "ar") ? "نسخ" : "Copy"; }, 1800); };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, done);
+  else { const t = document.createElement("textarea"); t.value = text; document.body.appendChild(t); t.select(); try { document.execCommand("copy"); } catch (x) {} t.remove(); done(); }
+});
 
 /* Step 4: confirmation */
 function renderDoneStep(){
@@ -1569,6 +1606,7 @@ function renderDoneStep(){
       <p>Your order has been received.</p>
       <div class="order-no">${esc(r.order_number || "")}</div>
       <p>Total: <strong>${money(r.total || 0)}</strong><br>(coffee ${money(r.subtotal || 0)} + delivery ${money(r.shipping_fee || 0)})</p>
+      ${paidWith === "instapay" ? instapayBox(r.total || 0, r.order_number || "") : ""}
       <p style="margin-top:14px">We'll call or WhatsApp you on <strong>${esc(details.phone)}</strong> to confirm your delivery.</p>
       ${wa}
     </div>`;

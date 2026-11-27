@@ -232,6 +232,13 @@
     "We couldn't place your order. Please try again.": "تعذّر إرسال طلبك. حاول مرة أخرى.",
     "Dismiss": "إغلاق", "01x xxxx xxxx": "01x xxxx xxxx",
 
+    "Pay with InstaPay": "ادفع عبر إنستاباي",
+    "Scan the QR code with your InstaPay app, or send to:": "امسح رمز QR بتطبيق إنستاباي، أو أرسل إلى:",
+    "Copy": "نسخ", "Copied ✓": "تم النسخ ✓", "Open InstaPay": "افتح إنستاباي",
+    "Write the order number in the InstaPay reference. We confirm your order once the payment arrives.": "اكتب رقم الطلب في خانة مرجع إنستاباي. نؤكد طلبك فور وصول الدفعة.",
+    "After you place the order, write your order number in the InstaPay reference. We confirm your order once the payment arrives.": "بعد إرسال الطلب، اكتب رقم طلبك في خانة مرجع إنستاباي. نؤكد طلبك فور وصول الدفعة.",
+    "Order number:": "رقم الطلب:", "Amount:": "المبلغ:",
+
     /* FAQ */
     "FAQ": "الأسئلة الشائعة", "Coffee questions, answered by the nerds who roast them.": "أسئلة عن القهوة، يجيب عنها من يحمّصونها.",
     "Delivery & payment": "التوصيل والدفع",
@@ -301,6 +308,8 @@
     m = n.match(/^Pay to InstaPay:$/);
     if (m) return "حوّل إلى إنستاباي:";
     if (n === "Put your order number in the reference.") return "اكتب رقم طلبك في خانة المرجع.";
+    m = n.match(/^Amount: EGP ([\d,.]+)$/);
+    if (m) return "المبلغ: " + m[1] + " ج.م";
     m = n.match(/^(\d)\. (.+)$/);
     if (m) { var st = translate(m[2]); if (st) return m[1] + ". " + st; }
     m = n.match(/^View details for (.+)$/);
