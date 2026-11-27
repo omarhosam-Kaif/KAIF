@@ -19,6 +19,55 @@ TODAY = date.today().isoformat()
 
 GUIDES = [
     {
+        "slug": "aeropress",
+        "ar_title": "إزاي تعمل قهوة إيروبريس؟",
+        "en_title": "How to brew AeroPress coffee",
+        "answer": "Use 15 grams of medium-fine coffee and about 200 ml of water just off the boil. Put a rinsed paper filter in the cap, add the coffee, pour the water and stir gently. Fit the plunger and wait about one minute. Press down slowly over 30 seconds and stop when you hear a hiss. The result is a clean, strong cup that you can drink as it is or dilute with hot water. If it tastes bitter, grind a little coarser or press more gently.",
+        "links": [("ethiopia-guji", "Ethiopia Guji"), ("colombia-huila", "Colombia Huila"), ("brazil-parana", "Brazil Paraná")],
+    },
+    {
+        "slug": "coffee-to-water-ratio",
+        "ar_title": "نسبة القهوة للمية: كام جرام لكل كوباية؟",
+        "en_title": "Coffee to water ratio: how much coffee per cup",
+        "answer": "For filter coffee, use about 1 gram of coffee for every 15 to 17 grams of water. For one 250 ml cup that is roughly 15 to 16 grams of coffee. For espresso, a common starting point is 18 grams of coffee for a 36 gram drink, which is a 1 to 2 ratio. For Turkish coffee, use about 7 grams for a small cup. Weigh your coffee with a scale instead of using spoons, because spoons vary a lot. If the cup is too weak, add more coffee. If it is too strong, add more water.",
+        "links": [("ethiopia-guji", "Ethiopia Guji"), ("ember-blend", "Ember Blend"), ("turkish-coffee-plain-light", "Turkish Plain Light")],
+    },
+    {
+        "slug": "sour-or-bitter-coffee",
+        "ar_title": "قهوتي حامضة أو مرة: أعمل إيه؟",
+        "en_title": "Why your coffee tastes sour or bitter, and how to fix it",
+        "answer": "Sour coffee is usually under-extracted: the water did not pull enough out of the grounds. Grind finer, use hotter water, or brew a little longer. Bitter coffee is usually over-extracted: too much was pulled out. Grind coarser, use slightly cooler water, or shorten the brew. Change only one thing at a time so you know what worked. Also check that your beans are fresh, because stale coffee tastes flat and harsh whatever you do.",
+        "links": [("ethiopia-guji", "Ethiopia Guji"), ("colombia-huila", "Colombia Huila"), ("aura-blend", "Aura Blend")],
+    },
+    {
+        "slug": "espresso-at-home",
+        "ar_title": "إزاي تظبط الإسبريسو في البيت؟",
+        "en_title": "How to dial in espresso at home",
+        "answer": "Start with 18 grams of finely ground coffee and aim for about 36 grams of espresso in 25 to 30 seconds. Level and tamp the coffee evenly before you lock in the portafilter. If the shot runs faster than that and tastes sour or thin, grind finer. If it runs slower and tastes bitter or burnt, grind coarser. Change only the grind between shots, and taste each one. A fresh blend made for espresso is the easiest place to begin.",
+        "links": [("ember-blend", "Ember Blend"), ("aura-blend", "Aura Blend"), ("dolce-blend", "Dolce Blend")],
+    },
+    {
+        "slug": "coffee-roast-levels",
+        "ar_title": "درجات تحميص البن: فاتح ومتوسط وغامق",
+        "en_title": "Coffee roast levels: light, medium and dark",
+        "answer": "Light roasts keep more of the origin: they taste brighter and fruitier, with more acidity. Medium roasts are balanced, with sweetness and notes like chocolate and caramel. Dark roasts taste bolder and smokier, with less acidity and a heavier body. None is better than the others. Light and medium roasts suit filter brewing. Medium and darker roasts are popular for espresso and milk drinks. Pick the roast by the flavour you enjoy.",
+        "links": [("ethiopia-guji", "Ethiopia Guji"), ("colombia-huila", "Colombia Huila"), ("ember-blend", "Ember Blend")],
+    },
+    {
+        "slug": "decaf-coffee",
+        "ar_title": "القهوة منزوعة الكافيين: كل اللي محتاج تعرفه",
+        "en_title": "What is decaf coffee, and does it taste different?",
+        "answer": "Decaf coffee is made from regular coffee beans that have had most of their caffeine removed before roasting. It is not caffeine-free, but the amount left is small. Good decaf can taste close to regular coffee, and it brews the same way. Decaf is a good choice for the evening or for people who want to cut down on caffeine. Check the bag for how the caffeine was removed and when it was roasted.",
+        "links": [("decaf-coffee", "KAIF Decaf")],
+    },
+    {
+        "slug": "coffee-for-milk-drinks",
+        "ar_title": "أنهي بن أحسن للقهوة بالحليب؟",
+        "en_title": "Which coffee is best for milk drinks?",
+        "answer": "Milk softens acidity and covers delicate flavours, so choose coffee with enough body and sweetness to stay noticeable. A medium to medium-dark espresso blend with chocolate and caramel notes works well in lattes, cappuccinos and flat whites. Flavoured coffees such as caramel, vanilla and hazelnut are also popular with milk. Make the coffee a little stronger than you would drink it black, and use fresh milk.",
+        "links": [("ember-blend", "Ember Blend"), ("dolce-blend", "Dolce Blend"), ("caramel", "Caramel"), ("vanilla", "Vanilla"), ("hazelnut", "Hazelnut")],
+    },
+    {
         "slug": "moka-pot",
         "ar_title": "إزاي تعمل قهوة بالموكا بوت؟",
         "en_title": "How to brew coffee in a moka pot",
