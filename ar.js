@@ -281,6 +281,11 @@
   function num(s) { return s; }
 
   function translate(text) {
+    var r = translate0(text);
+    return r == null ? r : r.replace(/Tal2eema/g, "تلقيمة");
+  }
+
+  function translate0(text) {
     var n = NORM(text);
     if (!n || AR_RE.test(n) && !/ · /.test(n)) return null;
     if (Object.prototype.hasOwnProperty.call(D, n)) return D[n];
