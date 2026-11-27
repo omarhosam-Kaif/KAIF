@@ -396,9 +396,13 @@
   }
 
   function start() {
-    document.title = "KAIF | قهوة مختصة محمّصة على دفعات صغيرة في مصر";
-    var md = document.querySelector('meta[name="description"]');
-    if (md) md.setAttribute("content", "قهوة مختصة محمّصة على دفعات صغيرة في مصر. حبوب أحادية المصدر وتوليفات وقهوة تركي وأكياس 20 جم للتجربة. توصيل لجميع أنحاء مصر.");
+    var at = document.body.getAttribute("data-ar-title");
+    if (at) { document.title = at + " | KAIF"; }
+    else if (/^\/(index\.html)?$/.test(location.pathname)) {
+      document.title = "KAIF | قهوة مختصة محمّصة على دفعات صغيرة في مصر";
+      var md = document.querySelector('meta[name="description"]');
+      if (md) md.setAttribute("content", "قهوة مختصة محمّصة على دفعات صغيرة في مصر. حبوب أحادية المصدر وتوليفات وقهوة تركي وأكياس 20 جم للتجربة. توصيل لجميع أنحاء مصر.");
+    }
     busy = true; walk(document.body); busy = false;
     var pending = [], timer = null;
     new MutationObserver(function (muts) {

@@ -12,6 +12,11 @@
 <meta property="og:url" content="https://kaifcoffee.net/guides/sour-or-bitter-coffee">
 <meta property="og:site_name" content="KAIF">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<script>
+(function(){var l="en";try{var q=location.search.match(/[?&]lang=(ar|en)/);if(q){l=q[1];localStorage.setItem("kaif-lang",l);}else{l=localStorage.getItem("kaif-lang")||"en";}}catch(e){}
+window.KAIF_LANG=l;
+if(l==="ar"){document.documentElement.lang="ar";document.documentElement.dir="rtl";document.write('<script src="/ar.js?v=2"><\/script>');}})();
+</script>
 <style>
 :root{
   --ink:#1f2a2e; --ink-soft:#5b6a6f; --teal:#6BADBE; --teal-dark:#4A8A9E;
@@ -656,6 +661,46 @@ h1,h2,h3,.brand span,.td-title,.price,.td-price{font-family:var(--display)}
 @keyframes sayIn{from{opacity:0;transform:translateY(-6px) scale(.9)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.cat .cup-fall{animation-duration:.01s}.cat.spilled{animation:none}}
 
+/* ---- language button ---- */
+.lang-btn{background:none;border:1px solid var(--line);border-radius:999px;padding:6px 14px;font:inherit;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;line-height:1.2}
+.lang-btn:hover{border-color:var(--teal);color:var(--teal-dark)}
+/* ---- Arabic (right-to-left) ---- */
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] input,html[lang="ar"] select,html[lang="ar"] textarea{font-family:var(--arabic)}
+html[lang="ar"] h1,html[lang="ar"] h2,html[lang="ar"] h3,html[lang="ar"] h4,html[lang="ar"] .brand span,html[lang="ar"] .td-title,html[lang="ar"] .price,html[lang="ar"] .td-price,html[lang="ar"] .quiz-cta b,html[lang="ar"] .quiz-result h4,html[lang="ar"] .again b,html[lang="ar"] .about-text p.about-lead,html[lang="ar"] .about-facts b{font-family:var(--arabic)}
+html[lang="ar"] .brand span{font-family:var(--display)}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] .cat,html[dir="rtl"] .brand .cat,html[dir="rtl"] #map,html[dir="rtl"] .journey-body{direction:ltr}
+html[dir="rtl"] .journey-steps li{direction:rtl}
+html[dir="rtl"] .drawer{right:auto;left:0;transform:translateX(-100%);box-shadow:10px 0 30px rgba(0,0,0,.18)}
+html[dir="rtl"] .drawer.open{transform:none}
+html[dir="rtl"] .drawer:not(.open){box-shadow:none}
+html[dir="rtl"] .pclose,html[dir="rtl"] .tools-close{right:auto;left:14px}
+html[dir="rtl"] .quiz-close{right:auto;left:12px}
+html[dir="rtl"] .s-val{text-align:left}
+html[dir="rtl"] .pay-opt .soon{margin-left:0;margin-right:4px}
+html[dir="rtl"] .wa-float{right:auto;left:18px}
+html[dir="rtl"] .shop-pop{left:auto;right:-10px}
+html[dir="rtl"] .shop-pop a,html[dir="rtl"] .shop-pop button{text-align:right}
+html[dir="rtl"] .td-colours span{margin-right:0;margin-left:4px}
+html[dir="rtl"] .td-prev{left:auto;right:8px}
+html[dir="rtl"] .td-next{right:auto;left:8px}
+html[dir="rtl"] .trust-grid li + li{border-left:0;border-right:1px solid var(--line)}
+html[dir="rtl"] .checks li::before{margin-right:0;margin-left:12px}
+html[dir="rtl"] .quiz-opts button{text-align:right}
+html[dir="rtl"] .quiz-opts button:hover{transform:translateX(-4px)}
+html[dir="rtl"] .quiz-try{text-align:right}
+html[dir="rtl"] .again-thumbs img{margin-left:0;margin-right:-14px}
+html[dir="rtl"] .again-thumbs img:first-child{margin-right:0}
+html[dir="rtl"] .card-img::after{left:50%}
+@media (max-width:880px){
+  html[dir="rtl"] .nav-links{left:0;right:0}
+  html[dir="rtl"] .wa-float{right:auto;left:12px}
+}
+
+.ar-only{display:none}
+html[lang="ar"] .ar-only{display:revert}
+html[lang="ar"] .en-only{display:none}
+html[dir="rtl"] .guide .shop-links a{margin:6px 0 0 8px}
 .guide{max-width:760px;margin:0 auto;padding:48px 20px}
 .guide h1{font-size:34px;margin:0 0 6px}
 .guide .en{color:#5d6a6e;font-size:18px;margin:0 0 24px}
@@ -664,12 +709,13 @@ h1,h2,h3,.brand span,.td-title,.price,.td-price{font-family:var(--display)}
 .guide .shop-links a{display:inline-block;margin:6px 8px 0 0;padding:8px 14px;border:1px solid #cfc7b6;border-radius:999px;color:#1f2a2e;text-decoration:none}
 </style>
 </head>
-<body>
+<body data-ar-title="قهوتي حامضة أو مرة: أعمل إيه؟">
 <header>
   <div class="container nav">
     <a href="/" class="brand" aria-label="KAIF home"><span class="cat " aria-hidden="true"><img src="/cat-hero.png" alt="" width="44" height="44"><i class="lid lid-l"></i><i class="lid lid-r"></i><i class="steam"></i><i class="steam s2"></i></span><span>KAIF</span></a>
     <ul class="nav-links" id="navLinks"><li><a href="/#shop">Shop</a></li><li><a href="/guides/">Guides</a></li><li><a href="/#about">About</a></li><li><a href="/#contact">Contact</a></li></ul>
     <div class="nav-actions">
+      <button class="lang-btn" id="langBtn" type="button" aria-label="Language"><span id="langBtnText">عربي</span></button>
       <a class="cart-btn" href="/#shop" aria-label="Open cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.5L21 8H6"/></svg></a>
       <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
@@ -679,10 +725,58 @@ h1,h2,h3,.brand span,.td-title,.price,.td-price{font-family:var(--display)}
 <main>
 <article class="guide">
   <h1 lang="ar" dir="rtl">قهوتي حامضة أو مرة: أعمل إيه؟</h1>
-  <p class="en">Why your coffee tastes sour or bitter, and how to fix it</p>
-  <p class="answer">Sour coffee is usually under-extracted: the water did not pull enough out of the grounds. Grind finer, use hotter water, or brew a little longer. Bitter coffee is usually over-extracted: too much was pulled out. Grind coarser, use slightly cooler water, or shorten the brew. Change only one thing at a time so you know what worked. Also check that your beans are fresh, because stale coffee tastes flat and harsh whatever you do.</p>
-  <div class="shop-links"><a href="/ethiopia-guji">Ethiopia Guji</a><a href="/colombia-huila">Colombia Huila</a><a href="/aura-blend">Aura Blend</a></div>
+  <p class="en en-only">Why your coffee tastes sour or bitter, and how to fix it</p>
+  <p class="answer en-only">Sour coffee is usually under-extracted: the water did not pull enough out of the grounds. Grind finer, use hotter water, or brew a little longer. Bitter coffee is usually over-extracted: too much was pulled out. Grind coarser, use slightly cooler water, or shorten the brew. Change only one thing at a time so you know what worked. Also check that your beans are fresh, because stale coffee tastes flat and harsh whatever you do.</p>
+  <p class="answer ar-only">القهوة الحامضة غالبًا لم يُستخلص منها ما يكفي: الماء لم يسحب من البن كفايته. اطحن أنعم، أو استخدم ماءً أسخن، أو أطل وقت التحضير قليلًا. أما القهوة المرّة فغالبًا استُخلص منها أكثر من اللازم. اطحن أخشن، أو استخدم ماءً أبرد قليلًا، أو قصّر وقت التحضير. غيّر شيئًا واحدًا فقط في كل مرة لتعرف ما الذي نفع. وتأكد أيضًا أن الحبوب طازجة، فالقهوة القديمة طعمها باهت وقاسٍ مهما فعلت.</p>
+  <div class="shop-links"><a href="/ethiopia-guji"><span class="en-only">Ethiopia Guji</span><span class="ar-only">إثيوبيا جوجي</span></a><a href="/colombia-huila"><span class="en-only">Colombia Huila</span><span class="ar-only">كولومبيا ويلا</span></a><a href="/aura-blend"><span class="en-only">Aura Blend</span><span class="ar-only">أورا بلند</span></a></div>
 </article>
 </main>
+<footer id="contact">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <h4>KAIF</h4>
+        <p>Specialty coffee beans, roasted in small batches for the Egyptian market.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul><li><a href="/#shop">All coffee</a></li></ul>
+      </div>
+      <div>
+        <h4>Delivery &amp; payment</h4>
+        <ul class="foot-list">
+          <li>Delivery across Egypt</li>
+          <li>Cash on delivery</li>
+          <li>InstaPay</li>
+          <li>Every order confirmed by phone or WhatsApp</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Help &amp; contact</h4>
+        <ul>
+          <li><a href="/#about">About KAIF</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/guides/">Brewing guides</a></li>
+          <li><a href="https://wa.me/201043083831" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://www.instagram.com/kaif.coffee_eg" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">&copy; 2026 KAIF &ndash; Specialty Coffee. All rights reserved.</div>
+  </div>
+</footer>
+<script>
+(function(){
+  var btn=document.getElementById("langBtn"),txt=document.getElementById("langBtnText");
+  if(!btn)return;
+  var ar=window.KAIF_LANG==="ar";
+  txt.textContent=ar?"EN":"عربي";
+  btn.setAttribute("aria-label",ar?"Switch to English":"التبديل إلى العربية");
+  btn.addEventListener("click",function(){
+    try{localStorage.setItem("kaif-lang",ar?"en":"ar");}catch(e){}
+    location.reload();
+  });
+})();
+</script>
 </body>
 </html>

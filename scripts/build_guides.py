@@ -137,12 +137,97 @@ def esc(s):
     return html.escape(str(s), quote=True)
 
 
+AR_ANSWERS = {
+    "aeropress": "استخدم 15 جرامًا من القهوة المطحونة طحنًا متوسطًا إلى ناعم، ونحو 200 مل من الماء بعد الغليان بقليل. ضع فلترًا ورقيًا مشطوفًا في الغطاء، وأضف القهوة، واسكب الماء وقلّب بلطف. ركّب المكبس وانتظر دقيقة تقريبًا. اضغط ببطء على مدى 30 ثانية، وتوقف عندما تسمع صوت فحيح. النتيجة فنجان نظيف وقوي، تشربه كما هو أو تخففه بماء ساخن. إذا كان طعمه مرًّا فاطحن أخشن قليلًا أو اضغط بلطف أكثر.",
+    "coffee-to-water-ratio": "للقهوة المفلترة استخدم نحو جرام واحد من القهوة لكل 15 إلى 17 جرامًا من الماء. وللفنجان الواحد سعة 250 مل يعني هذا حوالي 15 إلى 16 جرامًا من القهوة. وفي الإسبريسو نقطة البداية الشائعة 18 جرامًا من القهوة لمشروب وزنه 36 جرامًا، أي نسبة 1 إلى 2. وللقهوة التركي استخدم حوالي 7 جرامات للفنجان الصغير. زن القهوة بميزان بدل الملاعق، لأن حجم الملعقة يختلف كثيرًا. إذا كان الفنجان ضعيفًا فزد القهوة، وإذا كان قويًا فزد الماء.",
+    "sour-or-bitter-coffee": "القهوة الحامضة غالبًا لم يُستخلص منها ما يكفي: الماء لم يسحب من البن كفايته. اطحن أنعم، أو استخدم ماءً أسخن، أو أطل وقت التحضير قليلًا. أما القهوة المرّة فغالبًا استُخلص منها أكثر من اللازم. اطحن أخشن، أو استخدم ماءً أبرد قليلًا، أو قصّر وقت التحضير. غيّر شيئًا واحدًا فقط في كل مرة لتعرف ما الذي نفع. وتأكد أيضًا أن الحبوب طازجة، فالقهوة القديمة طعمها باهت وقاسٍ مهما فعلت.",
+    "espresso-at-home": "ابدأ بـ 18 جرامًا من القهوة المطحونة ناعمًا، واستهدف نحو 36 جرامًا من الإسبريسو خلال 25 إلى 30 ثانية. سوِّ القهوة وكبسها بالتساوي قبل تثبيت حامل الفلتر. إذا نزل الشوت أسرع من ذلك وكان طعمه حامضًا أو خفيفًا فاطحن أنعم. وإذا نزل أبطأ وكان طعمه مرًّا أو محروقًا فاطحن أخشن. غيّر درجة الطحن فقط بين الشوتات، وتذوّق كل واحد. وأسهل بداية توليفة طازجة مخصصة للإسبريسو.",
+    "coffee-roast-levels": "التحميص الفاتح يحتفظ بمزيد من طابع بلد المنشأ: طعمه أكثر إشراقًا وفواكهية، وحموضته أعلى. التحميص المتوسط متوازن، فيه حلاوة ونكهات مثل الشوكولاتة والكراميل. التحميص الغامق أقوى وأدخن، وحموضته أقل وقوامه أثقل. لا توجد درجة أفضل من غيرها. التحميص الفاتح والمتوسط يناسبان القهوة المفلترة، والمتوسط والأغمق شائعان في الإسبريسو ومشروبات الحليب. اختر التحميص حسب النكهة التي تحبها.",
+    "decaf-coffee": "القهوة منزوعة الكافيين تُصنع من حبوب قهوة عادية أُزيل معظم كافيينها قبل التحميص. ليست خالية من الكافيين تمامًا، لكن الكمية المتبقية قليلة. والديكاف الجيد يقترب طعمه من القهوة العادية، ويُحضَّر بنفس الطريقة. وهو اختيار جيد للمساء أو لمن يريد تقليل الكافيين. اقرأ على الكيس طريقة إزالة الكافيين وتاريخ التحميص.",
+    "coffee-for-milk-drinks": "الحليب يخفف الحموضة ويغطي النكهات الدقيقة، لذلك اختر قهوة بقوام ممتلئ وحلاوة تظل ظاهرة. توليفة إسبريسو متوسطة إلى متوسطة الغامقة بنكهات الشوكولاتة والكراميل تناسب اللاتيه والكابتشينو والفلات وايت. والقهوة المنكّهة مثل الكراميل والفانيليا والبندق شائعة مع الحليب أيضًا. اجعل القهوة أقوى قليلًا مما تشربها سادة، واستخدم حليبًا طازجًا.",
+    "moka-pot": "املأ الحوض السفلي بماء ساخن حتى أسفل الصمام بقليل. املأ السلة بقهوة مطحونة طحنًا متوسطًا إلى ناعم، أخشن قليلًا من الإسبريسو، وسوِّها دون كبس، وأغلق الجزء العلوي بإحكام. سخّن على نار هادئة إلى متوسطة. عندما تبدأ القهوة بالنزول، انتظر حتى يصير لونها باهتًا وتبدأ بالطرطشة، ثم ارفع الإبريق عن النار وضع قاعدته تحت ماء بارد لإيقاف التحضير. قلّب وصبّ. إذا كان الطعم مرًّا أو محروقًا فخفف النار أو اطحن أخشن قليلًا.",
+    "cold-brew": "اخلط 100 جرام من القهوة المطحونة خشنًا مع لتر من الماء البارد في برطمان. قلّب ليتبلل كل البن، وغطِّه واتركه في الثلاجة من 12 إلى 16 ساعة. صفِّه عبر فلتر ورقي أو قماش ناعم. هذا يعطي مركّزًا قويًا، فقدّمه على الثلج وخففه بالماء أو الحليب حسب ذوقك. احفظه في الثلاجة واشربه خلال خمسة أيام تقريبًا.",
+    "v60-pour-over": "ابدأ بـ 15 جرامًا من القهوة و250 مل من الماء. اطحن طحنًا متوسطًا إلى ناعم، أنعم قليلًا من ملح الطعام، واستخدم ماءً بعد الغليان بقليل. اشطف الفلتر الورقي، وأضف القهوة، واسكب 50 مل لترطيب البن. انتظر 30 ثانية ثم اسكب الباقي في دوائر بطيئة. استهدف الانتهاء في حوالي دقيقتين ونصف إلى ثلاث دقائق. إذا نزل الماء بسرعة كبيرة وكان الطعم حامضًا فاطحن أنعم. وإذا نزل ببطء وكان الطعم مرًّا فاطحن أخشن.",
+    "turkish-coffee-at-home": "استخدم نحو 7 جرامات من القهوة التركي المطحونة ناعمًا و70 مل من الماء البارد لكل فنجان صغير. ضعهما في الكنكة، وأضف السكر الآن إن أردت، وقلّب مرة واحدة. سخّن على نار هادئة ولا تقلّب مرة أخرى. عندما تصل الرغوة إلى حافة الكنكة، ارفعها عن النار قبل أن تفور وتفيض. صبّ ببطء لتسقط الرغوة في الفنجان، واتركه دقيقة ليترسب البن. ارتشف واترك الرواسب في القاع. كيس 20 جم يكفي لنحو 2 إلى 3 فناجين، فهو طريقة سهلة للتجربة.",
+    "filter-coffee-at-home": "ابدأ بـ 300 مل من الماء لكل 20 جرامًا من القهوة. اطحن طحنًا متوسطًا، واستخدم ماءً بعد الغليان بقليل. اسكب في دوائر بطيئة، وأنهِ التحضير في حوالي ثلاث إلى أربع دقائق. عدّل الطحن إذا كان الفنجان حامضًا أو مرًّا.",
+    "french-press": "ابدأ بـ 300 مل من الماء لكل 20 جرامًا من القهوة. اطحن خشنًا، مثل ملح البحر، واستخدم ماءً بعد الغليان بقليل. اسكب الماء على البن، وقلّب بلطف، وضع الغطاء والمكبس مرفوع. انتظر أربع دقائق، ثم اضغط ببطء واسكب الفنجان كله دفعة واحدة حتى يتوقف التحضير. إذا كان الطعم مرًّا فاطحن أخشن قليلًا أو قلّل وقت الانتظار. وإذا كان حامضًا فانتظر أطول قليلًا أو اطحن أنعم قليلًا.",
+    "grind-size": "الإسبريسو يحتاج طحنًا ناعمًا، مثل الرمل. والفلتر يحتاج طحنًا متوسطًا، مثل ملح الطعام. والفرنش برس يحتاج طحنًا خشنًا، مثل ملح البحر. إذا كان طعم قهوتك حامضًا فاطحن أنعم. وإذا كان مرًّا أو قاسيًا فاطحن أخشن.",
+    "espresso-or-filter": "الإسبريسو شوت صغير وقوي يُحضَّر تحت الضغط، لذلك قوامه ثقيل ونكهته مركّزة. أما الفلتر فهو فنجان أكبر وأخف يُظهر نكهات الفواكه والأزهار في القهوة أكثر. اختر الإسبريسو إذا كنت تشرب مشروبات الحليب أو تريد شوتًا قويًا. واختر الفلتر إذا أردت أن تتذوق بلد المنشأ.",
+    "store-coffee-beans": "احفظ الحبوب في كيسها المحكم، أو انقلها إلى برطمان محكم الإغلاق. خزّنها في مكان بارد ومظلم بعيدًا عن الحرارة وضوء الشمس. لا تضعها في الثلاجة، لأن الرطوبة تدخل كلما فتحتها. استخدم الحبوب خلال أسابيع قليلة من فتح الكيس للحصول على أفضل نكهة.",
+}
+
+AR_LABELS = {
+    "ethiopia-guji": "إثيوبيا جوجي", "ethiopia-dijammah": "إثيوبيا دجاما", "colombia-huila": "كولومبيا ويلا",
+    "brazil-parana": "البرازيل بارانا", "aura-blend": "أورا بلند", "dolce-blend": "دولتشي بلند",
+    "ember-blend": "إمبر بلند", "caramel": "كراميل", "vanilla": "فانيليا", "hazelnut": "بندق",
+    "decaf-coffee": "قهوة منزوعة الكافيين",
+    "turkish-coffee-plain-light": "تركي سادة فاتح", "turkish-coffee-plain-medium": "تركي سادة وسط",
+    "turkish-coffee-spiced-light": "تركي محوّج فاتح", "turkish-coffee-spiced-medium": "تركي محوّج وسط",
+    "turkish-coffee-plain-light-20g": "تركي سادة فاتح (20 جم)",
+}
+
+FOOTER = """<footer id="contact">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <h4>KAIF</h4>
+        <p>Specialty coffee beans, roasted in small batches for the Egyptian market.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul><li><a href="/#shop">All coffee</a></li></ul>
+      </div>
+      <div>
+        <h4>Delivery &amp; payment</h4>
+        <ul class="foot-list">
+          <li>Delivery across Egypt</li>
+          <li>Cash on delivery</li>
+          <li>InstaPay</li>
+          <li>Every order confirmed by phone or WhatsApp</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Help &amp; contact</h4>
+        <ul>
+          <li><a href="/#about">About KAIF</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/guides/">Brewing guides</a></li>
+          <li><a href="https://wa.me/201043083831" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://www.instagram.com/kaif.coffee_eg" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">&copy; 2026 KAIF &ndash; Specialty Coffee. All rights reserved.</div>
+  </div>
+</footer>"""
+
+LANG_HEAD = """<script>
+(function(){var l="en";try{var q=location.search.match(/[?&]lang=(ar|en)/);if(q){l=q[1];localStorage.setItem("kaif-lang",l);}else{l=localStorage.getItem("kaif-lang")||"en";}}catch(e){}
+window.KAIF_LANG=l;
+if(l==="ar"){document.documentElement.lang="ar";document.documentElement.dir="rtl";document.write('<script src="/ar.js?v=2"><\\/script>');}})();
+</script>"""
+
+LANG_JS = """<script>
+(function(){
+  var btn=document.getElementById("langBtn"),txt=document.getElementById("langBtnText");
+  if(!btn)return;
+  var ar=window.KAIF_LANG==="ar";
+  txt.textContent=ar?"EN":"عربي";
+  btn.setAttribute("aria-label",ar?"Switch to English":"التبديل إلى العربية");
+  btn.addEventListener("click",function(){
+    try{localStorage.setItem("kaif-lang",ar?"en":"ar");}catch(e){}
+    location.reload();
+  });
+})();
+</script>"""
+
+
 def shared_styles():
     index = (ROOT / "index.html").read_text(encoding="utf-8")
     return re.search(r"<style>(.*?)</style>", index, re.S).group(1)
 
 
-def page(title, description, canonical, body, styles):
+def page(title, description, canonical, body, styles, ar_title=""):
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -157,7 +242,12 @@ def page(title, description, canonical, body, styles):
 <meta property="og:url" content="{canonical}">
 <meta property="og:site_name" content="KAIF">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+{LANG_HEAD}
 <style>{styles}
+.ar-only{{display:none}}
+html[lang="ar"] .ar-only{{display:revert}}
+html[lang="ar"] .en-only{{display:none}}
+html[dir="rtl"] .guide .shop-links a{{margin:6px 0 0 8px}}
 .guide{{max-width:760px;margin:0 auto;padding:48px 20px}}
 .guide h1{{font-size:34px;margin:0 0 6px}}
 .guide .en{{color:#5d6a6e;font-size:18px;margin:0 0 24px}}
@@ -166,12 +256,13 @@ def page(title, description, canonical, body, styles):
 .guide .shop-links a{{display:inline-block;margin:6px 8px 0 0;padding:8px 14px;border:1px solid #cfc7b6;border-radius:999px;color:#1f2a2e;text-decoration:none}}
 </style>
 </head>
-<body>
+<body data-ar-title="{esc(ar_title)}">
 <header>
   <div class="container nav">
     <a href="/" class="brand" aria-label="KAIF home"><span class="cat " aria-hidden="true"><img src="/cat-hero.png" alt="" width="44" height="44"><i class="lid lid-l"></i><i class="lid lid-r"></i><i class="steam"></i><i class="steam s2"></i></span><span>KAIF</span></a>
     <ul class="nav-links" id="navLinks"><li><a href="/#shop">Shop</a></li><li><a href="/guides/">Guides</a></li><li><a href="/#about">About</a></li><li><a href="/#contact">Contact</a></li></ul>
     <div class="nav-actions">
+      <button class="lang-btn" id="langBtn" type="button" aria-label="Language"><span id="langBtnText">عربي</span></button>
       <a class="cart-btn" href="/#shop" aria-label="Open cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.5L21 8H6"/></svg></a>
       <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
@@ -181,23 +272,28 @@ def page(title, description, canonical, body, styles):
 <main>
 {body}
 </main>
+{FOOTER}
+{LANG_JS}
 </body>
 </html>
 """
 
 
 def guide_body(g):
-    links = ""
+    ar = AR_ANSWERS.get(g["slug"])
     if g["links"]:
         links = '<div class="shop-links">' + "".join(
-            f'<a href="/{esc(slug)}">{esc(label)}</a>' for slug, label in g["links"]
+            f'<a href="/{esc(slug)}"><span class="en-only">{esc(label)}</span><span class="ar-only">{esc(AR_LABELS.get(slug, label))}</span></a>'
+            for slug, label in g["links"]
         ) + "</div>"
     else:
-        links = '<div class="shop-links"><a href="/#shop">Shop KAIF coffee</a></div>'
+        links = '<div class="shop-links"><a href="/#shop"><span class="en-only">Shop KAIF coffee</span><span class="ar-only">تسوّق قهوة KAIF</span></a></div>'
+    ar_p = f'\n  <p class="answer ar-only">{esc(ar)}</p>' if ar else ""
+    en_cls = "answer en-only" if ar else "answer"
     return f"""<article class="guide">
   <h1 lang="ar" dir="rtl">{esc(g["ar_title"])}</h1>
-  <p class="en">{esc(g["en_title"])}</p>
-  <p class="answer">{esc(g["answer"])}</p>
+  <p class="en en-only">{esc(g["en_title"])}</p>
+  <p class="{en_cls}">{esc(g["answer"])}</p>{ar_p}
   {links}
 </article>"""
 
@@ -207,17 +303,17 @@ def build():
     guides_dir = ROOT / "guides"
     guides_dir.mkdir(exist_ok=True)
     listing = "".join(
-        f'<li><a href="/guides/{esc(g["slug"])}">{esc(g["en_title"])}</a></li>' for g in GUIDES
+        f'<li><a href="/guides/{esc(g["slug"])}"><span class="en-only">{esc(g["en_title"])}</span><span class="ar-only">{esc(g["ar_title"])}</span></a></li>' for g in GUIDES
     )
     index_body = f"""<style>body{{background:linear-gradient(rgba(251,250,247,.6),rgba(251,250,247,.6)),url('/hero_bg.jpg') center/cover fixed no-repeat;min-height:100vh}}.guides-index{{background:rgba(251,250,247,.9);border-radius:0;padding:72px 8vw;margin:0;max-width:none;width:100%;min-height:calc(100vh - 72px);box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;box-shadow:none}}.guides-index h1{{font-size:44px;margin-bottom:14px}}.guides-index .answer{{font-size:18px;margin-bottom:28px}}.guides-index ul{{list-style:none;padding:0}}.guides-index li{{padding:16px 0;border-bottom:1px solid rgba(31,42,46,.12);font-size:18px}}.guides-index li:last-child{{border-bottom:0}}.guides-index a{{text-decoration:none;color:var(--ink);font-weight:600}}.guides-index a:hover{{color:var(--teal-dark);text-decoration:underline}}</style>
 <article class="guide guides-index">
-  <h1>Coffee guides</h1>
-  <p class="answer">Short, practical answers about brewing, grinding and buying specialty coffee.</p>
+  <h1><span class="en-only">Coffee guides</span><span class="ar-only">أدلة القهوة</span></h1>
+  <p class="answer"><span class="en-only">Short, practical answers about brewing, grinding and buying specialty coffee.</span><span class="ar-only">إجابات قصيرة وعملية عن تحضير القهوة وطحنها وشرائها.</span></p>
   <ul class="answer">{listing}</ul>
 </article>"""
     (guides_dir / "index.html").write_text(
         page("Coffee guides | KAIF", "Short guides on brewing, grinding and storing specialty coffee, from KAIF in Egypt.",
-             f"{SITE}/guides/", index_body, styles),
+             f"{SITE}/guides/", index_body, styles, "أدلة القهوة"),
         encoding="utf-8",
     )
     urls = [f"{SITE}/guides/"]
@@ -226,7 +322,7 @@ def build():
         out.mkdir(exist_ok=True)
         desc = g["answer"][:157].rsplit(" ", 1)[0] + "..." if len(g["answer"]) > 160 else g["answer"]
         (out / "index.html").write_text(
-            page(f'{g["en_title"]} | KAIF', desc, f'{SITE}/guides/{g["slug"]}', guide_body(g), styles),
+            page(f'{g["en_title"]} | KAIF', desc, f'{SITE}/guides/{g["slug"]}', guide_body(g), styles, g["ar_title"]),
             encoding="utf-8",
         )
         urls.append(f'{SITE}/guides/{g["slug"]}')
